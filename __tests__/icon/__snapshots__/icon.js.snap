@@ -1,0 +1,23 @@
+exports[`test Large icon renders correctly 1`] = `
+<span
+  aria-hidden="true"
+  className="lui-icon lui-icon--close lui-icon--large" />
+`;
+
+exports[`test Missing icon renders correctly 1`] = `
+<span
+  aria-hidden="true"
+  className="lui-icon" />
+`;
+
+exports[`test Normal icon renders correctly 1`] = `
+<span
+  aria-hidden="true"
+  className="lui-icon lui-icon--close" />
+`;
+
+exports[`test Small icon renders correctly 1`] = `
+<span
+  aria-hidden="true"
+  className="lui-icon lui-icon--close lui-icon--small" />
+`;

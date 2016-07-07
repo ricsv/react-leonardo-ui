@@ -1,0 +1,49 @@
+exports[`test ButtonGroup passes props correctly 1`] = `
+<div
+  className="lui-buttongroup my-class"
+  data-x="x"
+  onClick={[Function]}
+  title="Title" />
+`;
+
+exports[`test ButtonGroup with buttons renders correctly 1`] = `
+<div
+  className="lui-buttongroup">
+  <button
+    className="lui-button">
+    Button 1
+  </button>
+  <button
+    className="lui-button">
+    Button 2
+  </button>
+  <button
+    className="lui-button lui-button--info">
+    Button 3
+  </button>
+</div>
+`;
+
+exports[`test Empty ButtonGroup renders correctly 1`] = `
+<div
+  className="lui-buttongroup" />
+`;
+
+exports[`test Inverse ButtonGroup with buttons renders correctly 1`] = `
+<div
+  className="lui-buttongroup"
+  variant="inverse">
+  <button
+    className="lui-button lui-button--inverse">
+    Button 1
+  </button>
+  <button
+    className="lui-button lui-button--inverse">
+    Button 2
+  </button>
+  <button
+    className="lui-button lui-button--info">
+    Button 3
+  </button>
+</div>
+`;

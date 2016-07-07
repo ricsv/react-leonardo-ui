@@ -1,0 +1,26 @@
+exports[`test Normal select renders correctly 1`] = `
+<select
+  className="lui-select"
+  value="Value" />
+`;
+
+exports[`test Select passes props correctly 1`] = `
+<select
+  className="lui-select my-class"
+  data-x="x"
+  onChange={[Function]}
+  title="Title" />
+`;
+
+exports[`test Select with modifiers renders correctly 1`] = `
+<select
+  className="lui-select lui-select--inverse"
+  value="Value" />
+`;
+
+exports[`test Select with states renders correctly 1`] = `
+<select
+  className="lui-select lui-disabled"
+  invalid={true}
+  value="Value" />
+`;

@@ -1,0 +1,80 @@
+exports[`test Empty tab renders correctly 1`] = `
+<li
+  className="lui-tab" />
+`;
+
+exports[`test Empty tabset renders correctly 1`] = `
+<ul
+  className="lui-tabset" />
+`;
+
+exports[`test Tab with modifiers renders correctly 1`] = `
+<li
+  className="lui-tab lui-tab--inverse" />
+`;
+
+exports[`test Tab with states renders correctly 1`] = `
+<li
+  className="lui-tab lui-active lui-disabled" />
+`;
+
+exports[`test Tabset passes props correctly 1`] = `
+<ul
+  className="lui-tabset my-class"
+  data-x="x">
+  <li
+    className="lui-tab"
+    data-x="x"
+    onClick={[Function]}
+    title="Item title">
+    Item 1
+  </li>
+</ul>
+`;
+
+exports[`test Tabset with complex items renders correctly 1`] = `
+<ul
+  className="lui-tabset">
+  <li
+    className="lui-tab">
+    <div
+      className="lui-tab__aside">
+      Aside 1
+    </div>
+    <div
+      className="lui-tab__text">
+      Text 1
+    </div>
+  </li>
+  <li
+    className="lui-tab">
+    <div
+      className="lui-tab__text">
+      Text 2
+    </div>
+    <div
+      className="lui-tab__aside">
+      Aside 2
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`test Tabset with modifiers renders correctly 1`] = `
+<ul
+  className="lui-tabset lui-tabset--fill lui-tabset--inverse" />
+`;
+
+exports[`test Tabset with simple items renders correctly 1`] = `
+<ul
+  className="lui-tabset">
+  <li
+    className="lui-tab">
+    Item 1
+  </li>
+  <li
+    className="lui-tab">
+    Item 2
+  </li>
+</ul>
+`;

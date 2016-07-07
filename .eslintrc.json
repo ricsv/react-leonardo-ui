@@ -1,0 +1,22 @@
+{
+  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": false
+  },
+  "rules": {
+    "comma-dangle": 0,
+    "import/no-extraneous-dependencies": 0,
+    "no-mixed-operators": 0,
+    "no-plusplus": 0,
+    "react/jsx-filename-extension": 0,
+    "react/no-did-mount-set-state": 0,
+    "react/prop-types": 0
+  }
+}

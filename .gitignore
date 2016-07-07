@@ -1,0 +1,13 @@
+*.rej
+*.tmp
+*.tgz
+
+.idea/
+.vscode/
+node_modules/
+coverage/
+docs/dist/
+dist/react-leonardo-ui.min.js.map
+
+npm-debug.log
+.DS_Store

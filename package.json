@@ -1,0 +1,49 @@
+{
+  "name": "react-leonardo-ui",
+  "version": "0.1.0",
+  "description": "React implementation of Leonardo UI",
+  "author": "Rickard Svensson <svensson.rt@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ricsv/react-leonardo-ui.git"
+  },
+  "files": [
+    "/dist"
+  ],
+  "main": "dist/react-leonardo-ui.js",
+  "scripts": {
+    "build": "webpack --config tools/webpack.config.js",
+    "lint": "eslint .",
+    "start": "node tools/start.js",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "leonardo-ui": ">=1.0.2",
+    "react": ">=15.0.0",
+    "react-dom": ">=15.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-jest": "^18.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.12.0",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "file-loader": "^0.9.0",
+    "jest": "^18.1.0",
+    "leonardo-ui": ">=1.0.2",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0",
+    "react-test-renderer": "^15.4.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  }
+}

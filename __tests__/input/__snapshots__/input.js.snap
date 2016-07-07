@@ -1,0 +1,26 @@
+exports[`test Input passes props correctly 1`] = `
+<input
+  className="lui-input my-class"
+  data-x="x"
+  onClick={[Function]}
+  title="Title"
+  value="Value" />
+`;
+
+exports[`test Input with modifiers renders correctly 1`] = `
+<input
+  className="lui-input lui-input--inverse"
+  value="Value" />
+`;
+
+exports[`test Input with states renders correctly 1`] = `
+<input
+  className="lui-input lui-invalid lui-disabled"
+  value="Value" />
+`;
+
+exports[`test Normal input renders correctly 1`] = `
+<input
+  className="lui-input"
+  value="Value" />
+`;

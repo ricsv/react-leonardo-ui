@@ -1,0 +1,53 @@
+exports[`test Empty list renders correctly 1`] = `
+<ul
+  className="lui-list" />
+`;
+
+exports[`test List passes props correctly 1`] = `
+<ul
+  className="lui-list my-class"
+  data-x="x">
+  <li
+    className="lui-list__header">
+    Header
+  </li>
+  <li
+    className="lui-list__item"
+    data-x="x"
+    onClick={[Function]}
+    title="Item title">
+    Item
+  </li>
+</ul>
+`;
+
+exports[`test List with item custom content renders correctly 1`] = `
+<ul
+  className="lui-list">
+  <li
+    className="lui-list__item">
+    <div
+      className="lui-list__aside">
+      Aside
+    </div>
+    <div
+      className="lui-list__text">
+      Text
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`test List with items renders correctly 1`] = `
+<ul
+  className="lui-list">
+  <li
+    className="lui-list__header">
+    Header
+  </li>
+  <li
+    className="lui-list__item">
+    Item 1
+  </li>
+</ul>
+`;

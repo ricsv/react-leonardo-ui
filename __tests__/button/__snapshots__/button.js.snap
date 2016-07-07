@@ -1,0 +1,43 @@
+exports[`test Button passes props correctly 1`] = `
+<button
+  className="lui-button my-class"
+  data-x="x"
+  onClick={[Function]}
+  title="Title">
+  Text
+</button>
+`;
+
+exports[`test Button with modifiers renders correctly 1`] = `
+<button
+  className="lui-button lui-button--success lui-button--large lui-button--block lui-button--rounded"
+  value="Value" />
+`;
+
+exports[`test Button with states renders correctly 1`] = `
+<button
+  className="lui-button lui-active lui-disabled"
+  value="Value" />
+`;
+
+exports[`test Button with subcomponents renders correctly 1`] = `
+<button
+  className="lui-button">
+  <span
+    aria-hidden="true"
+    className="lui-icon lui-icon--more lui-button__icon" />
+  <span
+    className="lui-button__text">
+    Text
+  </span>
+  <span
+    className="lui-button__caret  lui-caret" />
+</button>
+`;
+
+exports[`test Normal button renders correctly 1`] = `
+<button
+  className="lui-button">
+  Text
+</button>
+`;

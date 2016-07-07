@@ -1,0 +1,26 @@
+machine:
+  node:
+    version: 6.9.2
+  environment: 
+    NODE_ENV: production
+
+general:
+  artifacts:
+    - "dist"
+    - "docs/dist"
+    - "lib"
+
+dependencies:
+  override:
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    - sudo apt-get update && sudo apt-get install yarn
+    - yarn
+  post:
+    - npm -s run build
+    - node tools/build-docs.js
+
+test:
+  override:
+    - npm -s run lint
+    - npm -s run test

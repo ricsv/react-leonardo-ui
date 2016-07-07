@@ -1,0 +1,77 @@
+exports[`test Checkbox passes props correctly 1`] = `
+<label
+  className="lui-checkbox my-class"
+  htmlFor={undefined}
+  title="Title">
+  <input
+    checked={true}
+    className="lui-checkbox__input"
+    data-x="x"
+    onChange={[Function]}
+    type="checkbox" />
+  <div
+    className="lui-checkbox__check-wrap">
+    <span
+      className="lui-checkbox__check" />
+    <span
+      className="lui-checkbox__check-text" />
+  </div>
+</label>
+`;
+
+exports[`test Checkbox with modifiers renders correctly 1`] = `
+<label
+  className="lui-checkbox lui-checkbox--inverse"
+  htmlFor={undefined}
+  title={undefined}>
+  <input
+    checked={true}
+    className="lui-checkbox__input"
+    type="checkbox" />
+  <div
+    className="lui-checkbox__check-wrap">
+    <span
+      className="lui-checkbox__check" />
+    <span
+      className="lui-checkbox__check-text" />
+  </div>
+</label>
+`;
+
+exports[`test Checkbox with states renders correctly 1`] = `
+<label
+  className="lui-checkbox lui-active lui-disabled"
+  htmlFor={undefined}
+  title={undefined}>
+  <input
+    checked={true}
+    className="lui-checkbox__input"
+    type="checkbox" />
+  <div
+    className="lui-checkbox__check-wrap">
+    <span
+      className="lui-checkbox__check" />
+    <span
+      className="lui-checkbox__check-text" />
+  </div>
+</label>
+`;
+
+exports[`test Normal checkbox renders correctly 1`] = `
+<label
+  className="lui-checkbox"
+  htmlFor={undefined}
+  title={undefined}>
+  <input
+    checked={true}
+    className="lui-checkbox__input"
+    type="checkbox" />
+  <div
+    className="lui-checkbox__check-wrap">
+    <span
+      className="lui-checkbox__check" />
+    <span
+      className="lui-checkbox__check-text" />
+  </div>
+</label>
+`;

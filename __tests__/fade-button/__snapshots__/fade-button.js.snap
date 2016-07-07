@@ -1,0 +1,43 @@
+exports[`test Normal fade-button renders correctly 1`] = `
+<button
+  className="lui-fade-button">
+  Text
+</button>
+`;
+
+exports[`test fade-button passes props correctly 1`] = `
+<button
+  className="lui-fade-button my-class"
+  data-x="x"
+  onClick={[Function]}
+  title="Title">
+  Text
+</button>
+`;
+
+exports[`test fade-button with modifiers renders correctly 1`] = `
+<button
+  className="lui-fade-button lui-fade-button--success lui-fade-button--large lui-fade-button--block lui-fade-button--rounded"
+  value="Value" />
+`;
+
+exports[`test fade-button with states renders correctly 1`] = `
+<button
+  className="lui-fade-button lui-active lui-disabled"
+  value="Value" />
+`;
+
+exports[`test fade-button with subcomponents renders correctly 1`] = `
+<button
+  className="lui-fade-button">
+  <span
+    aria-hidden="true"
+    className="lui-icon lui-icon--more lui-button__icon" />
+  <span
+    className="lui-button__text">
+    Text
+  </span>
+  <span
+    className="lui-button__caret  lui-caret" />
+</button>
+`;

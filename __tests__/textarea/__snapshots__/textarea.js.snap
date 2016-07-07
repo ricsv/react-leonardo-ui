@@ -1,0 +1,33 @@
+exports[`test Normal textarea renders correctly 1`] = `
+<textarea
+  className="lui-textarea"
+  value="Value" />
+`;
+
+exports[`test Textarea passes props correctly 1`] = `
+<textarea
+  className="lui-textarea my-class"
+  data-x="x"
+  onClick={[Function]}
+  title="Title"
+  value="Value" />
+`;
+
+exports[`test Textarea with modifiers renders correctly 1`] = `
+<textarea
+  className="lui-textarea lui-textarea--inverse"
+  value="Value" />
+`;
+
+exports[`test Textarea with states renders correctly 1`] = `
+<textarea
+  className="lui-textarea lui-invalid lui-disabled"
+  value="Value" />
+`;
+
+exports[`test Textarea with states renders correctly 2`] = `
+<textarea
+  active={true}
+  className="lui-textarea lui-disabled"
+  value="Value" />
+`;

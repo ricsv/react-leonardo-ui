@@ -1,0 +1,65 @@
+exports[`test Normal switch renders correctly 1`] = `
+<div
+  className="lui-switch"
+  title={undefined}>
+  <label
+    className="lui-switch__label"
+    htmlFor={undefined}>
+    <input
+      checked={true}
+      className="lui-switch__checkbox"
+      type="checkbox" />
+    <span
+      className="lui-switch__wrap">
+      <div
+        className="lui-switch__inner" />
+      <div
+        className="lui-switch__switch" />
+    </span>
+  </label>
+</div>
+`;
+
+exports[`test Switch with modifiers renders correctly 1`] = `
+<div
+  className="lui-switch lui-switch--inverse"
+  title={undefined}>
+  <label
+    className="lui-switch__label"
+    htmlFor={undefined}>
+    <input
+      checked={true}
+      className="lui-switch__checkbox"
+      type="checkbox" />
+    <span
+      className="lui-switch__wrap">
+      <div
+        className="lui-switch__inner" />
+      <div
+        className="lui-switch__switch" />
+    </span>
+  </label>
+</div>
+`;
+
+exports[`test Switch with states renders correctly 1`] = `
+<div
+  className="lui-switch lui-active lui-disabled"
+  title={undefined}>
+  <label
+    className="lui-switch__label"
+    htmlFor={undefined}>
+    <input
+      checked={true}
+      className="lui-switch__checkbox"
+      type="checkbox" />
+    <span
+      className="lui-switch__wrap">
+      <div
+        className="lui-switch__inner" />
+      <div
+        className="lui-switch__switch" />
+    </span>
+  </label>
+</div>
+`;
