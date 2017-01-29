@@ -2,6 +2,9 @@
 
 React implementation of [Leonardo UI](https://github.com/qlik-oss/leonardo-ui).
 
+[![Build Status](https://travis-ci.org/ricsv/react-leonardo-ui.svg?branch=master)](https://travis-ci.org/ricsv/react-leonardo-ui)
+[![npm](https://badge.fury.io/js/react-leonardo-ui.svg?branch=master)](http://badge.fury.io/js/react-leonardo-ui)
+
 ## Installation
 
 __NPM__
