@@ -27,7 +27,7 @@ import { Button } from 'react-leonardo-ui';
 __CommonJS__
 
 ```js
-const button = require('react-leonardo-ui').Button;
+const Button = require('react-leonardo-ui').Button;
 ```
 
 ### Props passing
