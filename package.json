@@ -14,9 +14,10 @@
   "main": "dist/react-leonardo-ui.js",
   "scripts": {
     "build": "webpack --config tools/webpack.config.js",
+    "jest": "jest",
     "lint": "eslint .",
     "start": "node tools/start.js",
-    "test": "jest"
+    "test": "npm run lint && npm run jest"
   },
   "peerDependencies": {
     "leonardo-ui": ">=1.0.2",

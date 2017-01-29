@@ -37,7 +37,7 @@ const createConfig = (minify) => {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (!process.env.PRODUCTION) {
     config.debug = true;
     config.devtool = 'source-map';
   }
