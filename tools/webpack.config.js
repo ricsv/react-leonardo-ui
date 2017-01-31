@@ -21,24 +21,25 @@ const createConfig = (minify) => {
       'react-dom'
     ],
     module: {
-      loaders: [{
+      rules: [{
         test: /\.js$/,
-        loader: 'babel',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
       }]
     },
-    plugins: [
-      new webpack.optimize.OccurrenceOrderPlugin()
-    ]
+    plugins: []
   };
 
   if (minify) {
     config.output.filename = '[name].min.js';
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+      sourceMap: !process.env.PRODUCTION
+    }));
   }
 
   if (!process.env.PRODUCTION) {
-    config.debug = true;
     config.devtool = 'source-map';
   }
 
