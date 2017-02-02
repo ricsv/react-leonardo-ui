@@ -16,30 +16,38 @@ const config = {
     libraryTarget: 'umd'
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader'
+      }
     }, {
       test: /\.ttf$|\.woff$|\.svg$|\.ico$|\.html$/,
-      loader: 'file',
-      query: {
-        name: '[name].[ext]'
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]'
+        }
       }
     }, {
       test: /\.css$/,
-      loader: 'style!css'
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader',
+        options: {
+          name: '[name].[ext]'
+        }
+      }]
     }]
   },
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin()
-  ]
+  plugins: []
 };
 
 if (process.env.PRODUCTION) {
   config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 } else {
-  config.debug = true;
   config.devtool = 'source-map';
 }
 
