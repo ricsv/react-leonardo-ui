@@ -167,8 +167,8 @@ export function tryDock(elemRect, alignToRect, windowRect, dock, options = {}) {
 
 export function positionToRect(element, rect, dock = 'bottom', options = {}) {
   const elemRect = element.getBoundingClientRect();
-  const scrollTop = document.body.scrollTop;
-  const scrollLeft = document.body.scrollLeft;
+  const pageYOffset = window.pageYOffset;
+  const pageXOffset = window.pageXOffset;
   const windowRect = createRect(
     0,
     0,
@@ -195,10 +195,10 @@ export function positionToRect(element, rect, dock = 'bottom', options = {}) {
   let firstResult = null;
   for (let i = 0; i < docks.length; i++) {
     const result = tryDock(elemRect, rect, windowRect, docks[i], options);
-    result.position.top += scrollTop;
-    result.toPosition.top += scrollTop;
-    result.position.left += scrollLeft;
-    result.toPosition.left += scrollLeft;
+    result.position.top += pageYOffset;
+    result.toPosition.top += pageYOffset;
+    result.position.left += pageXOffset;
+    result.toPosition.left += pageXOffset;
 
     if (options.containerElement) {
       const offset = getOffset(options.containerElement);
