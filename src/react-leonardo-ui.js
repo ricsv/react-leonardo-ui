@@ -1,19 +1,39 @@
-export { default as Button } from './button';
-export { default as ButtonGroup } from './button-group';
-export { default as Checkbox } from './checkbox';
-export { default as Dialog } from './dialog';
-export { default as FadeButton } from './fade-button';
-export { default as Icon } from './icon';
-export { default as Input } from './input';
-export { default as InputGroup } from './input-group';
-export { default as List } from './list';
-export { default as Popover } from './popover';
-// export { default as Portal } from './portal';
-export { default as RadioButton } from './radio-button';
-export { default as Select } from './select';
-export { default as Search } from './search';
-export { default as Switch } from './switch';
-export { default as Tab } from './tab';
-export { default as Tabset } from './tabset';
-export { default as Textarea } from './textarea';
-export { default as Tooltip } from './tooltip';
+import Button from './button';
+import ButtonGroup from './button-group';
+import Checkbox from './checkbox';
+import Dialog from './dialog';
+import FadeButton from './fade-button';
+import Icon from './icon';
+import Input from './input';
+import InputGroup from './input-group';
+import List from './list';
+import Popover from './popover';
+import RadioButton from './radio-button';
+import Select from './select';
+import Search from './search';
+import Switch from './switch';
+import Tab from './tab';
+import Tabset from './tabset';
+import Textarea from './textarea';
+import Tooltip from './tooltip';
+
+export {
+  Button,
+  ButtonGroup,
+  Checkbox,
+  Dialog,
+  FadeButton,
+  Icon,
+  Input,
+  InputGroup,
+  List,
+  Popover,
+  RadioButton,
+  Search,
+  Select,
+  Switch,
+  Tab,
+  Tabset,
+  Textarea,
+  Tooltip
+};
