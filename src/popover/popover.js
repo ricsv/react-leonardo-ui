@@ -32,6 +32,13 @@ class Popover extends Component {
     currentId++;
 
     this.outsideListener = this.outsideListener.bind(this);
+    this.transitionToOpen = this.transitionToOpen.bind(this);
+    this.transitionToClosed = this.transitionToClosed.bind(this);
+  }
+  componentDidMount() {
+    if (this.state.popoverState === POPOVER_STATE.opening) {
+      this.transitionToOpen();
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
@@ -46,31 +53,37 @@ class Popover extends Component {
   }
   componentDidUpdate() {
     if (this.state.popoverState === POPOVER_STATE.opening) {
-      setTimeout(() => {
-        this.setState({ popoverState: POPOVER_STATE.open });
-        if (typeof this.props.onOutside === 'function') {
-          document.addEventListener('click', this.outsideListener);
-        }
-        if (typeof this.props.onOpen === 'function') {
-          this.props.onOpen();
-        }
-      });
+      this.transitionToOpen();
     } else if (this.state.popoverState === POPOVER_STATE.closing) {
-      if (typeof this.props.onOutside === 'function') {
-        document.removeEventListener('click', this.outsideListener);
-      }
-      setTimeout(() => {
-        this.setState({ popoverState: POPOVER_STATE.closed });
-        if (typeof this.props.onClose === 'function') {
-          this.props.onClose();
-        }
-      }, FADE_DURATION);
+      this.transitionToClosed();
     }
   }
   outsideListener(e) {
     if (!this.element.contains(e.target)) {
       this.props.onOutside();
     }
+  }
+  transitionToOpen() {
+    setTimeout(() => {
+      this.setState({ popoverState: POPOVER_STATE.open });
+      if (typeof this.props.onOutside === 'function') {
+        document.addEventListener('click', this.outsideListener);
+      }
+      if (typeof this.props.onOpen === 'function') {
+        this.props.onOpen();
+      }
+    });
+  }
+  transitionToClosed() {
+    if (typeof this.props.onOutside === 'function') {
+      document.removeEventListener('click', this.outsideListener);
+    }
+    setTimeout(() => {
+      this.setState({ popoverState: POPOVER_STATE.closed });
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose();
+      }
+    }, FADE_DURATION);
   }
   render() {
     const popoverState = this.state.popoverState;
