@@ -11,41 +11,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-
+/******/
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-
+/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -56,7 +56,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 			});
 /******/ 		}
 /******/ 	};
-
+/******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -65,13 +65,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-
+/******/
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 68);
 /******/ })
@@ -1087,10 +1087,19 @@ var Dialog = function (_Component) {
     currentId++;
 
     _this.keyUpListener = _this.keyUpListener.bind(_this);
+    _this.transitionToOpen = _this.transitionToOpen.bind(_this);
+    _this.transitionToClosed = _this.transitionToClosed.bind(_this);
     return _this;
   }
 
   _createClass(Dialog, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.state.dialogState === DIALOG_STATE.opening) {
+        this.transitionToOpen();
+      }
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (!this.props.show && nextProps.show) {
@@ -1106,28 +1115,10 @@ var Dialog = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      var _this2 = this;
-
       if (this.state.dialogState === DIALOG_STATE.opening) {
-        setTimeout(function () {
-          _this2.setState({ dialogState: DIALOG_STATE.open });
-          if (typeof _this2.props.onEscape === 'function') {
-            window.addEventListener('keyup', _this2.keyUpListener);
-          }
-          if (typeof _this2.props.onOpen === 'function') {
-            _this2.props.onOpen();
-          }
-        }, 0);
+        this.transitionToOpen();
       } else if (this.state.dialogState === DIALOG_STATE.closing) {
-        setTimeout(function () {
-          _this2.setState({ dialogState: DIALOG_STATE.closed });
-          if (typeof _this2.props.onEscape === 'function') {
-            window.removeEventListener('keyup', _this2.keyUpListener);
-          }
-          if (typeof _this2.props.onClose === 'function') {
-            _this2.props.onClose();
-          }
-        }, FADE_DURATION);
+        this.transitionToClosed();
       }
     }
   }, {
@@ -1136,6 +1127,36 @@ var Dialog = function (_Component) {
       if (e.keyCode === 27) {
         this.props.onEscape();
       }
+    }
+  }, {
+    key: 'transitionToOpen',
+    value: function transitionToOpen() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.setState({ dialogState: DIALOG_STATE.open });
+        if (typeof _this2.props.onEscape === 'function') {
+          window.addEventListener('keyup', _this2.keyUpListener);
+        }
+        if (typeof _this2.props.onOpen === 'function') {
+          _this2.props.onOpen();
+        }
+      }, 0);
+    }
+  }, {
+    key: 'transitionToClosed',
+    value: function transitionToClosed() {
+      var _this3 = this;
+
+      setTimeout(function () {
+        _this3.setState({ dialogState: DIALOG_STATE.closed });
+        if (typeof _this3.props.onEscape === 'function') {
+          window.removeEventListener('keyup', _this3.keyUpListener);
+        }
+        if (typeof _this3.props.onClose === 'function') {
+          _this3.props.onClose();
+        }
+      }, FADE_DURATION);
     }
   }, {
     key: 'render',
@@ -1814,10 +1835,19 @@ var Popover = function (_Component) {
     currentId++;
 
     _this.outsideListener = _this.outsideListener.bind(_this);
+    _this.transitionToOpen = _this.transitionToOpen.bind(_this);
+    _this.transitionToClosed = _this.transitionToClosed.bind(_this);
     return _this;
   }
 
   _createClass(Popover, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.state.popoverState === POPOVER_STATE.opening) {
+        this.transitionToOpen();
+      }
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (!this.props.show && nextProps.show) {
@@ -1833,28 +1863,10 @@ var Popover = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      var _this2 = this;
-
       if (this.state.popoverState === POPOVER_STATE.opening) {
-        setTimeout(function () {
-          _this2.setState({ popoverState: POPOVER_STATE.open });
-          if (typeof _this2.props.onOutside === 'function') {
-            document.addEventListener('click', _this2.outsideListener);
-          }
-          if (typeof _this2.props.onOpen === 'function') {
-            _this2.props.onOpen();
-          }
-        });
+        this.transitionToOpen();
       } else if (this.state.popoverState === POPOVER_STATE.closing) {
-        if (typeof this.props.onOutside === 'function') {
-          document.removeEventListener('click', this.outsideListener);
-        }
-        setTimeout(function () {
-          _this2.setState({ popoverState: POPOVER_STATE.closed });
-          if (typeof _this2.props.onClose === 'function') {
-            _this2.props.onClose();
-          }
-        }, FADE_DURATION);
+        this.transitionToClosed();
       }
     }
   }, {
@@ -1865,9 +1877,39 @@ var Popover = function (_Component) {
       }
     }
   }, {
+    key: 'transitionToOpen',
+    value: function transitionToOpen() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.setState({ popoverState: POPOVER_STATE.open });
+        if (typeof _this2.props.onOutside === 'function') {
+          document.addEventListener('click', _this2.outsideListener);
+        }
+        if (typeof _this2.props.onOpen === 'function') {
+          _this2.props.onOpen();
+        }
+      });
+    }
+  }, {
+    key: 'transitionToClosed',
+    value: function transitionToClosed() {
+      var _this3 = this;
+
+      if (typeof this.props.onOutside === 'function') {
+        document.removeEventListener('click', this.outsideListener);
+      }
+      setTimeout(function () {
+        _this3.setState({ popoverState: POPOVER_STATE.closed });
+        if (typeof _this3.props.onClose === 'function') {
+          _this3.props.onClose();
+        }
+      }, FADE_DURATION);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var popoverState = this.state.popoverState;
 
@@ -1886,7 +1928,7 @@ var Popover = function (_Component) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { ref: function ref(el) {
-              _this3.element = el;
+              _this4.element = el;
             } },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1__popover_content__["a" /* default */],
@@ -1901,7 +1943,7 @@ var Popover = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { ref: function ref(el) {
-              _this3.element = el;
+              _this4.element = el;
             } },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1__popover_content__["a" /* default */],
@@ -2515,10 +2557,20 @@ var Tooltip = function (_Component) {
     };
     _this.portalId = 'rlui-tooltip-' + currentId;
     currentId++;
+
+    _this.transitionToOpen = _this.transitionToOpen.bind(_this);
+    _this.transitionToClosed = _this.transitionToClosed.bind(_this);
     return _this;
   }
 
   _createClass(Tooltip, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.state.tooltipState === TOOLTIP_STATE.opening) {
+        this.transitionToOpen();
+      }
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (!this.props.show && nextProps.show) {
@@ -2534,23 +2586,35 @@ var Tooltip = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
+      if (this.state.tooltipState === TOOLTIP_STATE.opening) {
+        this.transitionToOpen();
+      } else if (this.state.tooltipState === TOOLTIP_STATE.closing) {
+        this.transitionToClosed();
+      }
+    }
+  }, {
+    key: 'transitionToOpen',
+    value: function transitionToOpen() {
       var _this2 = this;
 
-      if (this.state.tooltipState === TOOLTIP_STATE.opening) {
-        setTimeout(function () {
-          _this2.setState({ tooltipState: TOOLTIP_STATE.open });
-          if (typeof _this2.props.onOpen === 'function') {
-            _this2.props.onOpen();
-          }
-        });
-      } else if (this.state.tooltipState === TOOLTIP_STATE.closing) {
-        setTimeout(function () {
-          _this2.setState({ tooltipState: TOOLTIP_STATE.closed });
-          if (typeof _this2.props.onClose === 'function') {
-            _this2.props.onClose();
-          }
-        }, FADE_DURATION);
-      }
+      setTimeout(function () {
+        _this2.setState({ tooltipState: TOOLTIP_STATE.open });
+        if (typeof _this2.props.onOpen === 'function') {
+          _this2.props.onOpen();
+        }
+      });
+    }
+  }, {
+    key: 'transitionToClosed',
+    value: function transitionToClosed() {
+      var _this3 = this;
+
+      setTimeout(function () {
+        _this3.setState({ tooltipState: TOOLTIP_STATE.closed });
+        if (typeof _this3.props.onClose === 'function') {
+          _this3.props.onClose();
+        }
+      }, FADE_DURATION);
     }
   }, {
     key: 'render',
@@ -2604,3 +2668,4 @@ module.exports = __webpack_require__(11);
 /***/ })
 /******/ ]);
 });
+//# sourceMappingURL=react-leonardo-ui.js.map
