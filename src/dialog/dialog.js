@@ -26,6 +26,13 @@ class Dialog extends Component {
     currentId++;
 
     this.keyUpListener = this.keyUpListener.bind(this);
+    this.transitionToOpen = this.transitionToOpen.bind(this);
+    this.transitionToClosed = this.transitionToClosed.bind(this);
+  }
+  componentDidMount() {
+    if (this.state.dialogState === DIALOG_STATE.opening) {
+      this.transitionToOpen();
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
@@ -40,31 +47,37 @@ class Dialog extends Component {
   }
   componentDidUpdate() {
     if (this.state.dialogState === DIALOG_STATE.opening) {
-      setTimeout(() => {
-        this.setState({ dialogState: DIALOG_STATE.open });
-        if (typeof this.props.onEscape === 'function') {
-          window.addEventListener('keyup', this.keyUpListener);
-        }
-        if (typeof this.props.onOpen === 'function') {
-          this.props.onOpen();
-        }
-      }, 0);
+      this.transitionToOpen();
     } else if (this.state.dialogState === DIALOG_STATE.closing) {
-      setTimeout(() => {
-        this.setState({ dialogState: DIALOG_STATE.closed });
-        if (typeof this.props.onEscape === 'function') {
-          window.removeEventListener('keyup', this.keyUpListener);
-        }
-        if (typeof this.props.onClose === 'function') {
-          this.props.onClose();
-        }
-      }, FADE_DURATION);
+      this.transitionToClosed();
     }
   }
   keyUpListener(e) {
     if (e.keyCode === 27) {
       this.props.onEscape();
     }
+  }
+  transitionToOpen() {
+    setTimeout(() => {
+      this.setState({ dialogState: DIALOG_STATE.open });
+      if (typeof this.props.onEscape === 'function') {
+        window.addEventListener('keyup', this.keyUpListener);
+      }
+      if (typeof this.props.onOpen === 'function') {
+        this.props.onOpen();
+      }
+    }, 0);
+  }
+  transitionToClosed() {
+    setTimeout(() => {
+      this.setState({ dialogState: DIALOG_STATE.closed });
+      if (typeof this.props.onEscape === 'function') {
+        window.removeEventListener('keyup', this.keyUpListener);
+      }
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose();
+      }
+    }, FADE_DURATION);
   }
   render() {
     const dialogState = this.state.dialogState;

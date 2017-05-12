@@ -22,6 +22,14 @@ class Tooltip extends Component {
     };
     this.portalId = `rlui-tooltip-${currentId}`;
     currentId++;
+
+    this.transitionToOpen = this.transitionToOpen.bind(this);
+    this.transitionToClosed = this.transitionToClosed.bind(this);
+  }
+  componentDidMount() {
+    if (this.state.tooltipState === TOOLTIP_STATE.opening) {
+      this.transitionToOpen();
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
@@ -36,20 +44,26 @@ class Tooltip extends Component {
   }
   componentDidUpdate() {
     if (this.state.tooltipState === TOOLTIP_STATE.opening) {
-      setTimeout(() => {
-        this.setState({ tooltipState: TOOLTIP_STATE.open });
-        if (typeof this.props.onOpen === 'function') {
-          this.props.onOpen();
-        }
-      });
+      this.transitionToOpen();
     } else if (this.state.tooltipState === TOOLTIP_STATE.closing) {
-      setTimeout(() => {
-        this.setState({ tooltipState: TOOLTIP_STATE.closed });
-        if (typeof this.props.onClose === 'function') {
-          this.props.onClose();
-        }
-      }, FADE_DURATION);
+      this.transitionToClosed();
     }
+  }
+  transitionToOpen() {
+    setTimeout(() => {
+      this.setState({ tooltipState: TOOLTIP_STATE.open });
+      if (typeof this.props.onOpen === 'function') {
+        this.props.onOpen();
+      }
+    });
+  }
+  transitionToClosed() {
+    setTimeout(() => {
+      this.setState({ tooltipState: TOOLTIP_STATE.closed });
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose();
+      }
+    }, FADE_DURATION);
   }
   render() {
     const props = this.props;
