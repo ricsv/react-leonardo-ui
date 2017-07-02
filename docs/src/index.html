@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <title>React Leonardo UI</title>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+  <link rel="stylesheet" href="leonardo-ui.css">
+  <link rel="stylesheet" href="docs.css">
   <style>
     @import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700);
     @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro);
@@ -52,7 +54,6 @@
     }
 
     .header-wrapper {
-      background-color: white;
       border-bottom: 1px solid #CCCCCC;
       height: 50px;
       padding: 0 20px;
@@ -165,6 +166,14 @@
     </div>
   </div>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
   <script src="docs.js"></script>
+  <script>
+    ReactDOM.render(
+      React.createElement(window.docsContainer),
+      document.getElementById('container')
+    );
+  </script>
 </body>
 </html>
