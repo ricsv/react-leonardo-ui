@@ -17,7 +17,7 @@
     "jest": "jest",
     "lint": "eslint .",
     "start": "rollup -c ./rollup.config.docs.js -w",
-    "test": "npm run lint && npm run jest"
+    "test": "npm run lint && npm run jest --  --coverage"
   },
   "peerDependencies": {
     "leonardo-ui": ">=1.0.2",
@@ -50,5 +50,12 @@
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-watch": "^4.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom" : ["src/**/*.{js,jsx}", "!**/node_modules"],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ]
   }
 }

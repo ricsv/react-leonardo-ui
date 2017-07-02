@@ -8,3 +8,10 @@ cache: yarn
 
 env:
   - PRODUCTION=1
+
+install:
+  - yarn
+  - npm install coveralls
+
+after_success:
+  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
