@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Button from '../../src/button';
 import ButtonGroup from '../../src/button-group';
 
 test('Empty ButtonGroup renders correctly', () => {
@@ -14,9 +13,9 @@ test('Empty ButtonGroup renders correctly', () => {
 test('ButtonGroup with buttons renders correctly', () => {
   const tree = renderer.create(
     <ButtonGroup>
-      <Button>Button 1</Button>
-      <Button>Button 2</Button>
-      <Button variant="info">Button 3</Button>
+      <ButtonGroup.Button>Button 1</ButtonGroup.Button>
+      <ButtonGroup.Button>Button 2</ButtonGroup.Button>
+      <ButtonGroup.Button variant="info">Button 3</ButtonGroup.Button>
     </ButtonGroup>
   ).toJSON();
   expect(tree).toMatchSnapshot();
@@ -25,9 +24,9 @@ test('ButtonGroup with buttons renders correctly', () => {
 test('Inverse ButtonGroup with buttons renders correctly', () => {
   const tree = renderer.create(
     <ButtonGroup variant="inverse">
-      <Button variant="inverse">Button 1</Button>
-      <Button variant="inverse">Button 2</Button>
-      <Button variant="info">Button 3</Button>
+      <ButtonGroup.Button variant="inverse">Button 1</ButtonGroup.Button>
+      <ButtonGroup.Button variant="inverse">Button 2</ButtonGroup.Button>
+      <ButtonGroup.Button variant="info">Button 3</ButtonGroup.Button>
     </ButtonGroup>
   ).toJSON();
   expect(tree).toMatchSnapshot();
