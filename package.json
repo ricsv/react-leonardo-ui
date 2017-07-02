@@ -13,10 +13,10 @@
   ],
   "main": "dist/react-leonardo-ui.js",
   "scripts": {
-    "build": "webpack --config tools/webpack.config.js",
+    "build": "rollup -c && rollup -c --environment BUILD:production",
     "jest": "jest",
     "lint": "eslint .",
-    "start": "node tools/start.js",
+    "start": "rollup -c ./rollup.config.docs.js -w",
     "test": "npm run lint && npm run jest"
   },
   "peerDependencies": {
@@ -27,25 +27,28 @@
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-jest": "^18.0.0",
-    "babel-loader": "^6.2.10",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
-    "css-loader": "^0.26.1",
     "eslint": "^3.12.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
-    "file-loader": "^0.10.0",
     "jest": "^18.1.0",
     "leonardo-ui": ">=1.0.2",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
     "react-test-renderer": "^15.4.2",
-    "style-loader": "^0.13.1",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^1.16.2"
+    "rollup": "^0.43.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-serve": "^0.3.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-watch": "^4.0.0"
   }
 }

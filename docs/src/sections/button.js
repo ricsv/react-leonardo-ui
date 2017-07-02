@@ -41,7 +41,7 @@ const ButtonSection = props => (
       <Button variant={props.baseVariant}>
         <Button.Icon name="download" />
         <Button.Text>
-          Download
+          Download 23
         </Button.Text>
       </Button>
     </Example>
