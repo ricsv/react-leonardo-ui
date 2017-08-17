@@ -11,6 +11,38 @@ import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
+
+function copyFileSync(src, dest) {
+  const srcFile = path.resolve(__dirname, src);
+  const destFile = path.resolve(__dirname, dest);
+
+  const content = fs.readFileSync(srcFile);
+  if (fs.existsSync(destFile)) {
+    const toContent = fs.readFileSync(destFile).toString();
+    if (toContent === content.toString()) {
+      // file content never changed, do nothing:
+      return;
+    }
+  }
+  fs.writeFileSync(destFile, content);
+}
+
+// Rollup plugin to copy static files
+function copy() {
+  return {
+    name: 'docs-copy',
+    onwrite() {
+      copyFileSync('docs/src/docs.css', 'docs/dist/docs.css');
+      copyFileSync('docs/src/favicon.ico', 'docs/dist/favicon.ico');
+      copyFileSync('docs/src/react-logo.svg', 'docs/dist/react-logo.svg');
+      copyFileSync('node_modules/leonardo-ui/dist/leonardo-ui.css', 'docs/dist/leonardo-ui.css');
+      copyFileSync('node_modules/leonardo-ui/dist/lui-icons.woff', 'docs/dist/lui-icons.woff');
+      copyFileSync('node_modules/leonardo-ui/dist/lui-icons.ttf', 'docs/dist/lui-icons.ttf');
+    }
+  };
+}
+
+// Rollup plugin to server-side render index.html
 function ssr() {
   return {
     name: 'docs-ssr',
@@ -46,6 +78,7 @@ const config = {
     resolve({
       modulesOnly: true
     }),
+    copy(),
     ssr()
   ]
 };
