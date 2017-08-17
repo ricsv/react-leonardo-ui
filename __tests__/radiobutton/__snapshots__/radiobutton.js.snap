@@ -36,11 +36,12 @@ exports[`test Radiobutton with modifiers renders correctly 1`] = `
 
 exports[`test Radiobutton with states renders correctly 1`] = `
 <label
-  className="lui-radiobutton lui-active lui-disabled"
+  className="lui-radiobutton lui-active"
   htmlFor={undefined}>
   <input
     checked={true}
     className="lui-radiobutton__input"
+    disabled={true}
     type="radio" />
   <div
     className="lui-radiobutton__radio-wrap">

@@ -3,7 +3,7 @@ import React from 'react';
 import { luiClassName, filterProps } from '../util';
 
 const modifiers = ['variant'];
-const states = ['active', 'disabled'];
+const states = ['active'];
 
 const RadioButton = (props) => {
   const className = luiClassName('radiobutton', {

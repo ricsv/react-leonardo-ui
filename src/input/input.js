@@ -3,7 +3,7 @@ import { filterProps, luiClassName } from '../util';
 
 const modifiers = ['variant', 'size'];
 
-const states = ['invalid', 'disabled'];
+const states = ['invalid'];
 
 const Input = (props) => {
   const className = luiClassName('input', {

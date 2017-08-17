@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { filterProps, luiClassName } from '../util';
 
 const modifiers = ['variant'];
-const states = ['disabled'];
 
 // TODO handle outside updates of value
 class Search extends Component {
@@ -26,10 +25,9 @@ class Search extends Component {
 
     const className = luiClassName('search', {
       props,
-      states,
       modifiers
     });
-    const attributes = filterProps(props, modifiers, states, 'type');
+    const attributes = filterProps(props, modifiers, 'type');
 
     const onMouseDown = (e) => {
       e.preventDefault();
