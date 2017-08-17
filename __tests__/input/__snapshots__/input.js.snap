@@ -15,7 +15,8 @@ exports[`test Input with modifiers renders correctly 1`] = `
 
 exports[`test Input with states renders correctly 1`] = `
 <input
-  className="lui-input lui-invalid lui-disabled"
+  className="lui-input lui-invalid"
+  disabled={true}
   value="Value" />
 `;
 

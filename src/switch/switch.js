@@ -2,7 +2,7 @@ import React from 'react';
 import { filterProps, luiClassName } from '../util';
 
 const modifiers = ['variant'];
-const states = ['active', 'disabled'];
+const states = ['active'];
 
 const Switch = (props) => {
   const className = luiClassName('switch', {

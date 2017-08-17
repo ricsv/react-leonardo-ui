@@ -44,7 +44,7 @@ exports[`test Switch with modifiers renders correctly 1`] = `
 
 exports[`test Switch with states renders correctly 1`] = `
 <div
-  className="lui-switch lui-active lui-disabled"
+  className="lui-switch lui-active"
   title={undefined}>
   <label
     className="lui-switch__label"
@@ -52,6 +52,7 @@ exports[`test Switch with states renders correctly 1`] = `
     <input
       checked={true}
       className="lui-switch__checkbox"
+      disabled={true}
       type="checkbox" />
     <span
       className="lui-switch__wrap">

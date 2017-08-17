@@ -21,13 +21,15 @@ exports[`test Textarea with modifiers renders correctly 1`] = `
 
 exports[`test Textarea with states renders correctly 1`] = `
 <textarea
-  className="lui-textarea lui-invalid lui-disabled"
+  className="lui-textarea lui-invalid"
+  disabled={true}
   value="Value" />
 `;
 
 exports[`test Textarea with states renders correctly 2`] = `
 <textarea
   active={true}
-  className="lui-textarea lui-disabled"
+  className="lui-textarea"
+  disabled={true}
   value="Value" />
 `;

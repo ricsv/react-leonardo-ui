@@ -20,7 +20,8 @@ exports[`test Select with modifiers renders correctly 1`] = `
 
 exports[`test Select with states renders correctly 1`] = `
 <select
-  className="lui-select lui-disabled"
+  className="lui-select"
+  disabled={true}
   invalid={true}
   value="Value" />
 `;

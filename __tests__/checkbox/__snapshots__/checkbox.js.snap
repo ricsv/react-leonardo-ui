@@ -40,12 +40,13 @@ exports[`test Checkbox with modifiers renders correctly 1`] = `
 
 exports[`test Checkbox with states renders correctly 1`] = `
 <label
-  className="lui-checkbox lui-active lui-disabled"
+  className="lui-checkbox lui-active"
   htmlFor={undefined}
   title={undefined}>
   <input
     checked={true}
     className="lui-checkbox__input"
+    disabled={true}
     type="checkbox" />
   <div
     className="lui-checkbox__check-wrap">

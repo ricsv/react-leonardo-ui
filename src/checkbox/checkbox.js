@@ -1,7 +1,7 @@
 import React from 'react';
 import { filterProps, luiClassName } from '../util';
 
-const states = ['active', 'disabled'];
+const states = ['active'];
 const modifiers = ['variant'];
 
 const Checkbox = (props) => {

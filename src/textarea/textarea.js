@@ -3,7 +3,7 @@ import { filterProps, luiClassName } from '../util';
 
 const modifiers = ['variant'];
 
-const states = ['invalid', 'disabled'];
+const states = ['invalid'];
 
 const Textarea = (props) => {
   const className = luiClassName('textarea', {
