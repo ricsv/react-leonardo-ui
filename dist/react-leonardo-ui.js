@@ -242,7 +242,7 @@ var ButtonGroupButton = function ButtonGroupButton(props) {
 
 ButtonGroup$1.Button = ButtonGroupButton;
 
-var states$1 = ['active', 'disabled'];
+var states$1 = ['active'];
 var modifiers$2 = ['variant'];
 
 var Checkbox$1 = function Checkbox(props) {
@@ -532,7 +532,7 @@ FadeButton$1.Caret = FadeButtonCaret;
 
 var modifiers$5 = ['variant', 'size'];
 
-var states$3 = ['invalid', 'disabled'];
+var states$3 = ['invalid'];
 
 var Input$1 = function Input(props) {
   var className = luiClassName('input', {
@@ -1132,7 +1132,7 @@ Popover$1.Button = PopoverButton;
 Popover$1.Footer = PopoverFooter;
 
 var modifiers$9 = ['variant'];
-var states$4 = ['active', 'disabled'];
+var states$4 = ['active'];
 
 var RadioButton$1 = function RadioButton(props) {
   var className = luiClassName('radiobutton', {
@@ -1159,7 +1159,7 @@ var RadioButton$1 = function RadioButton(props) {
 };
 
 var modifiers$10 = ['variant'];
-var states$5 = ['active', 'disabled'];
+var states$5 = ['active'];
 
 var Select$1 = function Select(props) {
   var className = luiClassName('select', {
@@ -1175,7 +1175,6 @@ var Select$1 = function Select(props) {
 };
 
 var modifiers$11 = ['variant'];
-var states$6 = ['disabled'];
 
 // TODO handle outside updates of value
 
@@ -1213,10 +1212,9 @@ var Search$1 = function (_Component) {
 
       var className = luiClassName('search', {
         props: props,
-        states: states$6,
         modifiers: modifiers$11
       });
-      var attributes = filterProps(props, modifiers$11, states$6, 'type');
+      var attributes = filterProps(props, modifiers$11, 'type');
 
       var onMouseDown = function onMouseDown(e) {
         e.preventDefault();
@@ -1246,16 +1244,16 @@ var Search$1 = function (_Component) {
 }(React.Component);
 
 var modifiers$12 = ['variant'];
-var states$7 = ['active', 'disabled'];
+var states$6 = ['active'];
 
 var Switch$1 = function Switch(props) {
   var className = luiClassName('switch', {
     props: props,
-    states: states$7,
+    states: states$6,
     modifiers: modifiers$12
   });
 
-  var attributes = filterProps(props, modifiers$12, states$7, 'title', 'type');
+  var attributes = filterProps(props, modifiers$12, states$6, 'title', 'type');
   return React__default.createElement(
     'div',
     { className: className, title: props.title },
@@ -1274,15 +1272,15 @@ var Switch$1 = function Switch(props) {
 };
 
 var modifiers$13 = ['variant'];
-var states$8 = ['active', 'disabled'];
+var states$7 = ['active', 'disabled'];
 
 var Tab$1 = function Tab(props) {
   var className = luiClassName('tab', {
     props: props,
-    states: states$8,
+    states: states$7,
     modifiers: modifiers$13
   });
-  var attributes = filterProps(props, modifiers$13, states$8);
+  var attributes = filterProps(props, modifiers$13, states$7);
   return React__default.createElement(
     'li',
     _extends({ className: className }, attributes),
@@ -1325,15 +1323,15 @@ var Tabset$1 = function Tabset(props) {
 
 var modifiers$15 = ['variant'];
 
-var states$9 = ['invalid', 'disabled'];
+var states$8 = ['invalid'];
 
 var Textarea$1 = function Textarea(props) {
   var className = luiClassName('textarea', {
     props: props,
-    states: states$9,
+    states: states$8,
     modifiers: modifiers$15
   });
-  return React__default.createElement('textarea', _extends({ className: className }, filterProps(props, modifiers$15, states$9)));
+  return React__default.createElement('textarea', _extends({ className: className }, filterProps(props, modifiers$15, states$8)));
 };
 
 var DEFAULT_DOCK$1 = 'top';
