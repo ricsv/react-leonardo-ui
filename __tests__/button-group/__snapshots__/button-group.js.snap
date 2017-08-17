@@ -10,15 +10,15 @@ exports[`test ButtonGroup with buttons renders correctly 1`] = `
 <div
   className="lui-buttongroup">
   <button
-    className="lui-button">
+    className="lui-button lui-buttongroup__button  ">
     Button 1
   </button>
   <button
-    className="lui-button">
+    className="lui-button lui-buttongroup__button  ">
     Button 2
   </button>
   <button
-    className="lui-button lui-button--info">
+    className="lui-button lui-button--info lui-buttongroup__button  ">
     Button 3
   </button>
 </div>
@@ -34,15 +34,15 @@ exports[`test Inverse ButtonGroup with buttons renders correctly 1`] = `
   className="lui-buttongroup"
   variant="inverse">
   <button
-    className="lui-button lui-button--inverse">
+    className="lui-button lui-button--inverse lui-buttongroup__button  ">
     Button 1
   </button>
   <button
-    className="lui-button lui-button--inverse">
+    className="lui-button lui-button--inverse lui-buttongroup__button  ">
     Button 2
   </button>
   <button
-    className="lui-button lui-button--info">
+    className="lui-button lui-button--info lui-buttongroup__button  ">
     Button 3
   </button>
 </div>
