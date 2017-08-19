@@ -5,7 +5,7 @@
 .idea/
 .vscode/
 node_modules/
-coverage/
+coverage/ 
 docs/dist/
 dist/react-leonardo-ui.min.js.map
 
