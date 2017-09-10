@@ -11,6 +11,7 @@
   "files": [
     "/dist"
   ],
+  "module": "src/react-leonardo-ui.js",
   "main": "dist/react-leonardo-ui.js",
   "scripts": {
     "build": "rollup -c && rollup -c --environment BUILD:production",
