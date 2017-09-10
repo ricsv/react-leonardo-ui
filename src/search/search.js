@@ -8,10 +8,10 @@ const modifiers = ['variant'];
 class Search extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       value: null
     };
+    this.focus = this.focus.bind(this);
   }
   componentDidMount() {
     this.element.addEventListener('input', (e) => {
@@ -20,6 +20,9 @@ class Search extends Component {
       });
     });
   }
+  focus() {
+    this.element.focus();
+  }
   render() {
     const props = this.props;
 
@@ -27,7 +30,6 @@ class Search extends Component {
       props,
       modifiers
     });
-    const attributes = filterProps(props, modifiers, 'type');
 
     const onMouseDown = (e) => {
       e.preventDefault();
@@ -45,7 +47,7 @@ class Search extends Component {
           ref={(elem) => { this.element = elem; }}
           type="text"
           className="lui-search__input"
-          {...attributes}
+          {...filterProps(props, modifiers, 'type')}
         />
         {this.state.value ?
           <span className="lui-search__clear-icon" onMouseDown={onMouseDown} /> : null}
