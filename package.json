@@ -9,7 +9,8 @@
     "url": "git@github.com:ricsv/react-leonardo-ui.git"
   },
   "files": [
-    "/dist"
+    "/dist",
+    "/src"
   ],
   "module": "src/react-leonardo-ui.js",
   "main": "dist/react-leonardo-ui.js",
