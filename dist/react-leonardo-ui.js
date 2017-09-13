@@ -177,18 +177,49 @@ var possibleConstructorReturn = function (self, call) {
 var modifiers = ['variant', 'size', 'block', 'rounded'];
 var states = ['active', 'disabled'];
 
-var Button$1 = function Button(props) {
-  var className = luiClassName('button', {
-    props: props,
-    modifiers: modifiers,
-    states: states
-  });
-  return React__default.createElement(
-    'button',
-    _extends({ className: className }, filterProps(props, modifiers, states)),
-    props.children
-  );
-};
+var Button$1 = function (_Component) {
+  inherits(Button, _Component);
+
+  function Button(props) {
+    classCallCheck(this, Button);
+
+    var _this = possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+
+    _this.focus = _this.focus.bind(_this);
+    return _this;
+  }
+
+  createClass(Button, [{
+    key: 'focus',
+    value: function focus() {
+      this.element.focus();
+    }
+  }, {
+    key: 'render',
+    value: function render$$1() {
+      var _this2 = this;
+
+      var props = this.props;
+
+      var className = luiClassName('button', {
+        props: props,
+        modifiers: modifiers,
+        states: states
+      });
+      return React__default.createElement(
+        'button',
+        _extends({
+          ref: function ref(element) {
+            _this2.element = element;
+          },
+          className: className
+        }, filterProps(props, modifiers, states)),
+        props.children
+      );
+    }
+  }]);
+  return Button;
+}(React.Component);
 
 var modifiers$1 = ['size', 'name'];
 
@@ -534,15 +565,45 @@ var modifiers$5 = ['variant', 'size'];
 
 var states$3 = ['invalid'];
 
-var Input$1 = function Input(props) {
-  var className = luiClassName('input', {
-    props: props,
-    states: states$3,
-    modifiers: modifiers$5
-  });
-  var attributes = filterProps(props, modifiers$5, states$3, 'type');
-  return React__default.createElement('input', _extends({ className: className }, attributes));
-};
+var Input$1 = function (_Component) {
+  inherits(Input, _Component);
+
+  function Input(props) {
+    classCallCheck(this, Input);
+
+    var _this = possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this, props));
+
+    _this.focus = _this.focus.bind(_this);
+    return _this;
+  }
+
+  createClass(Input, [{
+    key: 'focus',
+    value: function focus() {
+      this.element.focus();
+    }
+  }, {
+    key: 'render',
+    value: function render$$1() {
+      var _this2 = this;
+
+      var props = this.props;
+
+      var className = luiClassName('input', {
+        props: props,
+        states: states$3,
+        modifiers: modifiers$5
+      });
+      var attributes = filterProps(props, modifiers$5, states$3, 'type');
+      return React__default.createElement('input', _extends({
+        ref: function ref(element) {
+          _this2.element = element;
+        },
+        className: className }, attributes));
+    }
+  }]);
+  return Input;
+}(React.Component);
 
 var modifiers$6 = ['variant'];
 
@@ -1161,18 +1222,49 @@ var RadioButton$1 = function RadioButton(props) {
 var modifiers$10 = ['variant'];
 var states$5 = ['active'];
 
-var Select$1 = function Select(props) {
-  var className = luiClassName('select', {
-    props: props,
-    states: states$5,
-    modifiers: modifiers$10
-  });
-  return React__default.createElement(
-    'select',
-    _extends({ className: className }, filterProps(props, states$5, modifiers$10)),
-    props.children
-  );
-};
+var Select$1 = function (_Component) {
+  inherits(Select, _Component);
+
+  function Select(props) {
+    classCallCheck(this, Select);
+
+    var _this = possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).call(this, props));
+
+    _this.focus = _this.focus.bind(_this);
+    return _this;
+  }
+
+  createClass(Select, [{
+    key: 'focus',
+    value: function focus() {
+      this.element.focus();
+    }
+  }, {
+    key: 'render',
+    value: function render$$1() {
+      var _this2 = this;
+
+      var props = this.props;
+
+      var className = luiClassName('select', {
+        props: props,
+        states: states$5,
+        modifiers: modifiers$10
+      });
+      return React__default.createElement(
+        'select',
+        _extends({
+          ref: function ref(element) {
+            _this2.element = element;
+          },
+          className: className
+        }, filterProps(props, states$5, modifiers$10)),
+        props.children
+      );
+    }
+  }]);
+  return Select;
+}(React.Component);
 
 var modifiers$11 = ['variant'];
 
@@ -1189,6 +1281,7 @@ var Search$1 = function (_Component) {
     _this.state = {
       value: null
     };
+    _this.focus = _this.focus.bind(_this);
     return _this;
   }
 
@@ -1204,6 +1297,11 @@ var Search$1 = function (_Component) {
       });
     }
   }, {
+    key: 'focus',
+    value: function focus() {
+      this.element.focus();
+    }
+  }, {
     key: 'render',
     value: function render$$1() {
       var _this3 = this;
@@ -1214,7 +1312,6 @@ var Search$1 = function (_Component) {
         props: props,
         modifiers: modifiers$11
       });
-      var attributes = filterProps(props, modifiers$11, 'type');
 
       var onMouseDown = function onMouseDown(e) {
         e.preventDefault();
@@ -1235,7 +1332,7 @@ var Search$1 = function (_Component) {
           },
           type: 'text',
           className: 'lui-search__input'
-        }, attributes)),
+        }, filterProps(props, modifiers$11, 'type'))),
         this.state.value ? React__default.createElement('span', { className: 'lui-search__clear-icon', onMouseDown: onMouseDown }) : null
       );
     }
@@ -1246,30 +1343,62 @@ var Search$1 = function (_Component) {
 var modifiers$12 = ['variant'];
 var states$6 = ['active'];
 
-var Switch$1 = function Switch(props) {
-  var className = luiClassName('switch', {
-    props: props,
-    states: states$6,
-    modifiers: modifiers$12
-  });
+var Switch$1 = function (_Component) {
+  inherits(Switch, _Component);
 
-  var attributes = filterProps(props, modifiers$12, states$6, 'title', 'type');
-  return React__default.createElement(
-    'div',
-    { className: className, title: props.title },
-    React__default.createElement(
-      'label',
-      { htmlFor: props.htmlFor, className: 'lui-switch__label' },
-      React__default.createElement('input', _extends({ className: 'lui-switch__checkbox', type: 'checkbox' }, attributes)),
-      React__default.createElement(
-        'span',
-        { className: 'lui-switch__wrap' },
-        React__default.createElement('div', { className: 'lui-switch__inner' }),
-        React__default.createElement('div', { className: 'lui-switch__switch' })
-      )
-    )
-  );
-};
+  function Switch(props) {
+    classCallCheck(this, Switch);
+
+    var _this = possibleConstructorReturn(this, (Switch.__proto__ || Object.getPrototypeOf(Switch)).call(this, props));
+
+    _this.focus = _this.focus.bind(_this);
+    return _this;
+  }
+
+  createClass(Switch, [{
+    key: 'focus',
+    value: function focus() {
+      this.element.focus();
+    }
+  }, {
+    key: 'render',
+    value: function render$$1() {
+      var _this2 = this;
+
+      var props = this.props;
+
+      var className = luiClassName('switch', {
+        props: props,
+        states: states$6,
+        modifiers: modifiers$12
+      });
+
+      var attributes = filterProps(props, modifiers$12, states$6, 'title', 'type');
+      return React__default.createElement(
+        'div',
+        { className: className, title: props.title },
+        React__default.createElement(
+          'label',
+          { htmlFor: props.htmlFor, className: 'lui-switch__label' },
+          React__default.createElement('input', _extends({
+            ref: function ref(element) {
+              _this2.element = element;
+            },
+            className: 'lui-switch__checkbox',
+            type: 'checkbox'
+          }, attributes)),
+          React__default.createElement(
+            'span',
+            { className: 'lui-switch__wrap' },
+            React__default.createElement('div', { className: 'lui-switch__inner' }),
+            React__default.createElement('div', { className: 'lui-switch__switch' })
+          )
+        )
+      );
+    }
+  }]);
+  return Switch;
+}(React.Component);
 
 var modifiers$13 = ['variant'];
 var states$7 = ['active', 'disabled'];
@@ -1325,14 +1454,45 @@ var modifiers$15 = ['variant'];
 
 var states$8 = ['invalid'];
 
-var Textarea$1 = function Textarea(props) {
-  var className = luiClassName('textarea', {
-    props: props,
-    states: states$8,
-    modifiers: modifiers$15
-  });
-  return React__default.createElement('textarea', _extends({ className: className }, filterProps(props, modifiers$15, states$8)));
-};
+var Textarea$1 = function (_Component) {
+  inherits(Textarea, _Component);
+
+  function Textarea(props) {
+    classCallCheck(this, Textarea);
+
+    var _this = possibleConstructorReturn(this, (Textarea.__proto__ || Object.getPrototypeOf(Textarea)).call(this, props));
+
+    _this.focus = _this.focus.bind(_this);
+    return _this;
+  }
+
+  createClass(Textarea, [{
+    key: 'focus',
+    value: function focus() {
+      this.element.focus();
+    }
+  }, {
+    key: 'render',
+    value: function render$$1() {
+      var _this2 = this;
+
+      var props = this.props;
+
+      var className = luiClassName('textarea', {
+        props: props,
+        states: states$8,
+        modifiers: modifiers$15
+      });
+      return React__default.createElement('textarea', _extends({
+        ref: function ref(element) {
+          _this2.element = element;
+        },
+        className: className
+      }, filterProps(props, modifiers$15, states$8)));
+    }
+  }]);
+  return Textarea;
+}(React.Component);
 
 var DEFAULT_DOCK$1 = 'top';
 var OFFSET$1 = 10;
