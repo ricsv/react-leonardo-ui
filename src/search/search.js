@@ -42,7 +42,7 @@ class Search extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div className={className}>
-        <span className="lui-search__search-icon" />
+        <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
         <input
           ref={(elem) => { this.element = elem; }}
           type="text"
@@ -50,7 +50,14 @@ class Search extends Component {
           {...filterProps(props, modifiers, 'type')}
         />
         {this.state.value ?
-          <span className="lui-search__clear-icon" onMouseDown={onMouseDown} /> : null}
+          <button
+            className="lui-search__clear-button"
+            onMouseDown={onMouseDown}
+          >
+            <span
+              className="lui-icon  lui-icon--small  lui-icon--close"
+            />
+          </button> : null}
       </div>
     );
   }
