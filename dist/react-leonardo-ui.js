@@ -1323,7 +1323,7 @@ var Search$1 = function (_Component) {
           'button',
           {
             className: 'lui-search__clear-button',
-            onClick: this.props.onClearClick
+            onClick: this.onClearClick
           },
           React__default.createElement('span', {
             className: 'lui-icon  lui-icon--small  lui-icon--close'
