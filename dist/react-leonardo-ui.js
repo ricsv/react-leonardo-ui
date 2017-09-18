@@ -1278,23 +1278,18 @@ var Search$1 = function (_Component) {
 
     var _this = possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
-    _this.state = {
-      value: null
-    };
     _this.focus = _this.focus.bind(_this);
+    _this.onClearClick = _this.onClearClick.bind(_this);
     return _this;
   }
 
   createClass(Search, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      this.element.addEventListener('input', function (e) {
-        _this2.setState({
-          value: e.target.value
-        });
-      });
+    key: 'onClearClick',
+    value: function onClearClick(e) {
+      e.preventDefault();
+      if (typeof this.props.onClear === 'function') {
+        this.props.onClear();
+      }
     }
   }, {
     key: 'focus',
@@ -1304,7 +1299,7 @@ var Search$1 = function (_Component) {
   }, {
     key: 'render',
     value: function render$$1() {
-      var _this3 = this;
+      var _this2 = this;
 
       var props = this.props;
 
@@ -1313,27 +1308,27 @@ var Search$1 = function (_Component) {
         modifiers: modifiers$11
       });
 
-      var onMouseDown = function onMouseDown(e) {
-        e.preventDefault();
-        _this3.element.value = '';
-        _this3.setState({
-          value: ''
-        });
-      };
-
-      /* eslint-disable jsx-a11y/no-static-element-interactions */
       return React__default.createElement(
         'div',
         { className: className },
-        React__default.createElement('span', { className: 'lui-search__search-icon' }),
+        React__default.createElement('span', { className: 'lui-icon  lui-icon--search  lui-search__search-icon' }),
         React__default.createElement('input', _extends({
           ref: function ref(elem) {
-            _this3.element = elem;
+            _this2.element = elem;
           },
           type: 'text',
           className: 'lui-search__input'
-        }, filterProps(props, modifiers$11, 'type'))),
-        this.state.value ? React__default.createElement('span', { className: 'lui-search__clear-icon', onMouseDown: onMouseDown }) : null
+        }, filterProps(props, modifiers$11, 'type', 'onClear'))),
+        this.props.value ? React__default.createElement(
+          'button',
+          {
+            className: 'lui-search__clear-button',
+            onClick: this.props.onClearClick
+          },
+          React__default.createElement('span', {
+            className: 'lui-icon  lui-icon--small  lui-icon--close'
+          })
+        ) : null
       );
     }
   }]);

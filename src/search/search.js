@@ -8,17 +8,14 @@ const modifiers = ['variant'];
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: null
-    };
     this.focus = this.focus.bind(this);
+    this.onClearClick = this.onClearClick.bind(this);
   }
-  componentDidMount() {
-    this.element.addEventListener('input', (e) => {
-      this.setState({
-        value: e.target.value
-      });
-    });
+  onClearClick(e) {
+    e.preventDefault();
+    if (typeof this.props.onClear === 'function') {
+      this.props.onClear();
+    }
   }
   focus() {
     this.element.focus();
@@ -31,15 +28,6 @@ class Search extends Component {
       modifiers
     });
 
-    const onMouseDown = (e) => {
-      e.preventDefault();
-      this.element.value = '';
-      this.setState({
-        value: ''
-      });
-    };
-
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div className={className}>
         <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
@@ -47,12 +35,12 @@ class Search extends Component {
           ref={(elem) => { this.element = elem; }}
           type="text"
           className="lui-search__input"
-          {...filterProps(props, modifiers, 'type')}
+          {...filterProps(props, modifiers, 'type', 'onClear')}
         />
-        {this.state.value ?
+        {this.props.value ?
           <button
             className="lui-search__clear-button"
-            onMouseDown={onMouseDown}
+            onClick={this.onClearClick}
           >
             <span
               className="lui-icon  lui-icon--small  lui-icon--close"
