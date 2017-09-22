@@ -22,7 +22,7 @@ class Input extends Component {
       states,
       modifiers
     });
-    const attributes = filterProps(props, modifiers, states, 'type');
+    const attributes = filterProps(props, modifiers, states);
     return (
       <input
         ref={(element) => { this.element = element; }}
