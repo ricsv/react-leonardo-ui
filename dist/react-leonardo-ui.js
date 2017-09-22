@@ -594,7 +594,7 @@ var Input$1 = function (_Component) {
         states: states$3,
         modifiers: modifiers$5
       });
-      var attributes = filterProps(props, modifiers$5, states$3, 'type');
+      var attributes = filterProps(props, modifiers$5, states$3);
       return React__default.createElement('input', _extends({
         ref: function ref(element) {
           _this2.element = element;
