@@ -1,23 +1,4 @@
-/* global global */
-
 import * as positioner from '../src/positioner';
-
-beforeEach(() => {
-  global.document = {
-    body: {
-      scrollTop: 0,
-      scrollLeft: 0,
-      scrollWidth: 500,
-      scrollHeight: 500
-    }
-  };
-});
-
-afterEach(() => {
-  delete global.innerHeight;
-  delete global.innerWidth;
-  delete global.document;
-});
 
 test('Positioner should get the opposite dock', () => {
   expect(positioner.oppositeDock('top')).toBe('bottom');
@@ -87,7 +68,7 @@ test('Positioner should succeed to dock to right and bottom', () => {
   expect(positioner.tryDock(elemRect, alignToRect, windowRect, 'top').fits).toBe(false);
 });
 
-it('Positioner should succeed to dock after realigning the element', () => {
+test('Positioner should succeed to dock after realigning the element', () => {
   const elemRect = positioner.createRect(0, 0, 200, 200);
   const topLeftRect = positioner.createRect(50, 50, 50, 50);
   const bottomRightRect = positioner.createRect(400, 400, 50, 50);
@@ -99,7 +80,7 @@ it('Positioner should succeed to dock after realigning the element', () => {
   expect(positioner.tryDock(elemRect, bottomRightRect, windowRect, 'top').fits).toBe(true);
 });
 
-test('Positioner position to an element', () => {
+describe('Positioner position to an element', () => {
   let element;
   let alignToElement;
 
@@ -168,7 +149,7 @@ test('Positioner position to an element', () => {
   });
 
 
-  it('Positioner should fail to position to "bottom" because of min edge offset', () => {
+  test('Positioner should fail to position to "bottom" because of min edge offset', () => {
     const result = positioner.positionToElement(element, alignToElement, 'bottom', {
       minEdgeOffset: 80
     });

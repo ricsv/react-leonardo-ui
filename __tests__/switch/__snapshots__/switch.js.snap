@@ -1,65 +1,85 @@
-exports[`test Normal switch renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Normal switch renders correctly 1`] = `
 <div
   className="lui-switch"
-  title={undefined}>
+  title={undefined}
+>
   <label
     className="lui-switch__label"
-    htmlFor={undefined}>
+    htmlFor={undefined}
+  >
     <input
       checked={true}
       className="lui-switch__checkbox"
-      type="checkbox" />
+      type="checkbox"
+    />
     <span
-      className="lui-switch__wrap">
+      className="lui-switch__wrap"
+    >
       <div
-        className="lui-switch__inner" />
+        className="lui-switch__inner"
+      />
       <div
-        className="lui-switch__switch" />
+        className="lui-switch__switch"
+      />
     </span>
   </label>
 </div>
 `;
 
-exports[`test Switch with modifiers renders correctly 1`] = `
+exports[`Switch with modifiers renders correctly 1`] = `
 <div
   className="lui-switch lui-switch--inverse"
-  title={undefined}>
+  title={undefined}
+>
   <label
     className="lui-switch__label"
-    htmlFor={undefined}>
+    htmlFor={undefined}
+  >
     <input
       checked={true}
       className="lui-switch__checkbox"
-      type="checkbox" />
+      type="checkbox"
+    />
     <span
-      className="lui-switch__wrap">
+      className="lui-switch__wrap"
+    >
       <div
-        className="lui-switch__inner" />
+        className="lui-switch__inner"
+      />
       <div
-        className="lui-switch__switch" />
+        className="lui-switch__switch"
+      />
     </span>
   </label>
 </div>
 `;
 
-exports[`test Switch with states renders correctly 1`] = `
+exports[`Switch with states renders correctly 1`] = `
 <div
   className="lui-switch lui-active"
-  title={undefined}>
+  title={undefined}
+>
   <label
     className="lui-switch__label"
-    htmlFor={undefined}>
+    htmlFor={undefined}
+  >
     <input
       checked={true}
       className="lui-switch__checkbox"
       disabled={true}
-      type="checkbox" />
+      type="checkbox"
+    />
     <span
-      className="lui-switch__wrap">
+      className="lui-switch__wrap"
+    >
       <div
-        className="lui-switch__inner" />
+        className="lui-switch__inner"
+      />
       <div
-        className="lui-switch__switch" />
+        className="lui-switch__switch"
+      />
     </span>
   </label>
 </div>

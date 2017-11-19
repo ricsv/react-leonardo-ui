@@ -1,78 +1,100 @@
-exports[`test Checkbox passes props correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox passes props correctly 1`] = `
 <label
   className="lui-checkbox my-class"
   htmlFor={undefined}
-  title="Title">
+  title="Title"
+>
   <input
     checked={true}
     className="lui-checkbox__input"
     data-x="x"
     onChange={[Function]}
-    type="checkbox" />
+    type="checkbox"
+  />
   <div
-    className="lui-checkbox__check-wrap">
+    className="lui-checkbox__check-wrap"
+  >
     <span
-      className="lui-checkbox__check" />
+      className="lui-checkbox__check"
+    />
     <span
-      className="lui-checkbox__check-text" />
+      className="lui-checkbox__check-text"
+    />
   </div>
 </label>
 `;
 
-exports[`test Checkbox with modifiers renders correctly 1`] = `
+exports[`Checkbox with modifiers renders correctly 1`] = `
 <label
   className="lui-checkbox lui-checkbox--inverse"
   htmlFor={undefined}
-  title={undefined}>
+  title={undefined}
+>
   <input
     checked={true}
     className="lui-checkbox__input"
-    type="checkbox" />
+    type="checkbox"
+  />
   <div
-    className="lui-checkbox__check-wrap">
+    className="lui-checkbox__check-wrap"
+  >
     <span
-      className="lui-checkbox__check" />
+      className="lui-checkbox__check"
+    />
     <span
-      className="lui-checkbox__check-text" />
+      className="lui-checkbox__check-text"
+    />
   </div>
 </label>
 `;
 
-exports[`test Checkbox with states renders correctly 1`] = `
+exports[`Checkbox with states renders correctly 1`] = `
 <label
   className="lui-checkbox lui-active"
   htmlFor={undefined}
-  title={undefined}>
+  title={undefined}
+>
   <input
     checked={true}
     className="lui-checkbox__input"
     disabled={true}
-    type="checkbox" />
+    type="checkbox"
+  />
   <div
-    className="lui-checkbox__check-wrap">
+    className="lui-checkbox__check-wrap"
+  >
     <span
-      className="lui-checkbox__check" />
+      className="lui-checkbox__check"
+    />
     <span
-      className="lui-checkbox__check-text" />
+      className="lui-checkbox__check-text"
+    />
   </div>
 </label>
 `;
 
-exports[`test Normal checkbox renders correctly 1`] = `
+exports[`Normal checkbox renders correctly 1`] = `
 <label
   className="lui-checkbox"
   htmlFor={undefined}
-  title={undefined}>
+  title={undefined}
+>
   <input
     checked={true}
     className="lui-checkbox__input"
-    type="checkbox" />
+    type="checkbox"
+  />
   <div
-    className="lui-checkbox__check-wrap">
+    className="lui-checkbox__check-wrap"
+  >
     <span
-      className="lui-checkbox__check" />
+      className="lui-checkbox__check"
+    />
     <span
-      className="lui-checkbox__check-text" />
+      className="lui-checkbox__check-text"
+    />
   </div>
 </label>
 `;

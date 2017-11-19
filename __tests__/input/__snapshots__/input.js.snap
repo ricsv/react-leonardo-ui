@@ -1,27 +1,33 @@
-exports[`test Input passes props correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input passes props correctly 1`] = `
 <input
   className="lui-input my-class"
   data-x="x"
   onClick={[Function]}
   title="Title"
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Input with modifiers renders correctly 1`] = `
+exports[`Input with modifiers renders correctly 1`] = `
 <input
   className="lui-input lui-input--inverse"
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Input with states renders correctly 1`] = `
+exports[`Input with states renders correctly 1`] = `
 <input
   className="lui-input lui-invalid"
   disabled={true}
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Normal input renders correctly 1`] = `
+exports[`Normal input renders correctly 1`] = `
 <input
   className="lui-input"
-  value="Value" />
+  value="Value"
+/>
 `;

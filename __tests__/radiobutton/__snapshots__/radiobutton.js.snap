@@ -1,54 +1,71 @@
-exports[`test Normal radiobutton renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Normal radiobutton renders correctly 1`] = `
 <label
   className="lui-radiobutton"
-  htmlFor={undefined}>
+  htmlFor={undefined}
+>
   <input
     checked={true}
     className="lui-radiobutton__input"
-    type="radio" />
+    type="radio"
+  />
   <div
-    className="lui-radiobutton__radio-wrap">
+    className="lui-radiobutton__radio-wrap"
+  >
     <span
-      className="lui-radiobutton__radio" />
+      className="lui-radiobutton__radio"
+    />
     <span
-      className="lui-radiobutton__radio-text" />
+      className="lui-radiobutton__radio-text"
+    />
   </div>
 </label>
 `;
 
-exports[`test Radiobutton with modifiers renders correctly 1`] = `
+exports[`Radiobutton with modifiers renders correctly 1`] = `
 <label
   className="lui-radiobutton lui-radiobutton--inverse"
-  htmlFor={undefined}>
+  htmlFor={undefined}
+>
   <input
     checked={true}
     className="lui-radiobutton__input"
-    type="radio" />
+    type="radio"
+  />
   <div
-    className="lui-radiobutton__radio-wrap">
+    className="lui-radiobutton__radio-wrap"
+  >
     <span
-      className="lui-radiobutton__radio" />
+      className="lui-radiobutton__radio"
+    />
     <span
-      className="lui-radiobutton__radio-text" />
+      className="lui-radiobutton__radio-text"
+    />
   </div>
 </label>
 `;
 
-exports[`test Radiobutton with states renders correctly 1`] = `
+exports[`Radiobutton with states renders correctly 1`] = `
 <label
   className="lui-radiobutton lui-active"
-  htmlFor={undefined}>
+  htmlFor={undefined}
+>
   <input
     checked={true}
     className="lui-radiobutton__input"
     disabled={true}
-    type="radio" />
+    type="radio"
+  />
   <div
-    className="lui-radiobutton__radio-wrap">
+    className="lui-radiobutton__radio-wrap"
+  >
     <span
-      className="lui-radiobutton__radio" />
+      className="lui-radiobutton__radio"
+    />
     <span
-      className="lui-radiobutton__radio-text" />
+      className="lui-radiobutton__radio-text"
+    />
   </div>
 </label>
 `;
