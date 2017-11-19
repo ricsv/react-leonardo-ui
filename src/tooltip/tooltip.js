@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Portal from '../portal';
+import { createPortal } from 'react-dom';
+
 import TooltipContent from './tooltip-content';
 import { luiClassName, filterProps } from '../util';
 
@@ -27,6 +28,10 @@ class Tooltip extends Component {
     this.transitionToClosed = this.transitionToClosed.bind(this);
   }
   componentDidMount() {
+    this.portalElement = document.createElement('div');
+    this.portalElement.id = this.props.portalId;
+    document.body.appendChild(this.portalElement);
+
     if (this.state.tooltipState === TOOLTIP_STATE.opening) {
       this.transitionToOpen();
     }
@@ -83,11 +88,12 @@ class Tooltip extends Component {
       );
     }
     return (
-      <Portal portalId={this.portalId}>
+      createPortal(
         <TooltipContent className={className} {...filterProps(props)}>
           {props.children}
-        </TooltipContent>
-      </Portal>
+        </TooltipContent>,
+        this.portalElement
+      )
     );
   }
 }

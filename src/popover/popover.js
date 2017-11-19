@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
 
 import PopoverContent from './popover-content';
 import PopoverBody from './popover-body';
 import PopoverFooter from './popover-footer';
 import PopoverHeader from './popover-header';
 import PopoverTitle from './popover-title';
-import Portal from '../portal';
 
 import { luiClassName, filterProps } from '../util';
 
@@ -36,6 +36,10 @@ class Popover extends Component {
     this.transitionToClosed = this.transitionToClosed.bind(this);
   }
   componentDidMount() {
+    this.portalElement = document.createElement('div');
+    this.portalElement.id = this.props.portalId;
+    document.body.appendChild(this.portalElement);
+
     if (this.state.popoverState === POPOVER_STATE.opening) {
       this.transitionToOpen();
     }
@@ -109,13 +113,14 @@ class Popover extends Component {
       );
     }
     return (
-      <Portal portalId={this.portalId}>
+      createPortal(
         <div ref={(el) => { this.element = el; }}>
           <PopoverContent className={className} {...filterProps(props)}>
             {props.children}
           </PopoverContent>
-        </div>
-      </Portal>
+        </div>,
+        this.portalElement
+      )
     );
   }
 }

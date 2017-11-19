@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
 
-import Portal from '../portal';
 import { luiClassName, filterProps } from '../util';
 
 const FADE_DURATION = 200;
@@ -30,6 +30,10 @@ class Dialog extends Component {
     this.transitionToClosed = this.transitionToClosed.bind(this);
   }
   componentDidMount() {
+    this.portalElement = document.createElement('div');
+    this.portalElement.id = this.props.portalId;
+    document.body.appendChild(this.portalElement);
+
     if (this.state.dialogState === DIALOG_STATE.opening) {
       this.transitionToOpen();
     }
@@ -51,6 +55,9 @@ class Dialog extends Component {
     } else if (this.state.dialogState === DIALOG_STATE.closing) {
       this.transitionToClosed();
     }
+  }
+  componentWillUnmount() {
+    document.body.removeChild(this.portalElement);
   }
   keyUpListener(e) {
     if (e.keyCode === 27) {
@@ -96,14 +103,15 @@ class Dialog extends Component {
 
     return (
       dialogState !== DIALOG_STATE.closed ?
-        <Portal portalId={this.portalId}>
+        createPortal(
           <div className="lui-dialog-container">
             <div className={backgroundClassName} />
             <div className={className} tabIndex="-1" {...passProps}>
               {this.props.children}
             </div>
-          </div>
-        </Portal>
+          </div>,
+          this.portalElement,
+        )
         : null
     );
   }
