@@ -1,23 +1,28 @@
 import React from 'react';
 
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const modifiers = ['variant'];
-const states = ['active'];
-
-const RadioButton = (props) => {
-  const className = luiClassName('radiobutton', {
-    props,
-    modifiers,
-    states
+const RadioButton = ({
+  children,
+  className,
+  title,
+  htmlFor,
+  active,
+  variant,
+  ...extraProps
+}) => {
+  const finalClassName = luiClassName('radiobutton', {
+    className,
+    states: { active },
+    modifiers: { variant }
   });
 
   return (
-    <label htmlFor={props.htmlFor} className={className}>
-      <input className="lui-radiobutton__input" type="radio" {...filterProps(props, modifiers, states, 'type')} />
+    <label htmlFor={htmlFor} className={finalClassName}>
+      <input className="lui-radiobutton__input" {...extraProps} type="radio" />
       <div className="lui-radiobutton__radio-wrap">
         <span className="lui-radiobutton__radio" />
-        <span className="lui-radiobutton__radio-text">{props.children}</span>
+        <span className="lui-radiobutton__radio-text">{children}</span>
       </div>
     </label>
   );

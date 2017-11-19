@@ -1,13 +1,12 @@
 import React from 'react';
 
 import Button from '../button';
-import { filterProps } from '../util';
 
-const ButtonGroupButton = (props) => {
-  const className = `lui-buttongroup__button  ${props.className || ''}`;
+const ButtonGroupButton = ({ className = '', children, ...extraProps }) => {
+  const finalClassName = `lui-buttongroup__button  ${className}`.trim();
   return (
-    <Button {...filterProps(props)} className={className}>
-      {props.children}
+    <Button {...extraProps} className={finalClassName}>
+      {children}
     </Button>
   );
 };

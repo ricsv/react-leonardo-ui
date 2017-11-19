@@ -7,7 +7,7 @@ import PopoverFooter from './popover-footer';
 import PopoverHeader from './popover-header';
 import PopoverTitle from './popover-title';
 
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
 const FADE_DURATION = 100;
 const POPOVER_STATE = {
@@ -16,9 +16,6 @@ const POPOVER_STATE = {
   closing: 2,
   closed: 3
 };
-
-const modifiers = ['variant'];
-const reservedProps = ['onEscape', 'show', 'onOpen', 'onClose'];
 
 let currentId = 0;
 
@@ -96,21 +93,27 @@ class Popover extends Component {
       return null;
     }
 
-    const props = this.props;
-    let className = luiClassName('popover', {
-      props,
-      modifiers
+    const {
+      className,
+      children,
+      inline,
+      variant,
+      ...extraProps
+    } = this.props;
+
+    let popoverClassName = luiClassName('popover', {
+      className,
+      modifiers: { variant }
     });
     if (popoverState === POPOVER_STATE.opening || popoverState === POPOVER_STATE.closing) {
-      className += ' lui-fade';
+      popoverClassName += ' lui-fade';
     }
 
-    const passProps = filterProps(this.props, modifiers, ...reservedProps);
-    if (this.props.inline) {
+    if (inline) {
       return (
         <div ref={(el) => { this.element = el; }}>
-          <PopoverContent className={className} inline {...passProps}>
-            {props.children}
+          <PopoverContent className={popoverClassName} inline {...extraProps}>
+            {children}
           </PopoverContent>
         </div>
       );
@@ -119,8 +122,8 @@ class Popover extends Component {
     return (
       createPortal(
         <div ref={(el) => { this.element = el; }}>
-          <PopoverContent className={className} {...passProps}>
-            {props.children}
+          <PopoverContent className={popoverClassName} {...extraProps}>
+            {children}
           </PopoverContent>
         </div>,
         this.portalElement

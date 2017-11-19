@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Button from '../button';
-import { filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const PopoverButton = (props) => {
-  const className = `lui-popover__button  ${props.className || ''}`;
+const PopoverButton = ({ className, children, ...extraProps }) => {
+  const finalClassName = luiClassName('lui-popover__button', { className });
   return (
-    <Button {...filterProps(props)} className={className}>
-      {props.children}
+    <Button className={finalClassName} {...extraProps}>
+      {children}
     </Button>
   );
 };

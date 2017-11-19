@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { filterProps, luiClassName } from '../util';
-
-const modifiers = ['variant'];
-const states = ['active'];
+import { luiClassName } from '../util';
 
 class Switch extends Component {
   constructor(props) {
@@ -14,23 +11,29 @@ class Switch extends Component {
   }
   render() {
     const {
-      props
-    } = this;
-    const className = luiClassName('switch', {
-      props,
-      states,
-      modifiers
+      children,
+      className,
+      title,
+      htmlFor,
+      active,
+      variant,
+      ...extraProps
+    } = this.props;
+
+    const finalClassName = luiClassName('switch', {
+      className,
+      modifiers: { variant },
+      states: { active }
     });
 
-    const attributes = filterProps(props, modifiers, states, 'title', 'type');
     return (
-      <div className={className} title={props.title}>
-        <label htmlFor={props.htmlFor} className="lui-switch__label">
+      <div className={finalClassName} title={title}>
+        <label htmlFor={htmlFor} className="lui-switch__label">
           <input
             ref={(element) => { this.element = element; }}
             className="lui-switch__checkbox"
+            {...extraProps}
             type="checkbox"
-            {...attributes}
           />
           <span className="lui-switch__wrap">
             <div className="lui-switch__inner" />

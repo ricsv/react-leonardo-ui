@@ -1,17 +1,20 @@
 import React from 'react';
 
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const modifiers = ['variant'];
-
-const InputGroup = (props) => {
-  const className = luiClassName('input-group', {
-    props,
-    modifiers
+const InputGroup = ({
+  className,
+  children,
+  variant,
+  ...extraProps
+}) => {
+  const finalClassName = luiClassName('input-group', {
+    className,
+    modifiers: { variant }
   });
   return (
-    <div className={className} {...filterProps(props, modifiers)}>
-      {props.children}
+    <div className={finalClassName} {...extraProps}>
+      {children}
     </div>
   );
 };

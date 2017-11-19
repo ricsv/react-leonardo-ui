@@ -49,7 +49,7 @@ class Example extends Component {
       </table>
     ) : null;
 
-    const className = `example  ${props.className || ''}`;
+    const className = `example  ${props.className || ''}`.trim();
     return (
       <div className={className}>
         {props.title}

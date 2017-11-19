@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
 const FADE_DURATION = 200;
 
@@ -11,9 +11,6 @@ const DIALOG_STATE = {
   closing: 2,
   closed: 3
 };
-
-const modifiers = ['variant'];
-const reservedProps = ['onEscape', 'show', 'onOpen', 'onClose'];
 
 let currentId = 0;
 
@@ -88,15 +85,25 @@ class Dialog extends Component {
     }, FADE_DURATION);
   }
   render() {
+    const {
+      className,
+      children,
+      variant,
+      show,
+      onEscape,
+      onOpen,
+      onClose,
+      ...extraProps
+    } = this.props;
     const { dialogState } = this.state;
 
-    let className = luiClassName('dialog', {
-      props: this.props,
-      modifiers
+    let dialogClassName = luiClassName('dialog', {
+      className,
+      modifiers: { variant }
     });
     let backgroundClassName = 'lui-modal-background';
     if (dialogState === DIALOG_STATE.opening || dialogState === DIALOG_STATE.closing) {
-      className += ' lui-fade';
+      dialogClassName += ' lui-fade';
       backgroundClassName += ' lui-fade';
     }
 
@@ -104,11 +111,10 @@ class Dialog extends Component {
       return null;
     }
 
-    const passProps = filterProps(this.props, modifiers, reservedProps);
     return createPortal(
       <div className="lui-dialog-container">
         <div className={backgroundClassName} />
-        <div className={className} tabIndex="-1" {...passProps}>
+        <div className={dialogClassName} tabIndex="-1" {...extraProps}>
           {this.props.children}
         </div>
       </div>,

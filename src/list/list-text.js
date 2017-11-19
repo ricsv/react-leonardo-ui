@@ -1,11 +1,10 @@
 import React from 'react';
-import { luiClassName, filterProps } from '../util';
 
-const ListText = (props) => {
-  const className = luiClassName('list__text', { props });
+const ListText = ({ className = '', children, ...extraProps }) => {
+  const finalClassName = `lui-list__text  ${className}`.trim();
   return (
-    <div className={className} {...filterProps(props)}>
-      {props.children}
+    <div className={finalClassName} {...extraProps}>
+      {children}
     </div>
   );
 };

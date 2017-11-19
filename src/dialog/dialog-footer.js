@@ -1,11 +1,11 @@
 import React from 'react';
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const DialogFooter = (props) => {
-  const className = luiClassName('dialog__footer', { props });
+const DialogFooter = ({ className, children, ...extraProps }) => {
+  const finalClassName = luiClassName('dialog__footer', { className });
   return (
-    <div className={className} {...filterProps(props)}>
-      {props.children}
+    <div className={finalClassName} {...extraProps}>
+      {children}
     </div>
   );
 };
