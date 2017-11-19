@@ -12,13 +12,13 @@ const Props = props => (
         </tr>
       </thead>
       <tbody>
-        {props.props.map((prop, idx) =>
-          <tr key={idx}>
+        {props.props.map(prop => (
+          <tr key={prop.name}>
             <td>{prop.name}</td>
             <td>{prop.type}</td>
             <td>{prop.description}</td>
           </tr>
-        )}
+        ))}
       </tbody>
     </table>
   </div>

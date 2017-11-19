@@ -19,6 +19,6 @@ const RadioButtonSection = props => (
       }]}
     />
   </Section>
-  );
+);
 
 export default RadioButtonSection;

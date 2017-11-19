@@ -38,13 +38,13 @@ class Example extends Component {
           </tr>
         </thead>
         <tbody>
-          {props.settings.map(setting =>
+          {props.settings.map(setting => (
             <tr>
               <td>{setting.name}</td>
               <td>{setting.type}</td>
               <td>{setting.description}</td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     ) : null;

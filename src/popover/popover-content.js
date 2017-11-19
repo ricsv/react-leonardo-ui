@@ -27,7 +27,8 @@ class PopoverContent extends Component {
         offset: OFFSET,
         minWindowOffset: 10,
         minEdgeOffset: 5
-      });
+      }
+    );
 
     this.setState({
       positionResult

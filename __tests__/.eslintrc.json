@@ -4,5 +4,8 @@
   },
   "parserOptions": {
     "ecmaVersion": 6
+  },
+  "rules": {
+    "function-paren-newline": 0
   }
 }

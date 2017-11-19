@@ -197,6 +197,6 @@ const IconSection = () => (
       }]}
     />
   </Section>
-  );
+);
 
 export default IconSection;

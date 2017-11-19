@@ -22,6 +22,6 @@ const InputSection = props => (
       }]}
     />
   </Section>
-  );
+);
 
 export default InputSection;

@@ -26,7 +26,8 @@ class Input extends Component {
     return (
       <input
         ref={(element) => { this.element = element; }}
-        className={className} {...attributes}
+        className={className}
+        {...attributes}
       />
     );
   }

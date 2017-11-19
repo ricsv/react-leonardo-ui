@@ -30,14 +30,13 @@ class ButtonGroupSection extends Component {
 
     const buttonItems = buttons.map((button, idx) => (
       <ButtonGroup.Button
-        key={idx}
         variant={props.baseVariant}
         active={this.state.activeButton === idx}
         onClick={() => this.onClick(idx)}
       >
         {button.text}
       </ButtonGroup.Button>
-      ));
+    ));
 
     return (
       <Section title="ButtonGroup">

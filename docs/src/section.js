@@ -7,6 +7,6 @@ const Section = props => (
     </h2>
     {props.children}
   </section>
-  );
+);
 
 export default Section;

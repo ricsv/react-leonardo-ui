@@ -37,14 +37,13 @@ class TabsSection extends Component {
 
     const tabItems = tabs.map((tab, idx) => (
       <Tab
-        key={idx}
         onClick={() => this.onClick(idx)}
         variant={props.baseVariant}
         active={this.state.activeTab === idx}
       >
         {tab.tabContent}
       </Tab>
-      ));
+    ));
 
     return (
       <Section title="Tabs">

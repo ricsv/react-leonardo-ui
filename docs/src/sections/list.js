@@ -40,6 +40,6 @@ const ListSection = props => (
       </List>
     </Example>
   </Section>
-  );
+);
 
 export default ListSection;

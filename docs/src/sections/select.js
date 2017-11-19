@@ -28,6 +28,6 @@ const SelectSection = props => (
       }]}
     />
   </Section>
-  );
+);
 
 export default SelectSection;

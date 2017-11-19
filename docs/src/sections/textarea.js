@@ -18,6 +18,6 @@ const TextareaSection = props => (
       }]}
     />
   </Section>
-  );
+);
 
 export default TextareaSection;
