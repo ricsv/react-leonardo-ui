@@ -13,6 +13,7 @@ const DIALOG_STATE = {
 };
 
 const modifiers = ['variant'];
+const reservedProps = ['onEscape', 'show', 'onOpen', 'onClose'];
 
 let currentId = 0;
 
@@ -87,7 +88,7 @@ class Dialog extends Component {
     }, FADE_DURATION);
   }
   render() {
-    const dialogState = this.state.dialogState;
+    const { dialogState } = this.state;
 
     let className = luiClassName('dialog', {
       props: this.props,
@@ -99,20 +100,19 @@ class Dialog extends Component {
       backgroundClassName += ' lui-fade';
     }
 
-    const passProps = filterProps(this.props, modifiers, 'onEscape', 'show', 'onOpen', 'onClose');
+    if (dialogState === DIALOG_STATE.closed) {
+      return null;
+    }
 
-    return (
-      dialogState !== DIALOG_STATE.closed ?
-        createPortal(
-          <div className="lui-dialog-container">
-            <div className={backgroundClassName} />
-            <div className={className} tabIndex="-1" {...passProps}>
-              {this.props.children}
-            </div>
-          </div>,
-          this.portalElement,
-        )
-        : null
+    const passProps = filterProps(this.props, modifiers, reservedProps);
+    return createPortal(
+      <div className="lui-dialog-container">
+        <div className={backgroundClassName} />
+        <div className={className} tabIndex="-1" {...passProps}>
+          {this.props.children}
+        </div>
+      </div>,
+      this.portalElement,
     );
   }
 }

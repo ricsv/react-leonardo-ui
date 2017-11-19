@@ -10,7 +10,6 @@ import PopoverTitle from './popover-title';
 import { luiClassName, filterProps } from '../util';
 
 const FADE_DURATION = 100;
-
 const POPOVER_STATE = {
   opening: 0,
   open: 1,
@@ -19,6 +18,7 @@ const POPOVER_STATE = {
 };
 
 const modifiers = ['variant'];
+const reservedProps = ['onEscape', 'show', 'onOpen', 'onClose'];
 
 let currentId = 0;
 
@@ -90,7 +90,11 @@ class Popover extends Component {
     }, FADE_DURATION);
   }
   render() {
-    const popoverState = this.state.popoverState;
+    const { popoverState } = this.state;
+
+    if (popoverState === POPOVER_STATE.closed) {
+      return null;
+    }
 
     const props = this.props;
     let className = luiClassName('popover', {
@@ -101,21 +105,21 @@ class Popover extends Component {
       className += ' lui-fade';
     }
 
-    if (popoverState === POPOVER_STATE.closed) {
-      return null;
-    } else if (this.props.inline) {
+    const passProps = filterProps(this.props, modifiers, ...reservedProps);
+    if (this.props.inline) {
       return (
         <div ref={(el) => { this.element = el; }}>
-          <PopoverContent className={className} inline {...filterProps(props)}>
+          <PopoverContent className={className} inline {...passProps}>
             {props.children}
           </PopoverContent>
         </div>
       );
     }
+
     return (
       createPortal(
         <div ref={(el) => { this.element = el; }}>
-          <PopoverContent className={className} {...filterProps(props)}>
+          <PopoverContent className={className} {...passProps}>
             {props.children}
           </PopoverContent>
         </div>,
