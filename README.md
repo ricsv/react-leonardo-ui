@@ -15,12 +15,6 @@ __NPM__
 npm install --save react-leonardo-ui
 ```
 
-__Yarn__
-
-```sh
-yarn add react-leonardo-ui
-```
-
 ## Usage
 
 __ES2015__

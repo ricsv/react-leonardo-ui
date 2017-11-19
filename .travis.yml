@@ -4,13 +4,15 @@ language: node_js
 
 node_js: '6'
 
-cache: yarn
+cache:
+  directories:
+    - "node_modules"
 
 env:
   - PRODUCTION=1
 
 install:
-  - yarn
+  - npm install
   - npm install coveralls
 
 after_success:
