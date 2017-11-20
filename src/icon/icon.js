@@ -1,16 +1,19 @@
 import React from 'react';
 
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const modifiers = ['size', 'name'];
-
-const Icon = (props) => {
-  const className = luiClassName('icon', {
-    props,
-    modifiers
+const Icon = ({
+  className,
+  name,
+  size,
+  ...extraProps
+}) => {
+  const finalClassName = luiClassName('icon', {
+    className,
+    modifiers: { name, size }
   });
   return (
-    <span className={className} aria-hidden="true" {...filterProps(props, modifiers)} />
+    <span className={finalClassName} aria-hidden="true" {...extraProps} />
   );
 };
 

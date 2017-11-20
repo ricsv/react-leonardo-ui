@@ -1,11 +1,11 @@
 import React from 'react';
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const DialogBody = (props) => {
-  const className = luiClassName('dialog__body', { props });
+const DialogBody = ({ className, children, ...extraProps }) => {
+  const finalClassName = luiClassName('dialog__body', { className });
   return (
-    <div className={className} {...filterProps(props)}>
-      {props.children}
+    <div className={finalClassName} {...extraProps}>
+      {children}
     </div>
   );
 };

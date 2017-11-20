@@ -1,13 +1,12 @@
 import React from 'react';
-import { luiClassName, filterProps } from '../util';
 
-const ListAside = (props) => {
-  const className = luiClassName('list__header', { props });
+const ListHeader = ({ className = '', children, ...extraProps }) => {
+  const finalClassName = `lui-list__header  ${className}`.trim();
   return (
-    <li className={className} {...filterProps(props)}>
-      {props.children}
+    <li className={finalClassName} {...extraProps}>
+      {children}
     </li>
   );
 };
 
-export default ListAside;
+export default ListHeader;

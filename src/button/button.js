@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-import { filterProps, luiClassName } from '../util';
-
-const modifiers = ['variant', 'size', 'block', 'rounded'];
-const states = ['active', 'disabled'];
+import { luiClassName } from '../util';
 
 class Button extends Component {
   constructor(props) {
@@ -15,20 +12,35 @@ class Button extends Component {
   }
   render() {
     const {
-      props
-    } = this;
-    const className = luiClassName('button', {
-      props,
-      modifiers,
-      states
+      children,
+      className,
+      variant,
+      size,
+      block,
+      rounded,
+      active,
+      disabled,
+      ...extraProps
+    } = this.props;
+
+    const finalClassName = luiClassName('button', {
+      className,
+      modifiers: {
+        variant,
+        size,
+        block,
+        rounded
+      },
+      states: { active, disabled }
     });
+
     return (
       <button
         ref={(element) => { this.element = element; }}
-        className={className}
-        {...filterProps(props, modifiers, states)}
+        className={finalClassName}
+        {...extraProps}
       >
-        {props.children}
+        {children}
       </button>
     );
   }

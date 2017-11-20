@@ -1,11 +1,11 @@
 import React from 'react';
-import { filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const PopoverBody = (props) => {
-  const className = `lui-popover__body ${props.className ? props.className : ''}`;
+const PopoverBody = ({ className, children, ...extraProps }) => {
+  const finalClassName = luiClassName('popover__body', { className });
   return (
-    <div className={className} {...filterProps(props)}>
-      {props.children}
+    <div className={finalClassName} {...extraProps}>
+      {children}
     </div>
   );
 };

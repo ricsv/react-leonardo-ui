@@ -1,20 +1,24 @@
 import React from 'react';
 
-import { filterProps, luiClassName } from '../util';
+import { luiClassName } from '../util';
 
-const modifiers = ['variant'];
-const states = ['active', 'disabled'];
-
-const Tab = (props) => {
-  const className = luiClassName('tab', {
-    props,
-    states,
-    modifiers
+const Tab = ({
+  className,
+  children,
+  variant,
+  active,
+  disabled,
+  ...extraProps
+}) => {
+  const finalClassName = luiClassName('tab', {
+    className,
+    modifiers: { variant },
+    states: { active, disabled }
   });
-  const attributes = filterProps(props, modifiers, states);
+
   return (
-    <li className={className} {...attributes}>
-      {props.children}
+    <li className={finalClassName} {...extraProps}>
+      {children}
     </li>
   );
 };

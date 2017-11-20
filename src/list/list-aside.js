@@ -1,11 +1,10 @@
 import React from 'react';
-import { luiClassName, filterProps } from '../util';
 
-const ListAside = (props) => {
-  const className = luiClassName('list__aside', { props });
+const ListAside = ({ className = '', children, ...extraProps }) => {
+  const finalClassName = `lui-list__aside  ${className}`.trim();
   return (
-    <div className={className} {...filterProps(props)}>
-      {props.children}
+    <div className={finalClassName} {...extraProps}>
+      {children}
     </div>
   );
 };

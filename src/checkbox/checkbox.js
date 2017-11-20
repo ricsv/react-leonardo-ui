@@ -1,23 +1,26 @@
 import React from 'react';
-import { filterProps, luiClassName } from '../util';
+import { luiClassName } from '../util';
 
-const states = ['active'];
-const modifiers = ['variant'];
-
-const Checkbox = (props) => {
-  const attributes = filterProps(props, states, modifiers, 'title', 'type');
-
-  const className = luiClassName('checkbox', {
-    props,
-    states,
-    modifiers
+const Checkbox = ({
+  children,
+  className,
+  title,
+  htmlFor,
+  active,
+  variant,
+  ...extraProps
+}) => {
+  const finalClassName = luiClassName('checkbox', {
+    className,
+    states: { active },
+    modifiers: { variant }
   });
   return (
-    <label htmlFor={props.htmlFor} title={props.title} className={className}>
-      <input className="lui-checkbox__input" type="checkbox" {...attributes} />
+    <label htmlFor={htmlFor} title={title} className={finalClassName}>
+      <input className="lui-checkbox__input" type="checkbox" {...extraProps} />
       <div className="lui-checkbox__check-wrap">
         <span className="lui-checkbox__check" />
-        <span className="lui-checkbox__check-text">{props.children}</span>
+        <span className="lui-checkbox__check-text">{children}</span>
       </div>
     </label>
   );

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import { filterProps, luiClassName } from '../util';
-
-const modifiers = ['variant'];
+import { luiClassName } from '../util';
 
 // TODO handle outside updates of value
 class Search extends Component {
@@ -21,23 +19,30 @@ class Search extends Component {
     this.element.focus();
   }
   render() {
-    const props = this.props;
+    const {
+      className,
+      children,
+      variant,
+      value,
+      onClear,
+      ...extraProps
+    } = this.props;
 
-    const className = luiClassName('search', {
-      props,
-      modifiers
+    const finalClassName = luiClassName('search', {
+      className,
+      modifiers: { variant }
     });
 
     return (
-      <div className={className}>
+      <div className={finalClassName}>
         <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
         <input
           ref={(elem) => { this.element = elem; }}
-          type="text"
           className="lui-search__input"
-          {...filterProps(props, modifiers, 'type', 'onClear')}
+          {...extraProps}
+          type="text"
         />
-        {this.props.value ?
+        {value ?
           <button
             className="lui-search__clear-button"
             onClick={this.onClearClick}

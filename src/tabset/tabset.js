@@ -1,17 +1,21 @@
 import React from 'react';
 
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const modifiers = ['variant', 'fill'];
-
-const Tabset = (props) => {
-  const className = luiClassName('tabset', {
-    props,
-    modifiers
+const Tabset = ({
+  className,
+  children,
+  variant,
+  fill,
+  ...extraProps
+}) => {
+  const finalClassName = luiClassName('tabset', {
+    className,
+    modifiers: { variant, fill }
   });
   return (
-    <ul className={className} {...filterProps(props, modifiers)}>
-      {props.children}
+    <ul className={finalClassName} {...extraProps}>
+      {children}
     </ul>
   );
 };

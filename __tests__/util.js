@@ -1,7 +1,6 @@
 import {
   camelToKebabCase,
-  luiClassName,
-  filterProps
+  luiClassName
 } from '../src/util';
 
 describe('util camelToKebabCase function', () => {
@@ -12,99 +11,55 @@ describe('util camelToKebabCase function', () => {
 
 describe('util luiClass function', () => {
   const name = 'button';
-  const modifiers = ['size', 'block'];
-  const states = ['active', 'focused', 'hovered', 'disabled'];
 
   test('to return a base class', () => {
+    expect(luiClassName(name)).toBe('lui-button');
+  });
+
+  test('to return a base class from empty modifiers and state', () => {
     expect(luiClassName(name, {
-      modifiers,
-      states
+      modifiers: {},
+      states: {},
     })).toBe('lui-button');
   });
 
   test('to return correct className using modifiers', () => {
     expect(luiClassName(name, {
-      props: {
+      modifiers: {
         size: 'large',
         block: true,
-        abc: false,
-        xyz: null
-      },
-      modifiers,
-      states
+      }
     })).toBe('lui-button lui-button--large lui-button--block');
   });
 
   test('to return correct className using states', () => {
     expect(luiClassName(name, {
-      props: {
+      states: {
         active: true,
         focused: false,
-        hovered: true
-      },
-      modifiers,
-      states
+        hovered: true,
+      }
     })).toBe('lui-button lui-active lui-hovered');
   });
 
   test('to return correct className using additional classes', () => {
     expect(luiClassName(name, {
-      props: {
-        className: 'extra classes'
-      },
-      modifiers,
-      states
+      className: 'extra classes',
     })).toBe('lui-button extra classes');
   });
 
   test('to return correct className using a combination', () => {
     expect(luiClassName(name, {
-      props: {
+      modifiers: {
+        size: 'large',
+        block: true,
+      },
+      states: {
         active: true,
         focused: false,
         hovered: true,
-        size: 'large',
-        block: true
-      },
-      modifiers,
-      states
+      }
     })).toBe('lui-button lui-button--large lui-button--block lui-active lui-hovered');
-  });
-});
-
-describe('util filterProps function', () => {
-  test('to pass all props', () => {
-    expect(filterProps({
-      a: 'a',
-      b: 'b'
-    }, ['x'], 'y')).toEqual({
-      a: 'a',
-      b: 'b'
-    });
-  });
-
-  test('to exclude correct props', () => {
-    expect(filterProps({
-      a: 'a',
-      b: 'b',
-      c: 'c'
-    }, ['a', 'x'], 'c', 'x')).toEqual({
-      b: 'b'
-    });
-  });
-
-  test('to exclude all props', () => {
-    expect(filterProps({
-      a: 'a',
-      b: 'b'
-    }, ['a'], 'b')).toEqual({});
-  });
-
-  test('to exclude regex props', () => {
-    expect(filterProps({
-      a: 'a',
-      onClick: 'onClick'
-    }, /^on[A-Z]/)).toEqual({ a: 'a' });
   });
 });
 

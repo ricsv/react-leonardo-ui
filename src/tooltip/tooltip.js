@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
 import TooltipContent from './tooltip-content';
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
 const FADE_DURATION = 50;
 const TOOLTIP_STATE = {
@@ -11,8 +11,6 @@ const TOOLTIP_STATE = {
   closing: 2,
   closed: 3
 };
-
-const reservedProps = ['show', 'onOpen', 'onClose'];
 
 let currentId = 0;
 
@@ -72,31 +70,40 @@ class Tooltip extends Component {
     }, FADE_DURATION);
   }
   render() {
-    const props = this.props;
     const { tooltipState } = this.state;
 
     if (tooltipState === TOOLTIP_STATE.closed) {
       return null;
     }
 
-    let className = luiClassName('tooltip', { props });
+    const {
+      className,
+      children,
+      inline,
+      variant,
+      ...extraProps
+    } = this.props;
+
+    let tooltipClassName = luiClassName('tooltip', {
+      className,
+      modifiers: { variant }
+    });
     if (tooltipState === TOOLTIP_STATE.opening || tooltipState === TOOLTIP_STATE.closing) {
-      className += ' lui-fade';
+      tooltipClassName += ' lui-fade';
     }
 
-    const passProps = filterProps(props, reservedProps);
-    if (this.props.inline) {
+    if (inline) {
       return (
-        <TooltipContent inline className={className} {...passProps}>
-          {props.children}
+        <TooltipContent inline className={tooltipClassName} {...extraProps}>
+          {children}
         </TooltipContent>
       );
     }
 
     return (
       createPortal(
-        <TooltipContent className={className} {...passProps}>
-          {props.children}
+        <TooltipContent className={tooltipClassName} {...extraProps}>
+          {children}
         </TooltipContent>,
         this.portalElement
       )

@@ -1,19 +1,31 @@
 import React from 'react';
-import { filterProps, luiClassName } from '../util';
+import { luiClassName } from '../util';
 
-const states = ['active', 'disabled'];
-const modifiers = ['variant', 'block', 'rounded', 'size'];
-
-const FadeButton = (props) => {
-  const className = luiClassName('fade-button', {
-    props,
-    states,
-    modifiers
+const FadeButton = ({
+  className,
+  children,
+  variant,
+  size,
+  block,
+  rounded,
+  active,
+  disabled,
+  ...extraProps
+}) => {
+  const finalClassName = luiClassName('fade-button', {
+    className,
+    modifiers: {
+      variant,
+      size,
+      block,
+      rounded
+    },
+    states: { active, disabled }
   });
 
   return (
-    <button className={className} {...filterProps(props, modifiers, states)}>
-      {props.children}
+    <button className={finalClassName} {...extraProps}>
+      {children}
     </button>
   );
 };

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { filterProps, luiClassName } from '../util';
-
-const modifiers = ['variant'];
-
-const states = ['invalid'];
+import { luiClassName } from '../util';
 
 class Textarea extends Component {
   constructor(props) {
@@ -15,18 +11,24 @@ class Textarea extends Component {
   }
   render() {
     const {
-      props
-    } = this;
-    const className = luiClassName('textarea', {
-      props,
-      states,
-      modifiers
+      className,
+      children,
+      variant,
+      invalid,
+      ...extraProps
+    } = this.props;
+
+    const finalClassName = luiClassName('textarea', {
+      className,
+      modifiers: { variant },
+      states: { invalid },
     });
+
     return (
       <textarea
         ref={(element) => { this.element = element; }}
-        className={className}
-        {...filterProps(props, modifiers, states)}
+        className={finalClassName}
+        {...extraProps}
       />
     );
   }

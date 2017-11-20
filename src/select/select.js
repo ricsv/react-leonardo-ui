@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { filterProps, luiClassName } from '../util';
-
-const modifiers = ['variant'];
-const states = ['active'];
+import { luiClassName } from '../util';
 
 class Select extends Component {
   constructor(props) {
@@ -14,20 +11,26 @@ class Select extends Component {
   }
   render() {
     const {
-      props
-    } = this;
-    const className = luiClassName('select', {
-      props,
-      states,
-      modifiers
+      children,
+      className,
+      active,
+      variant,
+      ...extraProps
+    } = this.props;
+
+    const finalClassName = luiClassName('select', {
+      className,
+      modifiers: { variant },
+      states: { active }
     });
+
     return (
       <select
         ref={(element) => { this.element = element; }}
-        className={className}
-        {...filterProps(props, states, modifiers)}
+        className={finalClassName}
+        {...extraProps}
       >
-        {props.children}
+        {children}
       </select>
     );
   }

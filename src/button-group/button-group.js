@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { luiClassName, filterProps } from '../util';
+import { luiClassName } from '../util';
 
-const ButtonGroup = (props) => {
-  const className = luiClassName('buttongroup', {
-    props
+const ButtonGroup = ({ className, children, ...extraProps }) => {
+  const finalClassName = luiClassName('buttongroup', {
+    className,
+    props: extraProps
   });
   return (
-    <div {...filterProps(props)} className={className}>
-      {props.children}
+    <div {...extraProps} className={finalClassName}>
+      {children}
     </div>
   );
 };

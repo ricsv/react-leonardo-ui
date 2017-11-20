@@ -77,7 +77,7 @@ exports[`Tabset with complex items renders correctly 1`] = `
 
 exports[`Tabset with modifiers renders correctly 1`] = `
 <ul
-  className="lui-tabset lui-tabset--fill lui-tabset--inverse"
+  className="lui-tabset lui-tabset--inverse lui-tabset--fill"
 />
 `;
 
