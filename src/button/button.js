@@ -19,7 +19,6 @@ class Button extends Component {
       block,
       rounded,
       active,
-      disabled,
       ...extraProps
     } = this.props;
 
@@ -31,7 +30,7 @@ class Button extends Component {
         block,
         rounded,
       },
-      states: { active, disabled },
+      states: { active },
     });
 
     return (
