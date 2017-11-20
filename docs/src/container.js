@@ -19,6 +19,7 @@ import SearchSection from './sections/search';
 import SwitchSection from './sections/switch';
 import TabsSection from './sections/tabs';
 import TextareaSection from './sections/textarea';
+import ToastSection from './sections/toast';
 import TooltipSection from './sections/tooltip';
 
 const sections = [{
@@ -78,6 +79,9 @@ const sections = [{
 }, {
   name: 'Tooltip',
   component: TooltipSection,
+}, {
+  name: 'Toast',
+  component: ToastSection,
 }];
 
 export default class Page extends Component {

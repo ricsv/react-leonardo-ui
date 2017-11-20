@@ -15,6 +15,7 @@ import Switch from './switch';
 import Tab from './tab';
 import Tabset from './tabset';
 import Textarea from './textarea';
+import Toast from './toast';
 import Tooltip from './tooltip';
 
 export {
@@ -35,5 +36,6 @@ export {
   Tab,
   Tabset,
   Textarea,
+  Toast,
   Tooltip,
 };
