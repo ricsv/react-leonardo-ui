@@ -53,6 +53,9 @@ class Tooltip extends Component {
       this.transitionToClosed();
     }
   }
+  componentWillUnmount() {
+    document.body.removeChild(this.portalElement);
+  }
   transitionToOpen() {
     setTimeout(() => {
       this.setState({ tooltipState: TOOLTIP_STATE.open });

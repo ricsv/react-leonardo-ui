@@ -59,6 +59,9 @@ class Popover extends Component {
       this.transitionToClosed();
     }
   }
+  componentWillUnmount() {
+    document.body.removeChild(this.portalElement);
+  }
   outsideListener(e) {
     if (!this.element.contains(e.target)) {
       this.props.onOutside();
