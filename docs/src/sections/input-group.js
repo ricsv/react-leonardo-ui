@@ -30,6 +30,6 @@ const InputGroupSection = props => (
       }]}
     />
   </Section>
-  );
+);
 
 export default InputGroupSection;

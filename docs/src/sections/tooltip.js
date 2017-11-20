@@ -47,7 +47,9 @@ class TooltipSection extends Component {
             <Button
               onClick={this.toggleDock}
               onMouseOver={() => this.toggleTooltip(true)}
+              onFocus={() => this.toggleTooltip(true)}
               onMouseLeave={() => this.toggleTooltip(false)}
+              onBlur={() => this.toggleTooltip(false)}
               variant={this.props.baseVariant}
             >
               Hover to show tooltip

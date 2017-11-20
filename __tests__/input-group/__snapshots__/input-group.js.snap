@@ -1,24 +1,31 @@
-exports[`test Empty InputGroup renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty InputGroup renders correctly 1`] = `
 <div
-  className="lui-input-group" />
+  className="lui-input-group"
+/>
 `;
 
-exports[`test InputGroup passes props correctly 1`] = `
+exports[`InputGroup passes props correctly 1`] = `
 <div
   className="lui-input-group my-class"
   data-x="x"
   onClick={[Function]}
-  title="title" />
+  title="title"
+/>
 `;
 
-exports[`test InputGroup with items renders correctly 1`] = `
+exports[`InputGroup with items renders correctly 1`] = `
 <div
-  className="lui-input-group">
+  className="lui-input-group"
+>
   <input
     className="lui-input lui-input-group__item  lui-input-group__input  "
-    value="Value" />
+    value="Value"
+  />
   <button
-    className="lui-button lui-input-group__item  lui-input-group__button  ">
+    className="lui-button lui-input-group__item  lui-input-group__button  "
+  >
     Text
   </button>
 </div>

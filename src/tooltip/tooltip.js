@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import Portal from '../portal';
+import { createPortal } from 'react-dom';
+
 import TooltipContent from './tooltip-content';
 import { luiClassName, filterProps } from '../util';
 
-let currentId = 0;
-
 const FADE_DURATION = 50;
-
 const TOOLTIP_STATE = {
   opening: 0,
   open: 1,
   closing: 2,
   closed: 3
 };
+
+const reservedProps = ['show', 'onOpen', 'onClose'];
+
+let currentId = 0;
 
 class Tooltip extends Component {
   constructor(props) {
@@ -27,6 +29,10 @@ class Tooltip extends Component {
     this.transitionToClosed = this.transitionToClosed.bind(this);
   }
   componentDidMount() {
+    this.portalElement = document.createElement('div');
+    this.portalElement.id = this.props.portalId;
+    document.body.appendChild(this.portalElement);
+
     if (this.state.tooltipState === TOOLTIP_STATE.opening) {
       this.transitionToOpen();
     }
@@ -67,27 +73,33 @@ class Tooltip extends Component {
   }
   render() {
     const props = this.props;
-    const tooltipState = this.state.tooltipState;
+    const { tooltipState } = this.state;
+
+    if (tooltipState === TOOLTIP_STATE.closed) {
+      return null;
+    }
+
     let className = luiClassName('tooltip', { props });
     if (tooltipState === TOOLTIP_STATE.opening || tooltipState === TOOLTIP_STATE.closing) {
       className += ' lui-fade';
     }
 
-    if (tooltipState === TOOLTIP_STATE.closed) {
-      return null;
-    } else if (this.props.inline) {
+    const passProps = filterProps(props, reservedProps);
+    if (this.props.inline) {
       return (
-        <TooltipContent inline className={className} {...filterProps(props)}>
+        <TooltipContent inline className={className} {...passProps}>
           {props.children}
         </TooltipContent>
       );
     }
+
     return (
-      <Portal portalId={this.portalId}>
-        <TooltipContent className={className} {...filterProps(props)}>
+      createPortal(
+        <TooltipContent className={className} {...passProps}>
           {props.children}
-        </TooltipContent>
-      </Portal>
+        </TooltipContent>,
+        this.portalElement
+      )
     );
   }
 }

@@ -1,23 +1,29 @@
-exports[`test Large icon renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Large icon renders correctly 1`] = `
 <span
   aria-hidden="true"
-  className="lui-icon lui-icon--close lui-icon--large" />
+  className="lui-icon lui-icon--close lui-icon--large"
+/>
 `;
 
-exports[`test Missing icon renders correctly 1`] = `
+exports[`Missing icon renders correctly 1`] = `
 <span
   aria-hidden="true"
-  className="lui-icon" />
+  className="lui-icon"
+/>
 `;
 
-exports[`test Normal icon renders correctly 1`] = `
+exports[`Normal icon renders correctly 1`] = `
 <span
   aria-hidden="true"
-  className="lui-icon lui-icon--close" />
+  className="lui-icon lui-icon--close"
+/>
 `;
 
-exports[`test Small icon renders correctly 1`] = `
+exports[`Small icon renders correctly 1`] = `
 <span
   aria-hidden="true"
-  className="lui-icon lui-icon--close lui-icon--small" />
+  className="lui-icon lui-icon--close lui-icon--small"
+/>
 `;

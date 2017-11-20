@@ -21,12 +21,6 @@ Navigate to the directory in your shell and run:
 npm install
 ```
 
-or if using [yarn](https://yarnpkg.com/) (recommended):
-
-```sh
-yarn
-```
-
 __Starting the dev server__
 
 ```sh

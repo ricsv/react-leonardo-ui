@@ -20,6 +20,6 @@ const CheckboxSection = props => (
       }]}
     />
   </Section>
-  );
+);
 
 export default CheckboxSection;

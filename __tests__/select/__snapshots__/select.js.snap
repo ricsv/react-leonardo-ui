@@ -1,27 +1,33 @@
-exports[`test Normal select renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Normal select renders correctly 1`] = `
 <select
   className="lui-select"
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Select passes props correctly 1`] = `
+exports[`Select passes props correctly 1`] = `
 <select
   className="lui-select my-class"
   data-x="x"
   onChange={[Function]}
-  title="Title" />
+  title="Title"
+/>
 `;
 
-exports[`test Select with modifiers renders correctly 1`] = `
+exports[`Select with modifiers renders correctly 1`] = `
 <select
   className="lui-select lui-select--inverse"
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Select with states renders correctly 1`] = `
+exports[`Select with states renders correctly 1`] = `
 <select
   className="lui-select"
   disabled={true}
   invalid={true}
-  value="Value" />
+  value="Value"
+/>
 `;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
 
-import Portal from '../portal';
 import { luiClassName, filterProps } from '../util';
 
 const FADE_DURATION = 200;
@@ -13,6 +13,7 @@ const DIALOG_STATE = {
 };
 
 const modifiers = ['variant'];
+const reservedProps = ['onEscape', 'show', 'onOpen', 'onClose'];
 
 let currentId = 0;
 
@@ -30,6 +31,10 @@ class Dialog extends Component {
     this.transitionToClosed = this.transitionToClosed.bind(this);
   }
   componentDidMount() {
+    this.portalElement = document.createElement('div');
+    this.portalElement.id = this.props.portalId;
+    document.body.appendChild(this.portalElement);
+
     if (this.state.dialogState === DIALOG_STATE.opening) {
       this.transitionToOpen();
     }
@@ -51,6 +56,9 @@ class Dialog extends Component {
     } else if (this.state.dialogState === DIALOG_STATE.closing) {
       this.transitionToClosed();
     }
+  }
+  componentWillUnmount() {
+    document.body.removeChild(this.portalElement);
   }
   keyUpListener(e) {
     if (e.keyCode === 27) {
@@ -80,7 +88,7 @@ class Dialog extends Component {
     }, FADE_DURATION);
   }
   render() {
-    const dialogState = this.state.dialogState;
+    const { dialogState } = this.state;
 
     let className = luiClassName('dialog', {
       props: this.props,
@@ -92,19 +100,19 @@ class Dialog extends Component {
       backgroundClassName += ' lui-fade';
     }
 
-    const passProps = filterProps(this.props, modifiers, 'onEscape', 'show', 'onOpen', 'onClose');
+    if (dialogState === DIALOG_STATE.closed) {
+      return null;
+    }
 
-    return (
-      dialogState !== DIALOG_STATE.closed ?
-        <Portal portalId={this.portalId}>
-          <div className="lui-dialog-container">
-            <div className={backgroundClassName} />
-            <div className={className} tabIndex="-1" {...passProps}>
-              {this.props.children}
-            </div>
-          </div>
-        </Portal>
-        : null
+    const passProps = filterProps(this.props, modifiers, reservedProps);
+    return createPortal(
+      <div className="lui-dialog-container">
+        <div className={backgroundClassName} />
+        <div className={className} tabIndex="-1" {...passProps}>
+          {this.props.children}
+        </div>
+      </div>,
+      this.portalElement,
     );
   }
 }

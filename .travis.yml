@@ -2,15 +2,18 @@ sudo: false
 
 language: node_js
 
-node_js: '6'
+node_js: '8'
 
-cache: yarn
+cache:
+  directories:
+    - "node_modules"
 
 env:
   - PRODUCTION=1
 
 install:
-  - yarn
+  - npm install -g npm@5.2.0 # Avoid https://github.com/npm/npm/issues/17858
+  - npm install
   - npm install coveralls
 
 after_success:

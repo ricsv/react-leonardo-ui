@@ -1,8 +1,12 @@
 {
   "env": {
-    "jest": true
+    "jest": true,
+    "node": true
   },
   "parserOptions": {
     "ecmaVersion": 6
+  },
+  "rules": {
+    "function-paren-newline": 0
   }
 }

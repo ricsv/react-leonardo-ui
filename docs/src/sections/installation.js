@@ -19,13 +19,6 @@ class InstallationSection extends Component {
           <div className="example-code hljs">
             <pre><code className="bash">
   npm install --save react-leonardo-ui
-  </code></pre>
-          </div>
-
-          <p><b>Yarn</b></p>
-          <div className="example-code hljs">
-            <pre><code className="bash">
-  yarn add react-leonardo-ui
             </code></pre>
           </div>
         </div>

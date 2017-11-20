@@ -11,21 +11,21 @@ const TestDialog = props => (
       <Dialog.Title>Test</Dialog.Title>
     </Dialog.Header>
     <Dialog.Body>
-        Bacon ipsum dolor amet picanha pastrami boudin chicken doner.
-        Meatloaf meatball tongue, pastrami t-bone shoulder alcatra chicken ball
-        tip brisket venison rump flank. Jowl beef ribs prosciutto bresaola,
-        chuck ball tip t-bone pork chop ham leberkas short loin beef sirloin
-        corned beef. Ham hock meatloaf hamburger short loin bacon short ribs
-        pig corned beef cow leberkas sausage picanha bresaola biltong beef.
-        Bresaola jerky strip steak filet mignon picanha swine doner salami
-        biltong spare ribs landjaeger turducken rump cow. Cupim filet mignon
-        prosciutto tri-tip, fatback leberkas t-bone pastrami.
-      </Dialog.Body>
+      Bacon ipsum dolor amet picanha pastrami boudin chicken doner.
+      Meatloaf meatball tongue, pastrami t-bone shoulder alcatra chicken ball
+      tip brisket venison rump flank. Jowl beef ribs prosciutto bresaola,
+      chuck ball tip t-bone pork chop ham leberkas short loin beef sirloin
+      corned beef. Ham hock meatloaf hamburger short loin bacon short ribs
+      pig corned beef cow leberkas sausage picanha bresaola biltong beef.
+      Bresaola jerky strip steak filet mignon picanha swine doner salami
+      biltong spare ribs landjaeger turducken rump cow. Cupim filet mignon
+      prosciutto tri-tip, fatback leberkas t-bone pastrami.
+    </Dialog.Body>
     <Dialog.Footer>
       <Button variant="info" onClick={props.close} autoFocus>OK</Button>
     </Dialog.Footer>
   </Dialog>
-  );
+);
 
 class DialogSection extends Component {
   constructor(props) {

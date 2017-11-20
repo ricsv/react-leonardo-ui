@@ -1,35 +1,42 @@
-exports[`test Normal textarea renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Normal textarea renders correctly 1`] = `
 <textarea
   className="lui-textarea"
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Textarea passes props correctly 1`] = `
+exports[`Textarea passes props correctly 1`] = `
 <textarea
   className="lui-textarea my-class"
   data-x="x"
   onClick={[Function]}
   title="Title"
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Textarea with modifiers renders correctly 1`] = `
+exports[`Textarea with modifiers renders correctly 1`] = `
 <textarea
   className="lui-textarea lui-textarea--inverse"
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Textarea with states renders correctly 1`] = `
+exports[`Textarea with states renders correctly 1`] = `
 <textarea
   className="lui-textarea lui-invalid"
   disabled={true}
-  value="Value" />
+  value="Value"
+/>
 `;
 
-exports[`test Textarea with states renders correctly 2`] = `
+exports[`Textarea with states renders correctly 2`] = `
 <textarea
   active={true}
   className="lui-textarea"
   disabled={true}
-  value="Value" />
+  value="Value"
+/>
 `;
