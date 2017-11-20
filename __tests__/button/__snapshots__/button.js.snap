@@ -20,7 +20,8 @@ exports[`Button with modifiers renders correctly 1`] = `
 
 exports[`Button with states renders correctly 1`] = `
 <button
-  className="lui-button lui-active lui-disabled"
+  className="lui-button lui-active"
+  disabled={true}
   value="Value"
 />
 `;
