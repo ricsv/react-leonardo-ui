@@ -5,9 +5,9 @@ global.requestAnimationFrame = (callback) => {
 };
 
 Object.defineProperty(global.document.body, 'clientWidth', {
-  value: 500
+  value: 500,
 });
 
 Object.defineProperty(global.document.body, 'clientHeight', {
-  value: 500
+  value: 500,
 });

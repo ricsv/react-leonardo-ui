@@ -23,68 +23,68 @@ import TooltipSection from './sections/tooltip';
 
 const sections = [{
   name: 'Installation',
-  component: InstallationSection
+  component: InstallationSection,
 }, {
   name: 'Get started',
-  component: GetStartedSection
+  component: GetStartedSection,
 }, {
   name: 'Button',
-  component: ButtonSection
+  component: ButtonSection,
 }, {
   name: 'Button group',
   href: 'ButtonGroup',
-  component: ButtonGroupSection
+  component: ButtonGroupSection,
 }, {
   name: 'Input',
-  component: InputSection
+  component: InputSection,
 }, {
   name: 'Input group',
   href: 'InputGroup',
-  component: InputGroupSection
+  component: InputGroupSection,
 }, {
   name: 'List',
-  component: ListSection
+  component: ListSection,
 }, {
   name: 'Textarea',
-  component: TextareaSection
+  component: TextareaSection,
 }, {
   name: 'Select',
-  component: SelectSection
+  component: SelectSection,
 }, {
   name: 'Checkbox',
-  component: CheckboxSection
+  component: CheckboxSection,
 }, {
   name: 'Radiobuttons',
   href: 'RadioButton',
-  component: RadioButtonSection
+  component: RadioButtonSection,
 }, {
   name: 'Switch',
-  component: SwitchSection
+  component: SwitchSection,
 }, {
   name: 'Search',
-  component: SearchSection
+  component: SearchSection,
 }, {
   name: 'Tabs',
-  component: TabsSection
+  component: TabsSection,
 }, {
   name: 'Icons',
-  component: IconSection
+  component: IconSection,
 }, {
   name: 'Dialog',
-  component: DialogSection
+  component: DialogSection,
 }, {
   name: 'Popover',
-  component: PopoverSection
+  component: PopoverSection,
 }, {
   name: 'Tooltip',
-  component: TooltipSection
+  component: TooltipSection,
 }];
 
 export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      variant: null
+      variant: null,
     };
     this.setVariant = this.setVariant.bind(this);
   }
@@ -95,7 +95,7 @@ export default class Page extends Component {
     headerWrapperElem.classList.remove(`lui-bg-${currentVariant}`);
 
     this.setState({
-      variant
+      variant,
     });
     document.body.classList.add(`lui-bg-${variant}`);
     headerWrapperElem.classList.add(`lui-bg-${variant}`);

@@ -13,7 +13,7 @@ const Tab = ({
   const finalClassName = luiClassName('tab', {
     className,
     modifiers: { variant },
-    states: { active, disabled }
+    states: { active, disabled },
   });
 
   return (

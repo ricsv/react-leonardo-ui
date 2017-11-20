@@ -14,7 +14,7 @@ const POPOVER_STATE = {
   opening: 0,
   open: 1,
   closing: 2,
-  closed: 3
+  closed: 3,
 };
 
 let currentId = 0;
@@ -24,9 +24,9 @@ class Popover extends Component {
     super(props);
     this.portalId = `rlui-popover-${currentId}`;
     this.state = {
-      popoverState: props.show ? POPOVER_STATE.opening : POPOVER_STATE.closed
+      popoverState: props.show ? POPOVER_STATE.opening : POPOVER_STATE.closed,
     };
-    currentId++;
+    currentId += 1;
 
     this.outsideListener = this.outsideListener.bind(this);
     this.transitionToOpen = this.transitionToOpen.bind(this);
@@ -44,11 +44,11 @@ class Popover extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
       this.setState({
-        popoverState: POPOVER_STATE.opening
+        popoverState: POPOVER_STATE.opening,
       });
     } else if (this.props.show && !nextProps.show) {
       this.setState({
-        popoverState: POPOVER_STATE.closing
+        popoverState: POPOVER_STATE.closing,
       });
     }
   }
@@ -103,7 +103,7 @@ class Popover extends Component {
 
     let popoverClassName = luiClassName('popover', {
       className,
-      modifiers: { variant }
+      modifiers: { variant },
     });
     if (popoverState === POPOVER_STATE.opening || popoverState === POPOVER_STATE.closing) {
       popoverClassName += ' lui-fade';

@@ -17,9 +17,11 @@ class InstallationSection extends Component {
         <div ref={(el) => { this.elem = el; }}>
           <p><b>NPM</b></p>
           <div className="example-code hljs">
-            <pre><code className="bash">
+            <pre>
+              <code className="bash">
   npm install --save react-leonardo-ui
-            </code></pre>
+              </code>
+            </pre>
           </div>
         </div>
       </Section>

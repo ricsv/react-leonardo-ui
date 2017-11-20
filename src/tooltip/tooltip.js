@@ -9,7 +9,7 @@ const TOOLTIP_STATE = {
   opening: 0,
   open: 1,
   closing: 2,
-  closed: 3
+  closed: 3,
 };
 
 let currentId = 0;
@@ -18,10 +18,10 @@ class Tooltip extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tooltipState: props.show ? TOOLTIP_STATE.opening : TOOLTIP_STATE.closed
+      tooltipState: props.show ? TOOLTIP_STATE.opening : TOOLTIP_STATE.closed,
     };
     this.portalId = `rlui-tooltip-${currentId}`;
-    currentId++;
+    currentId += 1;
 
     this.transitionToOpen = this.transitionToOpen.bind(this);
     this.transitionToClosed = this.transitionToClosed.bind(this);
@@ -38,11 +38,11 @@ class Tooltip extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
       this.setState({
-        tooltipState: TOOLTIP_STATE.opening
+        tooltipState: TOOLTIP_STATE.opening,
       });
     } else if (this.props.show && !nextProps.show) {
       this.setState({
-        tooltipState: TOOLTIP_STATE.closing
+        tooltipState: TOOLTIP_STATE.closing,
       });
     }
   }
@@ -86,7 +86,7 @@ class Tooltip extends Component {
 
     let tooltipClassName = luiClassName('tooltip', {
       className,
-      modifiers: { variant }
+      modifiers: { variant },
     });
     if (tooltipState === TOOLTIP_STATE.opening || tooltipState === TOOLTIP_STATE.closing) {
       tooltipClassName += ' lui-fade';

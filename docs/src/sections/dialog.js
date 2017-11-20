@@ -31,7 +31,7 @@ class DialogSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dialogOpen: false
+      dialogOpen: false,
     };
     this.toggleDialog = this.toggleDialog.bind(this);
   }
@@ -75,23 +75,23 @@ class DialogSection extends Component {
           props={[{
             name: 'show',
             type: 'Boolean',
-            description: 'Flag used to open / close the dialog.'
+            description: 'Flag used to open / close the dialog.',
           }, {
             name: 'variant',
             type: 'String',
-            description: 'Variant. Any of: null (default) | "inverse".'
+            description: 'Variant. Any of: null (default) | "inverse".',
           }, {
             name: 'onEscape',
             type: 'Function',
-            description: 'Function triggered when the escape key is pressed.'
+            description: 'Function triggered when the escape key is pressed.',
           }, {
             name: 'onOpen',
             type: 'Function',
-            description: 'Function triggered when the dialog has opened.'
+            description: 'Function triggered when the dialog has opened.',
           }, {
             name: 'onClose',
             type: 'Function',
-            description: 'Function triggered when the dialog has closed.'
+            description: 'Function triggered when the dialog has closed.',
           }]}
         />
       </Section>

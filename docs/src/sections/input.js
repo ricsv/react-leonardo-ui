@@ -14,11 +14,11 @@ const InputSection = props => (
       props={[{
         name: 'variant',
         type: 'String',
-        description: 'Variant of the Input. Any of: null (default) | "inverse".'
+        description: 'Variant of the Input. Any of: null (default) | "inverse".',
       }, {
         name: 'size',
         type: 'String',
-        description: 'Input size. Any of: null (default) | "large".'
+        description: 'Input size. Any of: null (default) | "large".',
       }]}
     />
   </Section>

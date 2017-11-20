@@ -9,7 +9,7 @@ class PopoverContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      positionResult: null
+      positionResult: null,
     };
     this.reposition = this.reposition.bind(this);
   }
@@ -26,12 +26,12 @@ class PopoverContent extends Component {
         dock: this.props.dock || DEFAULT_DOCK,
         offset: OFFSET,
         minWindowOffset: 10,
-        minEdgeOffset: 5
+        minEdgeOffset: 5,
       }
     );
 
     this.setState({
-      positionResult
+      positionResult,
     });
   }
   render() {
@@ -41,11 +41,11 @@ class PopoverContent extends Component {
       position: 'absolute',
       maxWidth: '500px',
       top: res ? `${res.position.top}px` : '-99999px',
-      left: res ? `${res.position.left}px` : '-99999px'
+      left: res ? `${res.position.left}px` : '-99999px',
     };
     const arrow = {
       dock: '',
-      style: {}
+      style: {},
     };
     if (res) {
       style.visibility = 'visible';

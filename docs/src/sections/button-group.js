@@ -8,24 +8,24 @@ class ButtonGroupSection extends Component {
   constructor() {
     super();
     this.state = {
-      activeButton: 0
+      activeButton: 0,
     };
     this.onClick = this.onClick.bind(this);
   }
   onClick(activeButton) {
     this.setState({
-      activeButton
+      activeButton,
     });
   }
   render() {
-    const props = this.props;
+    const { props } = this;
 
     const buttons = [{
-      text: 'First'
+      text: 'First',
     }, {
-      text: 'Second'
+      text: 'Second',
     }, {
-      text: 'Third'
+      text: 'Third',
     }];
 
     const buttonItems = buttons.map((button, idx) => (

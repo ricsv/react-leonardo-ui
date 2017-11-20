@@ -30,7 +30,7 @@ class Search extends Component {
 
     const finalClassName = luiClassName('search', {
       className,
-      modifiers: { variant }
+      modifiers: { variant },
     });
 
     return (

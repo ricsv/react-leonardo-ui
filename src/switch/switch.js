@@ -23,7 +23,7 @@ class Switch extends Component {
     const finalClassName = luiClassName('switch', {
       className,
       modifiers: { variant },
-      states: { active }
+      states: { active },
     });
 
     return (

@@ -13,7 +13,7 @@ const Checkbox = ({
   const finalClassName = luiClassName('checkbox', {
     className,
     states: { active },
-    modifiers: { variant }
+    modifiers: { variant },
   });
   return (
     <label htmlFor={htmlFor} title={title} className={finalClassName}>

@@ -9,7 +9,7 @@ const DIALOG_STATE = {
   opening: 0,
   open: 1,
   closing: 2,
-  closed: 3
+  closed: 3,
 };
 
 let currentId = 0;
@@ -19,9 +19,9 @@ class Dialog extends Component {
     super(props);
     this.portalId = `rlui-dialog-${currentId}`;
     this.state = {
-      dialogState: props.show ? DIALOG_STATE.opening : DIALOG_STATE.closed
+      dialogState: props.show ? DIALOG_STATE.opening : DIALOG_STATE.closed,
     };
-    currentId++;
+    currentId += 1;
 
     this.keyUpListener = this.keyUpListener.bind(this);
     this.transitionToOpen = this.transitionToOpen.bind(this);
@@ -39,11 +39,11 @@ class Dialog extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
       this.setState({
-        dialogState: DIALOG_STATE.opening
+        dialogState: DIALOG_STATE.opening,
       });
     } else if (this.props.show && !nextProps.show) {
       this.setState({
-        dialogState: DIALOG_STATE.closing
+        dialogState: DIALOG_STATE.closing,
       });
     }
   }
@@ -99,7 +99,7 @@ class Dialog extends Component {
 
     let dialogClassName = luiClassName('dialog', {
       className,
-      modifiers: { variant }
+      modifiers: { variant },
     });
     let backgroundClassName = 'lui-modal-background';
     if (dialogState === DIALOG_STATE.opening || dialogState === DIALOG_STATE.closing) {
@@ -118,7 +118,7 @@ class Dialog extends Component {
           {this.props.children}
         </div>
       </div>,
-      this.portalElement,
+      this.portalElement
     );
   }
 }

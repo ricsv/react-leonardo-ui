@@ -8,31 +8,31 @@ class TabsSection extends Component {
   constructor() {
     super();
     this.state = {
-      activeTab: 0
+      activeTab: 0,
     };
     this.onClick = this.onClick.bind(this);
   }
   onClick(activeTab) {
     this.setState({
-      activeTab
+      activeTab,
     });
   }
   render() {
-    const props = this.props;
+    const { props } = this;
     const tabs = [{
       tabContent: 'Tab 1',
-      content: <div>Content 1</div>
+      content: <div>Content 1</div>,
     }, {
       tabContent: 'Tab 2',
-      content: <div>Content 2</div>
+      content: <div>Content 2</div>,
     }, {
       tabContent: [
         <Tab.Text key="text">Blah 3</Tab.Text>,
         <Tab.Aside key="aside">
           <Icon name="close" size="small" />
-        </Tab.Aside>
+        </Tab.Aside>,
       ],
-      content: <div>Content 1</div>
+      content: <div>Content 1</div>,
     }];
 
     const tabItems = tabs.map((tab, idx) => (

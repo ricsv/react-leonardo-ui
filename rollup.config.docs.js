@@ -38,7 +38,7 @@ function copy() {
       copyFileSync('node_modules/leonardo-ui/dist/leonardo-ui.css', 'docs/dist/leonardo-ui.css');
       copyFileSync('node_modules/leonardo-ui/dist/lui-icons.woff', 'docs/dist/lui-icons.woff');
       copyFileSync('node_modules/leonardo-ui/dist/lui-icons.ttf', 'docs/dist/lui-icons.ttf');
-    }
+    },
   };
 }
 
@@ -54,7 +54,7 @@ function ssr() {
       const htmlContent = fs.readFileSync(path.resolve(__dirname, './docs/src/index.html'), 'utf8');
       const ssrHtmlContent = htmlContent.replace(/\s*?<!--Content-->/, str);
       fs.writeFileSync(path.resolve(__dirname, './docs/dist/index.html'), ssrHtmlContent, 'utf8');
-    }
+    },
   };
 }
 
@@ -65,22 +65,22 @@ const config = {
   format: 'umd',
   external: [
     'react',
-    'react-dom'
+    'react-dom',
   ],
   globals: {
     react: 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
   },
   plugins: [
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
     }),
     resolve({
-      modulesOnly: true
+      modulesOnly: true,
     }),
     copy(),
-    ssr()
-  ]
+    ssr(),
+  ],
 };
 
 if (process.env.BUILD !== 'production') {
@@ -89,10 +89,10 @@ if (process.env.BUILD !== 'production') {
     contentBase: [
       'docs/dist',
       'docs/static',
-      'node_modules/leonardo-ui/dist'
+      'node_modules/leonardo-ui/dist',
     ],
     host: 'localhost',
-    port: 8080
+    port: 8080,
   }));
   config.plugins.push(sourcemaps());
 }

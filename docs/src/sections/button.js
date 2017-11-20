@@ -49,27 +49,27 @@ const ButtonSection = props => (
       props={[{
         name: 'rounded',
         type: 'Boolean',
-        description: 'Extra rounded corners.'
+        description: 'Extra rounded corners.',
       }, {
         name: 'block',
         type: 'Boolean',
-        description: 'Display as a block element.'
+        description: 'Display as a block element.',
       }, {
         name: 'size',
         type: 'String',
-        description: 'Button size. Any of: null (default) | "large" | "x-large"'
+        description: 'Button size. Any of: null (default) | "large" | "x-large"',
       }, {
         name: 'variant',
         type: 'String',
-        description: 'Variant to use. Any of: null (default) | "inverse" | "success" | "info" | "warning" | "danger"'
+        description: 'Variant to use. Any of: null (default) | "inverse" | "success" | "info" | "warning" | "danger"',
       }, {
         name: 'active',
         type: 'Boolean',
-        description: 'Show the button in active state. Suitable for toggle buttons'
+        description: 'Show the button in active state. Suitable for toggle buttons',
       }, {
         name: 'disabled',
         type: 'Boolean',
-        description: 'Show the button in disabled state.'
+        description: 'Show the button in disabled state.',
       }]}
     />
   </Section>

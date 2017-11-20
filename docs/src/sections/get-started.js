@@ -17,16 +17,20 @@ class GetStartedSection extends Component {
         <div ref={(el) => { this.elem = el; }}>
           <p><b>ES2015</b></p>
           <div className="example-code hljs">
-            <pre><code className="javascript">
-              {'import { Button } from \'react-leonardo-ui\';'}
-            </code></pre>
+            <pre>
+              <code className="javascript">
+                {'import { Button } from \'react-leonardo-ui\';'}
+              </code>
+            </pre>
           </div>
 
           <p><b>CommonJS</b></p>
           <div className="example-code hljs">
-            <pre><code className="javascript">
-              {'const Button = require(\'react-leonardo-ui\').Button;'}
-            </code></pre>
+            <pre>
+              <code className="javascript">
+                {'const Button = require(\'react-leonardo-ui\').Button;'}
+              </code>
+            </pre>
           </div>
 
           <h3>Props passing</h3>
@@ -36,13 +40,15 @@ class GetStartedSection extends Component {
             small and manageable.
           </p>
           <div className="example-code hljs">
-            <pre><code className="jsx">
-              {
+            <pre>
+              <code className="jsx">
+                {
 `<Button active title="My title" onClick={clickHandler}>
   My button
 </Button>`
-              }
-            </code></pre>
+                }
+              </code>
+            </pre>
           </div>
           <p>
             In the example above, the Button component will handle the active attribute and

@@ -11,7 +11,7 @@ const Tabset = ({
 }) => {
   const finalClassName = luiClassName('tabset', {
     className,
-    modifiers: { variant, fill }
+    modifiers: { variant, fill },
   });
   return (
     <ul className={finalClassName} {...extraProps}>

@@ -12,23 +12,23 @@ const config = {
   format: 'umd',
   external: [
     'react',
-    'react-dom'
+    'react-dom',
   ],
   globals: {
     react: 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
   },
   plugins: [
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
     }),
     resolve({
       modulesOnly: true,
       customResolveOptions: {
-        moduleDirectory: 'src'
-      }
-    })
-  ]
+        moduleDirectory: 'src',
+      },
+    }),
+  ],
 };
 
 if (process.env.BUILD === 'production') {

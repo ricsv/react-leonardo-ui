@@ -9,7 +9,7 @@ class TooltipContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      positionResult: null
+      positionResult: null,
     };
     this.reposition = this.reposition.bind(this);
   }
@@ -32,12 +32,12 @@ class TooltipContent extends Component {
         dock: dock || DEFAULT_DOCK,
         offset: OFFSET,
         minWindowOffset: 10,
-        minEdgeOffset: 5
+        minEdgeOffset: 5,
       }
     );
 
     this.setState({
-      positionResult
+      positionResult,
     });
   }
   render() {
@@ -45,11 +45,11 @@ class TooltipContent extends Component {
     const style = {
       position: 'absolute',
       top: res ? `${res.position.top}px` : '-99999px',
-      left: res ? `${res.position.left}px` : '-99999px'
+      left: res ? `${res.position.left}px` : '-99999px',
     };
     const arrow = {
       dock: '',
-      style: {}
+      style: {},
     };
     if (res) {
       arrow.style.position = 'absolute';

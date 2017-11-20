@@ -10,7 +10,7 @@ const InputGroup = ({
 }) => {
   const finalClassName = luiClassName('input-group', {
     className,
-    modifiers: { variant }
+    modifiers: { variant },
   });
   return (
     <div className={finalClassName} {...extraProps}>

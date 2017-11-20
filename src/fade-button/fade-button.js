@@ -18,9 +18,9 @@ const FadeButton = ({
       variant,
       size,
       block,
-      rounded
+      rounded,
     },
-    states: { active, disabled }
+    states: { active, disabled },
   });
 
   return (

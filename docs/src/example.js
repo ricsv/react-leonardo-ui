@@ -12,7 +12,7 @@ class Example extends Component {
     }
   }
   render() {
-    const props = this.props;
+    const { props } = this;
 
     let exampleCode;
     if (props.code) {
@@ -21,9 +21,11 @@ class Example extends Component {
           ref={(elem) => { this.codeElem = elem; }}
           className="example-code"
         >
-          <pre><code className="jsx">
-            {props.code}
-          </code></pre>
+          <pre>
+            <code className="jsx">
+              {props.code}
+            </code>
+          </pre>
         </div>
       );
     }

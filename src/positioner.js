@@ -2,7 +2,7 @@ const oppositeDockMap = {
   top: 'bottom',
   right: 'left',
   bottom: 'top',
-  left: 'right'
+  left: 'right',
 };
 
 export function oppositeDock(dock) {
@@ -27,22 +27,22 @@ export function addOffset(dock, left = 0, top = 0, offset = 0) {
   if (dock === 'top') {
     return {
       top: top - offset,
-      left
+      left,
     };
   } else if (dock === 'right') {
     return {
       top,
-      left: left + offset
+      left: left + offset,
     };
   } else if (dock === 'left') {
     return {
       top,
-      left: left - offset
+      left: left - offset,
     };
   }
   return {
     top: top + offset,
-    left
+    left,
   };
 }
 
@@ -53,7 +53,7 @@ export function createRect(top = 0, left = 0, width = 0, height = 0) {
     bottom: top + height,
     left,
     width,
-    height
+    height,
   };
 }
 
@@ -61,21 +61,21 @@ export function getDockCenterPoint(rect, dock) {
   let top;
   let left;
   if (dock === 'top') {
-    top = rect.top;
+    top = rect.top; // eslint-disable-line prefer-destructuring
     left = rect.left + rect.width / 2;
   } else if (dock === 'right') {
     top = rect.top + rect.height / 2;
     left = rect.right;
   } else if (dock === 'left') {
     top = rect.top + rect.height / 2;
-    left = rect.left;
+    left = rect.left; // eslint-disable-line prefer-destructuring
   } else {
     top = rect.bottom;
     left = rect.left + rect.width / 2;
   }
   return {
     top,
-    left
+    left,
   };
 }
 
@@ -89,7 +89,7 @@ export function tryPosition(rect, withinRect) {
     left,
     right,
     top,
-    bottom
+    bottom,
   };
 }
 
@@ -117,7 +117,7 @@ export function tryDock(elemRect, alignToRect, windowRect, dock, options = {}) {
   const {
     offset = 0,
     minWindowOffset = 0,
-    minEdgeOffset = 0
+    minEdgeOffset = 0,
   } = options;
 
   const windowOffsetRect = createRect(
@@ -159,16 +159,15 @@ export function tryDock(elemRect, alignToRect, windowRect, dock, options = {}) {
     dock,
     position: {
       left: tryRect.left,
-      top: tryRect.top
+      top: tryRect.top,
     },
-    toPosition: getDockCenterPoint(alignToRect, dock)
+    toPosition: getDockCenterPoint(alignToRect, dock),
   };
 }
 
 export function positionToRect(element, rect, dock = 'bottom', options = {}) {
   const elemRect = element.getBoundingClientRect();
-  const pageYOffset = window.pageYOffset;
-  const pageXOffset = window.pageXOffset;
+  const { pageXOffset, pageYOffset } = window;
   const windowRect = createRect(
     0,
     0,
@@ -182,18 +181,18 @@ export function positionToRect(element, rect, dock = 'bottom', options = {}) {
       const parentOffset = getOffset(parent);
       return {
         top: parent.offsetTop + parentOffset.top,
-        left: parent.offsetLeft + parentOffset.left
+        left: parent.offsetLeft + parentOffset.left,
       };
     }
     return {
       top: 0,
-      left: 0
+      left: 0,
     };
   };
 
   const docks = getDocks(dock);
   let firstResult = null;
-  for (let i = 0; i < docks.length; i++) {
+  for (let i = 0; i < docks.length; i += 1) {
     const result = tryDock(elemRect, rect, windowRect, docks[i], options);
     result.position.top += pageYOffset;
     result.toPosition.top += pageYOffset;
@@ -231,7 +230,7 @@ export function positionToCoordinate(element, x, y, dock = 'bottom', options = {
     left: x,
     right: x,
     width: 0,
-    height: 0
+    height: 0,
   };
   return positionToRect(element, rect, dock, options);
 }
