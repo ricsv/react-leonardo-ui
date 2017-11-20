@@ -9,13 +9,13 @@ class SearchSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onClear = this.onClear.bind(this);
   }
   onChange(e) {
-    const value = e.target.value;
+    const { value } = e.target;
     this.setState({ value });
   }
   onClear() {
@@ -47,11 +47,11 @@ class SearchSection extends Component {
           props={[{
             name: 'variant',
             type: 'String',
-            description: 'Variant. Any of: null (default) | "inverse".'
+            description: 'Variant. Any of: null (default) | "inverse".',
           }, {
             name: 'onClear',
             type: 'Function',
-            description: 'Callback that is invoked when the clear button is clicked.'
+            description: 'Callback that is invoked when the clear button is clicked.',
           }]}
         />
       </Section>

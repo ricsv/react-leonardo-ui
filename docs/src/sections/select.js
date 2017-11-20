@@ -24,7 +24,7 @@ const SelectSection = props => (
       props={[{
         name: 'variant',
         type: 'String',
-        description: 'Variant. Any of: null (default) | "inverse".'
+        description: 'Variant. Any of: null (default) | "inverse".',
       }]}
     />
   </Section>

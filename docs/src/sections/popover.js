@@ -33,7 +33,7 @@ class PopoverSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      popoverOpen: false
+      popoverOpen: false,
     };
     this.togglePopover = this.togglePopover.bind(this);
   }
@@ -83,35 +83,35 @@ class PopoverSection extends Component {
           props={[{
             name: 'show',
             type: 'Boolean',
-            description: 'Flag used to open / close the popover.'
+            description: 'Flag used to open / close the popover.',
           }, {
             name: 'dock',
             type: 'String',
-            description: 'Dock side. Any of: "top" | "right" | "bottom" | "left".'
+            description: 'Dock side. Any of: "top" | "right" | "bottom" | "left".',
           }, {
             name: 'alignTo',
             type: 'HTMLElement',
-            description: 'The element to align to.'
+            description: 'The element to align to.',
           }, {
             name: 'inline',
             type: 'Boolean',
-            description: 'Experimental. Append the popover inline in the DOM instead of to the body.'
+            description: 'Experimental. Append the popover inline in the DOM instead of to the body.',
           }, {
             name: 'variant',
             type: 'String',
-            description: 'Variant of the Popover. Any of: null (default) | "inverse".'
+            description: 'Variant of the Popover. Any of: null (default) | "inverse".',
           }, {
             name: 'onOutside',
             type: 'Function',
-            description: 'Function triggered on clicks outside the popover element.'
+            description: 'Function triggered on clicks outside the popover element.',
           }, {
             name: 'onOpen',
             type: 'Function',
-            description: 'Function triggered when the popover has opened.'
+            description: 'Function triggered when the popover has opened.',
           }, {
             name: 'onClose',
             type: 'Function',
-            description: 'Function triggered when the popover has closed.'
+            description: 'Function triggered when the popover has closed.',
           }]}
         />
       </Section>

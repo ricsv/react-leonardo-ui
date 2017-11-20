@@ -11,7 +11,7 @@ class TooltipSection extends Component {
     super(props);
     this.state = {
       dock: 'top',
-      show: false
+      show: false,
     };
     this.toggleDock = this.toggleDock.bind(this);
     this.toggleTooltip = this.toggleTooltip.bind(this);
@@ -21,7 +21,7 @@ class TooltipSection extends Component {
   }
   toggleDock() {
     const docks = ['left', 'top', 'right', 'bottom'];
-    let dock = this.state.dock;
+    let { dock } = this.state;
     dock = docks[docks.indexOf(dock) + 1] || docks[0];
     this.setState({ dock });
   }
@@ -72,19 +72,19 @@ class TooltipSection extends Component {
           props={[{
             name: 'show',
             type: 'Boolean',
-            description: 'Flag used to open / close the popover.'
+            description: 'Flag used to open / close the popover.',
           }, {
             name: 'dock',
             type: 'String',
-            description: 'Dock side. Any of: "top" | "right" | "bottom" | "left".'
+            description: 'Dock side. Any of: "top" | "right" | "bottom" | "left".',
           }, {
             name: 'alignTo',
             type: 'HTMLElement',
-            description: 'The element to align to.'
+            description: 'The element to align to.',
           }, {
             name: 'inline',
             type: 'Boolean',
-            description: 'Experimental. Append the tooltip inline in the DOM instead of to the body.'
+            description: 'Experimental. Append the tooltip inline in the DOM instead of to the body.',
           }]}
         />
       </Section>

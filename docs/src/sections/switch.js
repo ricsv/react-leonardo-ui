@@ -14,7 +14,7 @@ const SwitchSection = props => (
       props={[{
         name: 'variant',
         type: 'String',
-        description: 'Variant of the Switch. Any of: null (default) | "inverse".'
+        description: 'Variant of the Switch. Any of: null (default) | "inverse".',
       }]}
     />
   </Section>

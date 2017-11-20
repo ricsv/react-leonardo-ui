@@ -14,7 +14,7 @@ const RadioButton = ({
   const finalClassName = luiClassName('radiobutton', {
     className,
     states: { active },
-    modifiers: { variant }
+    modifiers: { variant },
   });
 
   return (

@@ -10,7 +10,7 @@ const List = ({
 }) => {
   const finalClassName = luiClassName('list', {
     className,
-    modifiers: { variant }
+    modifiers: { variant },
   });
   return (
     <ul className={finalClassName} {...extraProps}>

@@ -35,5 +35,5 @@ export {
   Tab,
   Tabset,
   Textarea,
-  Tooltip
+  Tooltip,
 };

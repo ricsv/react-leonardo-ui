@@ -161,7 +161,7 @@ const ICONS = [
   'break-association',
   'log-in',
   'log-out',
-  'previous'
+  'previous',
 ];
 
 const IconSection = () => (
@@ -189,11 +189,11 @@ const IconSection = () => (
       props={[{
         name: 'name',
         type: 'String',
-        description: 'Name of the icon to show.'
+        description: 'Name of the icon to show.',
       }, {
         name: 'size',
         type: 'String',
-        description: 'Icon size. Any of: null (default) | "small" | "large".'
+        description: 'Icon size. Any of: null (default) | "small" | "large".',
       }]}
     />
   </Section>

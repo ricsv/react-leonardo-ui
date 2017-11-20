@@ -1,6 +1,6 @@
 import {
   camelToKebabCase,
-  luiClassName
+  luiClassName,
 } from '../src/util';
 
 describe('util camelToKebabCase function', () => {
@@ -28,7 +28,7 @@ describe('util luiClass function', () => {
       modifiers: {
         size: 'large',
         block: true,
-      }
+      },
     })).toBe('lui-button lui-button--large lui-button--block');
   });
 
@@ -38,7 +38,7 @@ describe('util luiClass function', () => {
         active: true,
         focused: false,
         hovered: true,
-      }
+      },
     })).toBe('lui-button lui-active lui-hovered');
   });
 
@@ -58,7 +58,7 @@ describe('util luiClass function', () => {
         active: true,
         focused: false,
         hovered: true,
-      }
+      },
     })).toBe('lui-button lui-button--large lui-button--block lui-active lui-hovered');
   });
 });

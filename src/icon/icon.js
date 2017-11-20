@@ -10,7 +10,7 @@ const Icon = ({
 }) => {
   const finalClassName = luiClassName('icon', {
     className,
-    modifiers: { name, size }
+    modifiers: { name, size },
   });
   return (
     <span className={finalClassName} aria-hidden="true" {...extraProps} />

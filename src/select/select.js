@@ -21,7 +21,7 @@ class Select extends Component {
     const finalClassName = luiClassName('select', {
       className,
       modifiers: { variant },
-      states: { active }
+      states: { active },
     });
 
     return (

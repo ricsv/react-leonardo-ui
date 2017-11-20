@@ -7,7 +7,7 @@ export function luiClassName(name, opts = {}) {
   const {
     className,
     modifiers = {},
-    states = {}
+    states = {},
   } = opts;
 
   const baseClass = `lui-${name}`;

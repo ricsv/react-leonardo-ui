@@ -15,7 +15,7 @@ test('Positioner should create rects', () => {
     width: 10,
     height: 10,
     right: 10,
-    bottom: 10
+    bottom: 10,
   });
   rect = positioner.createRect(-10, -10, 20, 20);
   expect(rect).toEqual({
@@ -24,7 +24,7 @@ test('Positioner should create rects', () => {
     width: 20,
     height: 20,
     right: 10,
-    bottom: 10
+    bottom: 10,
   });
   rect = positioner.createRect(5, 5, 2.5, 2.5);
   expect(rect).toEqual({
@@ -33,7 +33,7 @@ test('Positioner should create rects', () => {
     width: 2.5,
     height: 2.5,
     right: 7.5,
-    bottom: 7.5
+    bottom: 7.5,
   });
 });
 
@@ -41,19 +41,19 @@ test('Positioner should get the center point of a rect', () => {
   const rect = positioner.createRect(10, 10, 30, 25);
   expect(positioner.getDockCenterPoint(rect, 'top')).toEqual({
     left: 25,
-    top: 10
+    top: 10,
   });
   expect(positioner.getDockCenterPoint(rect, 'right')).toEqual({
     left: 40,
-    top: 22.5
+    top: 22.5,
   });
   expect(positioner.getDockCenterPoint(rect, 'bottom')).toEqual({
     left: 25,
-    top: 35
+    top: 35,
   });
   expect(positioner.getDockCenterPoint(rect, 'left')).toEqual({
     left: 10,
-    top: 22.5
+    top: 22.5,
   });
 });
 
@@ -88,12 +88,12 @@ describe('Positioner position to an element', () => {
     element = {
       getBoundingClientRect() {
         return positioner.createRect(0, 0, 200, 200);
-      }
+      },
     };
     alignToElement = {
       getBoundingClientRect() {
         return positioner.createRect(50, 50, 50, 50);
-      }
+      },
     };
   });
 
@@ -104,12 +104,12 @@ describe('Positioner position to an element', () => {
       dock: 'bottom',
       position: {
         top: 100,
-        left: 0
+        left: 0,
       },
       toPosition: {
         top: 100,
-        left: 75
-      }
+        left: 75,
+      },
     });
   });
 
@@ -120,50 +120,50 @@ describe('Positioner position to an element', () => {
       dock: 'right',
       position: {
         top: 0,
-        left: 100
+        left: 100,
       },
       toPosition: {
         top: 75,
-        left: 100
-      }
+        left: 100,
+      },
     });
   });
 
   test('Positioner should position to "bottom" with an offset', () => {
     const result = positioner.positionToElement(element, alignToElement, 'bottom', {
       offset: 5,
-      minWindowOffset: 8
+      minWindowOffset: 8,
     });
     expect(result).toEqual({
       fits: true,
       dock: 'bottom',
       position: {
         top: 105,
-        left: 8
+        left: 8,
       },
       toPosition: {
         top: 100,
-        left: 75
-      }
+        left: 75,
+      },
     });
   });
 
 
   test('Positioner should fail to position to "bottom" because of min edge offset', () => {
     const result = positioner.positionToElement(element, alignToElement, 'bottom', {
-      minEdgeOffset: 80
+      minEdgeOffset: 80,
     });
     expect(result).toEqual({
       fits: false,
       dock: 'bottom',
       position: {
         top: 100,
-        left: -5
+        left: -5,
       },
       toPosition: {
         top: 100,
-        left: 75
-      }
+        left: 75,
+      },
     });
   });
 });

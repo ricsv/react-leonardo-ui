@@ -16,7 +16,7 @@ const CheckboxSection = props => (
       props={[{
         name: 'variant',
         type: 'String',
-        description: 'Variant of the Checkbox. Any of: null (default) | "inverse".'
+        description: 'Variant of the Checkbox. Any of: null (default) | "inverse".',
       }]}
     />
   </Section>
