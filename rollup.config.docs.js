@@ -59,7 +59,7 @@ function ssr() {
 }
 
 const config = {
-  name: 'React Leonardo UI Docs',
+  name: 'docsContainer',
   input: 'docs/src/docs.js',
   output: {
     file: 'docs/dist/docs.js',
