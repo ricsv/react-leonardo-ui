@@ -114,10 +114,6 @@ class Toast extends Component {
       style.bottom = '10px';
     }
 
-    if (typeof document === 'undefined') {
-      return null;
-    }
-
     const containerElement = getOrCreateContainer();
     return (
       createPortal(

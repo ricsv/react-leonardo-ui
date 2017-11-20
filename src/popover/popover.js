@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
 import PopoverContent from './popover-content';
-import PopoverBody from './popover-body';
-import PopoverFooter from './popover-footer';
-import PopoverHeader from './popover-header';
-import PopoverTitle from './popover-title';
-
 import { luiClassName } from '../util';
 
 const FADE_DURATION = 100;
@@ -22,72 +17,102 @@ let currentId = 0;
 class Popover extends Component {
   constructor(props) {
     super(props);
+
     this.portalId = `rlui-popover-${currentId}`;
     this.state = {
-      popoverState: props.show ? POPOVER_STATE.opening : POPOVER_STATE.closed,
+      popoverState: POPOVER_STATE.closed,
     };
     currentId += 1;
 
     this.outsideListener = this.outsideListener.bind(this);
-    this.transitionToOpen = this.transitionToOpen.bind(this);
-    this.transitionToClosed = this.transitionToClosed.bind(this);
+    this.keyUpListener = this.keyUpListener.bind(this);
+    this.openPopover = this.openPopover.bind(this);
+    this.closePopover = this.closePopover.bind(this);
+
+    if (!props.inline && typeof document !== 'undefined') {
+      this.containerElement = document.createElement('div');
+      this.containerElement.id = this.props.portalId;
+    }
   }
   componentDidMount() {
-    this.portalElement = document.createElement('div');
-    this.portalElement.id = this.portalId;
-    document.body.appendChild(this.portalElement);
-
-    if (this.state.popoverState === POPOVER_STATE.opening) {
-      this.transitionToOpen();
+    if (this.props.show) {
+      this.openPopover();
     }
   }
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
-      this.setState({
-        popoverState: POPOVER_STATE.opening,
-      });
+      this.openPopover();
     } else if (this.props.show && !nextProps.show) {
-      this.setState({
-        popoverState: POPOVER_STATE.closing,
-      });
+      this.closePopover();
     }
   }
   componentDidUpdate() {
-    if (this.state.popoverState === POPOVER_STATE.opening) {
-      this.transitionToOpen();
-    } else if (this.state.popoverState === POPOVER_STATE.closing) {
-      this.transitionToClosed();
+    const {
+      popoverState,
+    } = this.state;
+
+    const {
+      inline,
+      onEscape,
+      onOpen,
+      onClose,
+      onOutside,
+    } = this.props;
+
+    if (popoverState === POPOVER_STATE.opening) {
+      setTimeout(() => {
+        this.setState({ popoverState: POPOVER_STATE.open });
+        if (typeof onEscape === 'function') {
+          window.addEventListener('keyup', this.keyUpListener);
+        }
+        if (typeof onOutside === 'function') {
+          document.addEventListener('click', this.outsideListener);
+        }
+        if (typeof onOpen === 'function') {
+          onOpen();
+        }
+      });
+    } else if (popoverState === POPOVER_STATE.closing) {
+      if (typeof onEscape === 'function') {
+        window.removeEventListener('keyup', this.keyUpListener);
+      }
+      if (typeof onOutside === 'function') {
+        document.removeEventListener('click', this.outsideListener);
+      }
+      setTimeout(() => {
+        this.setState({ popoverState: POPOVER_STATE.closed });
+        if (typeof onClose === 'function') {
+          onClose();
+        }
+        if (!inline) {
+          document.body.removeChild(this.containerElement);
+        }
+      }, FADE_DURATION);
     }
   }
-  componentWillUnmount() {
-    document.body.removeChild(this.portalElement);
+  keyUpListener(e) {
+    if (e.keyCode === 27) {
+      this.props.onEscape();
+    }
   }
   outsideListener(e) {
     if (!this.element.contains(e.target)) {
       this.props.onOutside();
     }
   }
-  transitionToOpen() {
-    setTimeout(() => {
-      this.setState({ popoverState: POPOVER_STATE.open });
-      if (typeof this.props.onOutside === 'function') {
-        document.addEventListener('click', this.outsideListener);
-      }
-      if (typeof this.props.onOpen === 'function') {
-        this.props.onOpen();
-      }
-    });
-  }
-  transitionToClosed() {
-    if (typeof this.props.onOutside === 'function') {
-      document.removeEventListener('click', this.outsideListener);
+  openPopover() {
+    if (!this.props.inline) {
+      document.body.appendChild(this.containerElement);
     }
-    setTimeout(() => {
-      this.setState({ popoverState: POPOVER_STATE.closed });
-      if (typeof this.props.onClose === 'function') {
-        this.props.onClose();
-      }
-    }, FADE_DURATION);
+
+    this.setState(() => ({
+      popoverState: POPOVER_STATE.opening,
+    }));
+  }
+  closePopover() {
+    this.setState(() => ({
+      popoverState: POPOVER_STATE.closing,
+    }));
   }
   render() {
     const { popoverState } = this.state;
@@ -99,6 +124,8 @@ class Popover extends Component {
     const {
       className,
       children,
+      // dock,
+      // alignTo,
       inline,
       variant,
       ...extraProps
@@ -129,15 +156,10 @@ class Popover extends Component {
             {children}
           </PopoverContent>
         </div>,
-        this.portalElement
+        this.containerElement
       )
     );
   }
 }
-
-Popover.Header = PopoverHeader;
-Popover.Title = PopoverTitle;
-Popover.Body = PopoverBody;
-Popover.Footer = PopoverFooter;
 
 export default Popover;

@@ -23,54 +23,71 @@ class Tooltip extends Component {
     this.portalId = `rlui-tooltip-${currentId}`;
     currentId += 1;
 
-    this.transitionToOpen = this.transitionToOpen.bind(this);
-    this.transitionToClosed = this.transitionToClosed.bind(this);
+    this.openTooltip = this.openTooltip.bind(this);
+    this.closeTooltip = this.closeTooltip.bind(this);
+
+    if (!props.inline && typeof document !== 'undefined') {
+      this.containerElement = document.createElement('div');
+      this.containerElement.id = this.portalId;
+    }
   }
   componentDidMount() {
-    this.portalElement = document.createElement('div');
-    this.portalElement.id = this.portalId;
-    document.body.appendChild(this.portalElement);
+    if (!this.props.inline) {
+      document.body.appendChild(this.containerElement);
+    }
 
     if (this.state.tooltipState === TOOLTIP_STATE.opening) {
-      this.transitionToOpen();
+      this.openTooltip();
     }
   }
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
-      this.setState({
-        tooltipState: TOOLTIP_STATE.opening,
-      });
+      this.openTooltip();
     } else if (this.props.show && !nextProps.show) {
-      this.setState({
-        tooltipState: TOOLTIP_STATE.closing,
-      });
+      this.closeTooltip();
     }
   }
   componentDidUpdate() {
-    if (this.state.tooltipState === TOOLTIP_STATE.opening) {
-      this.transitionToOpen();
-    } else if (this.state.tooltipState === TOOLTIP_STATE.closing) {
-      this.transitionToClosed();
+    const {
+      tooltipState,
+    } = this.state;
+
+    const {
+      inline,
+      onOpen,
+      onClose,
+    } = this.props;
+
+    if (tooltipState === TOOLTIP_STATE.opening) {
+      setTimeout(() => {
+        this.setState({ tooltipState: TOOLTIP_STATE.open });
+        if (typeof onOpen === 'function') {
+          onOpen();
+        }
+      });
+    } else if (tooltipState === TOOLTIP_STATE.closing) {
+      setTimeout(() => {
+        this.setState({ tooltipState: TOOLTIP_STATE.closed });
+
+        if (typeof onClose === 'function') {
+          onClose();
+        }
+
+        if (!inline) {
+          document.body.removeChild(this.containerElement);
+        }
+      }, FADE_DURATION);
     }
   }
-  componentWillUnmount() {
-    document.body.removeChild(this.portalElement);
-  }
-  transitionToOpen() {
-    setTimeout(() => {
-      this.setState({ tooltipState: TOOLTIP_STATE.open });
-      if (typeof this.props.onOpen === 'function') {
-        this.props.onOpen();
-      }
+  openTooltip() {
+    this.setState({
+      tooltipState: TOOLTIP_STATE.opening,
     });
   }
-  transitionToClosed() {
-    setTimeout(() => {
-      this.setState({ tooltipState: TOOLTIP_STATE.closed });
-      if (typeof this.props.onClose === 'function') {
-        this.props.onClose();
-      }
-    }, FADE_DURATION);
+  closeTooltip() {
+    this.setState({
+      tooltipState: TOOLTIP_STATE.closing,
+    });
   }
   render() {
     const { tooltipState } = this.state;
@@ -108,7 +125,7 @@ class Tooltip extends Component {
         <TooltipContent className={tooltipClassName} {...extraProps}>
           {children}
         </TooltipContent>,
-        this.portalElement
+        this.containerElement
       )
     );
   }
