@@ -29,7 +29,7 @@ class Dialog extends Component {
   }
   componentDidMount() {
     this.portalElement = document.createElement('div');
-    this.portalElement.id = this.props.portalId;
+    this.portalElement.id = this.portalId;
     document.body.appendChild(this.portalElement);
 
     if (this.state.dialogState === DIALOG_STATE.opening) {
