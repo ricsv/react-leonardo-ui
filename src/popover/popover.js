@@ -63,7 +63,9 @@ class Popover extends Component {
 
     if (popoverState === POPOVER_STATE.opening) {
       setTimeout(() => {
-        this.setState({ popoverState: POPOVER_STATE.open });
+        this.setState(() => ({
+          popoverState: POPOVER_STATE.open,
+        }));
         if (typeof onEscape === 'function') {
           window.addEventListener('keyup', this.keyUpListener);
         }
@@ -82,7 +84,9 @@ class Popover extends Component {
         document.removeEventListener('click', this.outsideListener);
       }
       setTimeout(() => {
-        this.setState({ popoverState: POPOVER_STATE.closed });
+        this.setState(() => ({
+          popoverState: POPOVER_STATE.closed,
+        }));
         if (typeof onClose === 'function') {
           onClose();
         }

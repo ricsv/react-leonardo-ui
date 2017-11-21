@@ -57,7 +57,9 @@ class Toast extends Component {
   componentDidUpdate() {
     if (this.state.toastState === TOAST_STATE.opening) {
       setTimeout(() => {
-        this.setState({ toastState: TOAST_STATE.open });
+        this.setState(() => ({
+          toastState: TOAST_STATE.open,
+        }));
         if (typeof this.props.onOutside === 'function') {
           document.addEventListener('click', this.outsideListener);
         }
@@ -70,7 +72,9 @@ class Toast extends Component {
         document.removeEventListener('click', this.outsideListener);
       }
       setTimeout(() => {
-        this.setState({ toastState: TOAST_STATE.closed });
+        this.setState(() => ({
+          toastState: TOAST_STATE.closed,
+        }));
         if (typeof this.props.onClose === 'function') {
           this.props.onClose();
         }

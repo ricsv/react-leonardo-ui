@@ -59,20 +59,24 @@ class Dialog extends Component {
 
     if (dialogState === DIALOG_STATE.opening) {
       setTimeout(() => {
-        this.setState({ dialogState: DIALOG_STATE.open });
+        this.setState(() => ({
+          dialogState: DIALOG_STATE.open,
+        }));
         if (typeof onEscape === 'function') {
           window.addEventListener('keyup', this.keyUpListener);
         }
         if (typeof onOpen === 'function') {
           onOpen();
         }
-      }, 0);
+      });
     } else if (dialogState === DIALOG_STATE.closing) {
       if (typeof onEscape === 'function') {
         window.removeEventListener('keyup', this.keyUpListener);
       }
       setTimeout(() => {
-        this.setState({ dialogState: DIALOG_STATE.closed });
+        this.setState(() => ({
+          dialogState: DIALOG_STATE.closed,
+        }));
         if (typeof onClose === 'function') {
           onClose();
         }

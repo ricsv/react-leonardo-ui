@@ -62,14 +62,18 @@ class Tooltip extends Component {
 
     if (tooltipState === TOOLTIP_STATE.opening) {
       setTimeout(() => {
-        this.setState({ tooltipState: TOOLTIP_STATE.open });
+        this.setState(() => ({
+          tooltipState: TOOLTIP_STATE.open,
+        }));
         if (typeof onOpen === 'function') {
           onOpen();
         }
       });
     } else if (tooltipState === TOOLTIP_STATE.closing) {
       setTimeout(() => {
-        this.setState({ tooltipState: TOOLTIP_STATE.closed });
+        this.setState(() => ({
+          tooltipState: TOOLTIP_STATE.closed,
+        }));
 
         if (typeof onClose === 'function') {
           onClose();
@@ -82,14 +86,14 @@ class Tooltip extends Component {
     }
   }
   openTooltip() {
-    this.setState({
+    this.setState(() => ({
       tooltipState: TOOLTIP_STATE.opening,
-    });
+    }));
   }
   closeTooltip() {
-    this.setState({
+    this.setState(() => ({
       tooltipState: TOOLTIP_STATE.closing,
-    });
+    }));
   }
   render() {
     const { tooltipState } = this.state;
