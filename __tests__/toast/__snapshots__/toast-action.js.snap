@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toast action passes props correctly 1`] = `
+<div
+  className="lui-toast__aside my-class"
+  data-x="x"
+  title="Action"
+>
+  Action
+</div>
+`;
+
+exports[`Toast action renders correctly 1`] = `
+<div
+  className="lui-toast__aside undefined"
+>
+  Action
+</div>
+`;

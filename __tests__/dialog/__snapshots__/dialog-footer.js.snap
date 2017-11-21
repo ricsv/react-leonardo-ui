@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dialog footer passes props correctly 1`] = `
+<div
+  className="lui-dialog__footer my-class"
+  data-x="x"
+  title="Footer title"
+>
+  Footer title
+</div>
+`;
+
+exports[`Dialog footer renders correctly 1`] = `
+<div
+  className="lui-dialog__footer"
+>
+  Footer content
+</div>
+`;

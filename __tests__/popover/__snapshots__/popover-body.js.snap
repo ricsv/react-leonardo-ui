@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popover body passes props correctly 1`] = `
+<div
+  className="lui-popover__body my-class"
+  data-x="x"
+  title="Body title"
+>
+  Body title
+</div>
+`;
+
+exports[`Popover body renders correctly 1`] = `
+<div
+  className="lui-popover__body"
+>
+  Body content
+</div>
+`;

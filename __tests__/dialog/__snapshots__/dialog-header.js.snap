@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dialog header passes props correctly 1`] = `
+<div
+  className="lui-dialog__header my-class"
+  data-x="x"
+  title="Header title"
+>
+  Header title
+</div>
+`;
+
+exports[`Dialog header renders correctly 1`] = `
+<div
+  className="lui-dialog__header"
+>
+  Header content
+</div>
+`;
+
+exports[`Dialog header with title renders correctly 1`] = `
+<div
+  className="lui-dialog__header"
+>
+  <div
+    className="lui-dialog__title"
+  >
+    Header title
+  </div>
+</div>
+`;
