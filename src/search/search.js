@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { luiClassName } from '../util';
 
-// TODO handle outside updates of value
 class Search extends Component {
   constructor(props) {
     super(props);

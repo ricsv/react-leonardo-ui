@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty search renders correctly 1`] = `
+<div
+  className="lui-search"
+>
+  <span
+    className="lui-icon  lui-icon--search  lui-search__search-icon"
+  />
+  <input
+    className="lui-search__input"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Normal search renders correctly 1`] = `
+<div
+  className="lui-search"
+>
+  <span
+    className="lui-icon  lui-icon--search  lui-search__search-icon"
+  />
+  <input
+    className="lui-search__input"
+    type="text"
+  />
+  <button
+    className="lui-search__clear-button"
+    onClick={[Function]}
+  >
+    <span
+      className="lui-icon  lui-icon--small  lui-icon--close"
+    />
+  </button>
+</div>
+`;
+
+exports[`Search passes props correctly 1`] = `
+<div
+  className="lui-search my-class"
+>
+  <span
+    className="lui-icon  lui-icon--search  lui-search__search-icon"
+  />
+  <input
+    className="lui-search__input"
+    data-x="x"
+    title="Title"
+    type="text"
+  />
+  <button
+    className="lui-search__clear-button"
+    onClick={[Function]}
+  >
+    <span
+      className="lui-icon  lui-icon--small  lui-icon--close"
+    />
+  </button>
+</div>
+`;
+
+exports[`Search with modifiers renders correctly 1`] = `
+<div
+  className="lui-search lui-search--inverse"
+>
+  <span
+    className="lui-icon  lui-icon--search  lui-search__search-icon"
+  />
+  <input
+    className="lui-search__input"
+    type="text"
+  />
+  <button
+    className="lui-search__clear-button"
+    onClick={[Function]}
+  >
+    <span
+      className="lui-icon  lui-icon--small  lui-icon--close"
+    />
+  </button>
+</div>
+`;
+
+exports[`Search with states renders correctly 1`] = `
+<div
+  className="lui-search"
+>
+  <span
+    className="lui-icon  lui-icon--search  lui-search__search-icon"
+  />
+  <input
+    className="lui-search__input"
+    disabled={true}
+    invalid={true}
+    type="text"
+  />
+  <button
+    className="lui-search__clear-button"
+    onClick={[Function]}
+  >
+    <span
+      className="lui-icon  lui-icon--small  lui-icon--close"
+    />
+  </button>
+</div>
+`;
+
+exports[`Search without value renders correctly 1`] = `
+<div
+  className="lui-search"
+>
+  <span
+    className="lui-icon  lui-icon--search  lui-search__search-icon"
+  />
+  <input
+    className="lui-search__input"
+    type="text"
+  />
+</div>
+`;
