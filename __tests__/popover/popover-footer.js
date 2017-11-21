@@ -18,3 +18,13 @@ test('Popover footer passes props correctly', () => {
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+test('Popover footer with buttons', () => {
+  const tree = renderer.create(
+    <Popover.Footer nopad>
+      <Popover.Button>Button 1</Popover.Button>
+      <Popover.Button>Button 2</Popover.Button>
+    </Popover.Footer>
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});

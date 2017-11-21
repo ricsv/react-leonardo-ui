@@ -17,3 +17,20 @@ exports[`Popover footer renders correctly 1`] = `
   Footer content
 </div>
 `;
+
+exports[`Popover footer with buttons 1`] = `
+<div
+  className="lui-popover__footer lui-nopad"
+>
+  <button
+    className="lui-button lui-popover__button undefined"
+  >
+    Button 1
+  </button>
+  <button
+    className="lui-button lui-popover__button undefined"
+  >
+    Button 2
+  </button>
+</div>
+`;
