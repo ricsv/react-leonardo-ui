@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
+import POPOVER_STATE from '../overlay-state';
 import PopoverContent from './popover-content';
 import { luiClassName } from '../util';
 
 const FADE_DURATION = 100;
-const POPOVER_STATE = {
-  opening: 0,
-  open: 1,
-  closing: 2,
-  closed: 3,
-};
 
 let currentId = 0;
 

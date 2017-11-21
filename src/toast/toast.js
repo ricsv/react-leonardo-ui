@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
+import TOAST_STATE from '../overlay-state';
 import { luiClassName } from '../util';
 
 const FADE_DURATION = 200;
-const TOAST_STATE = {
-  opening: 0,
-  open: 1,
-  closing: 2,
-  closed: 3,
-};
-
 let currentId = 0;
 
 const getOrCreateContainer = (parentElement) => {

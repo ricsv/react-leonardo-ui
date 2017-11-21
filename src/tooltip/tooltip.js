@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
+import TOOLTIP_STATE from '../overlay-state';
 import TooltipContent from './tooltip-content';
 import { luiClassName } from '../util';
 
 const FADE_DURATION = 50;
-const TOOLTIP_STATE = {
-  opening: 0,
-  open: 1,
-  closing: 2,
-  closed: 3,
-};
-
 let currentId = 0;
 
 class Tooltip extends Component {
