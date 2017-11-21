@@ -289,15 +289,14 @@ var Checkbox$1 = function Checkbox(_ref) {
   );
 };
 
-var FADE_DURATION = 200;
-
-var DIALOG_STATE = {
+var TOOLTIP_STATE = {
   opening: 0,
   open: 1,
   closing: 2,
   closed: 3
 };
 
+var FADE_DURATION = 200;
 var currentId = 0;
 
 var Dialog$1 = function (_Component) {
@@ -310,53 +309,81 @@ var Dialog$1 = function (_Component) {
 
     _this.portalId = 'rlui-dialog-' + currentId;
     _this.state = {
-      dialogState: props.show ? DIALOG_STATE.opening : DIALOG_STATE.closed
+      dialogState: TOOLTIP_STATE.closed
     };
     currentId += 1;
 
     _this.keyUpListener = _this.keyUpListener.bind(_this);
-    _this.transitionToOpen = _this.transitionToOpen.bind(_this);
-    _this.transitionToClosed = _this.transitionToClosed.bind(_this);
+    _this.openDialog = _this.openDialog.bind(_this);
+    _this.closeDialog = _this.closeDialog.bind(_this);
+
+    if (typeof document !== 'undefined') {
+      _this.parentElement = props.parentElement || document.body;
+
+      _this.containerElement = document.createElement('div');
+      _this.containerElement.id = _this.portalId;
+    }
     return _this;
   }
 
   createClass(Dialog, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.portalElement = document.createElement('div');
-      this.portalElement.id = this.portalId;
-      document.body.appendChild(this.portalElement);
-
-      if (this.state.dialogState === DIALOG_STATE.opening) {
-        this.transitionToOpen();
+      if (this.props.show) {
+        this.openDialog();
       }
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (!this.props.show && nextProps.show) {
-        this.setState({
-          dialogState: DIALOG_STATE.opening
-        });
+        this.openDialog();
       } else if (this.props.show && !nextProps.show) {
-        this.setState({
-          dialogState: DIALOG_STATE.closing
-        });
+        this.closeDialog();
       }
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      if (this.state.dialogState === DIALOG_STATE.opening) {
-        this.transitionToOpen();
-      } else if (this.state.dialogState === DIALOG_STATE.closing) {
-        this.transitionToClosed();
+      var _this2 = this;
+
+      var dialogState = this.state.dialogState;
+      var _props = this.props,
+          onEscape = _props.onEscape,
+          onOpen = _props.onOpen,
+          onClose = _props.onClose;
+
+
+      if (dialogState === TOOLTIP_STATE.opening) {
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              dialogState: TOOLTIP_STATE.open
+            };
+          });
+          if (typeof onEscape === 'function') {
+            window.addEventListener('keyup', _this2.keyUpListener);
+          }
+          if (typeof onOpen === 'function') {
+            onOpen();
+          }
+        });
+      } else if (dialogState === TOOLTIP_STATE.closing) {
+        if (typeof onEscape === 'function') {
+          window.removeEventListener('keyup', this.keyUpListener);
+        }
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              dialogState: TOOLTIP_STATE.closed
+            };
+          });
+          if (typeof onClose === 'function') {
+            onClose();
+          }
+          _this2.parentElement.removeChild(_this2.containerElement);
+        }, FADE_DURATION);
       }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      document.body.removeChild(this.portalElement);
     }
   }, {
     key: 'keyUpListener',
@@ -366,62 +393,54 @@ var Dialog$1 = function (_Component) {
       }
     }
   }, {
-    key: 'transitionToOpen',
-    value: function transitionToOpen() {
-      var _this2 = this;
+    key: 'openDialog',
+    value: function openDialog() {
+      this.parentElement.appendChild(this.containerElement);
 
-      setTimeout(function () {
-        _this2.setState({ dialogState: DIALOG_STATE.open });
-        if (typeof _this2.props.onEscape === 'function') {
-          window.addEventListener('keyup', _this2.keyUpListener);
-        }
-        if (typeof _this2.props.onOpen === 'function') {
-          _this2.props.onOpen();
-        }
-      }, 0);
+      this.setState(function () {
+        return {
+          dialogState: TOOLTIP_STATE.opening
+        };
+      });
     }
   }, {
-    key: 'transitionToClosed',
-    value: function transitionToClosed() {
-      var _this3 = this;
-
-      setTimeout(function () {
-        _this3.setState({ dialogState: DIALOG_STATE.closed });
-        if (typeof _this3.props.onEscape === 'function') {
-          window.removeEventListener('keyup', _this3.keyUpListener);
-        }
-        if (typeof _this3.props.onClose === 'function') {
-          _this3.props.onClose();
-        }
-      }, FADE_DURATION);
+    key: 'closeDialog',
+    value: function closeDialog() {
+      this.setState(function () {
+        return {
+          dialogState: TOOLTIP_STATE.closing
+        };
+      });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          className = _props.className,
-          children = _props.children,
-          variant = _props.variant,
-          show = _props.show,
-          onEscape = _props.onEscape,
-          onOpen = _props.onOpen,
-          onClose = _props.onClose,
-          extraProps = objectWithoutProperties(_props, ['className', 'children', 'variant', 'show', 'onEscape', 'onOpen', 'onClose']);
+      var _props2 = this.props,
+          className = _props2.className,
+          children = _props2.children,
+          variant = _props2.variant,
+          show = _props2.show,
+          onEscape = _props2.onEscape,
+          onOpen = _props2.onOpen,
+          onClose = _props2.onClose,
+          parentElement = _props2.parentElement,
+          extraProps = objectWithoutProperties(_props2, ['className', 'children', 'variant', 'show', 'onEscape', 'onOpen', 'onClose', 'parentElement']);
       var dialogState = this.state.dialogState;
 
+
+      if (dialogState === TOOLTIP_STATE.closed) {
+        return null;
+      }
 
       var dialogClassName = luiClassName('dialog', {
         className: className,
         modifiers: { variant: variant }
       });
       var backgroundClassName = 'lui-modal-background';
-      if (dialogState === DIALOG_STATE.opening || dialogState === DIALOG_STATE.closing) {
+
+      if (dialogState === TOOLTIP_STATE.opening || dialogState === TOOLTIP_STATE.closing) {
         dialogClassName += ' lui-fade';
         backgroundClassName += ' lui-fade';
-      }
-
-      if (dialogState === DIALOG_STATE.closed) {
-        return null;
       }
 
       return reactDom.createPortal(React__default.createElement(
@@ -431,9 +450,9 @@ var Dialog$1 = function (_Component) {
         React__default.createElement(
           'div',
           _extends({ className: dialogClassName, tabIndex: '-1' }, extraProps),
-          this.props.children
+          children
         )
-      ), this.portalElement);
+      ), this.containerElement);
     }
   }]);
   return Dialog;
@@ -442,9 +461,13 @@ var Dialog$1 = function (_Component) {
 var DialogBody = function DialogBody(_ref) {
   var className = _ref.className,
       children = _ref.children,
-      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+      nopad = _ref.nopad,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'nopad']);
 
-  var finalClassName = luiClassName('dialog__body', { className: className });
+  var finalClassName = luiClassName('dialog__body', {
+    className: className,
+    states: { nopad: nopad }
+  });
   return React__default.createElement(
     'div',
     _extends({ className: finalClassName }, extraProps),
@@ -455,9 +478,13 @@ var DialogBody = function DialogBody(_ref) {
 var DialogFooter = function DialogFooter(_ref) {
   var className = _ref.className,
       children = _ref.children,
-      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+      nopad = _ref.nopad,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'nopad']);
 
-  var finalClassName = luiClassName('dialog__footer', { className: className });
+  var finalClassName = luiClassName('dialog__footer', {
+    className: className,
+    states: { nopad: nopad }
+  });
   return React__default.createElement(
     'div',
     _extends({ className: finalClassName }, extraProps),
@@ -468,9 +495,13 @@ var DialogFooter = function DialogFooter(_ref) {
 var DialogHeader = function DialogHeader(_ref) {
   var className = _ref.className,
       children = _ref.children,
-      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+      nopad = _ref.nopad,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'nopad']);
 
-  var finalClassName = luiClassName('dialog__header', { className: className });
+  var finalClassName = luiClassName('dialog__header', {
+    className: className,
+    states: { nopad: nopad }
+  });
   return React__default.createElement(
     'div',
     _extends({ className: finalClassName }, extraProps),
@@ -1007,14 +1038,226 @@ var PopoverContent = function (_Component) {
   return PopoverContent;
 }(React.Component);
 
+var FADE_DURATION$1 = 100;
+
+var currentId$1 = 0;
+
+var Popover$1 = function (_Component) {
+  inherits(Popover, _Component);
+
+  function Popover(props) {
+    classCallCheck(this, Popover);
+
+    var _this = possibleConstructorReturn(this, (Popover.__proto__ || Object.getPrototypeOf(Popover)).call(this, props));
+
+    _this.portalId = 'rlui-popover-' + currentId$1;
+    _this.state = {
+      popoverState: TOOLTIP_STATE.closed
+    };
+    currentId$1 += 1;
+
+    _this.outsideListener = _this.outsideListener.bind(_this);
+    _this.keyUpListener = _this.keyUpListener.bind(_this);
+    _this.openPopover = _this.openPopover.bind(_this);
+    _this.closePopover = _this.closePopover.bind(_this);
+
+    if (!props.inline && typeof document !== 'undefined') {
+      _this.parentElement = props.parentElement || document.body;
+
+      _this.containerElement = document.createElement('div');
+      _this.containerElement.id = _this.props.portalId;
+    }
+    return _this;
+  }
+
+  createClass(Popover, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.show) {
+        this.openPopover();
+      }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (!this.props.show && nextProps.show) {
+        this.openPopover();
+      } else if (this.props.show && !nextProps.show) {
+        this.closePopover();
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var _this2 = this;
+
+      var popoverState = this.state.popoverState;
+      var _props = this.props,
+          inline = _props.inline,
+          onEscape = _props.onEscape,
+          onOpen = _props.onOpen,
+          onClose = _props.onClose,
+          onOutside = _props.onOutside;
+
+
+      if (popoverState === TOOLTIP_STATE.opening) {
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              popoverState: TOOLTIP_STATE.open
+            };
+          });
+          if (typeof onEscape === 'function') {
+            window.addEventListener('keyup', _this2.keyUpListener);
+          }
+          if (typeof onOutside === 'function') {
+            document.addEventListener('click', _this2.outsideListener);
+          }
+          if (typeof onOpen === 'function') {
+            onOpen();
+          }
+        });
+      } else if (popoverState === TOOLTIP_STATE.closing) {
+        if (typeof onEscape === 'function') {
+          window.removeEventListener('keyup', this.keyUpListener);
+        }
+        if (typeof onOutside === 'function') {
+          document.removeEventListener('click', this.outsideListener);
+        }
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              popoverState: TOOLTIP_STATE.closed
+            };
+          });
+          if (typeof onClose === 'function') {
+            onClose();
+          }
+          if (!inline) {
+            _this2.parentElement.removeChild(_this2.containerElement);
+          }
+        }, FADE_DURATION$1);
+      }
+    }
+  }, {
+    key: 'keyUpListener',
+    value: function keyUpListener(e) {
+      if (e.keyCode === 27) {
+        this.props.onEscape();
+      }
+    }
+  }, {
+    key: 'outsideListener',
+    value: function outsideListener(e) {
+      if (!this.element.contains(e.target)) {
+        this.props.onOutside();
+      }
+    }
+  }, {
+    key: 'openPopover',
+    value: function openPopover() {
+      if (!this.props.inline) {
+        this.parentElement.appendChild(this.containerElement);
+      }
+
+      this.setState(function () {
+        return {
+          popoverState: TOOLTIP_STATE.opening
+        };
+      });
+    }
+  }, {
+    key: 'closePopover',
+    value: function closePopover() {
+      this.setState(function () {
+        return {
+          popoverState: TOOLTIP_STATE.closing
+        };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var popoverState = this.state.popoverState;
+
+
+      if (popoverState === TOOLTIP_STATE.closed) {
+        return null;
+      }
+
+      var _props2 = this.props,
+          className = _props2.className,
+          children = _props2.children,
+          inline = _props2.inline,
+          variant = _props2.variant,
+          extraProps = objectWithoutProperties(_props2, ['className', 'children', 'inline', 'variant']);
+
+
+      var popoverClassName = luiClassName('popover', {
+        className: className,
+        modifiers: { variant: variant }
+      });
+      if (popoverState === TOOLTIP_STATE.opening || popoverState === TOOLTIP_STATE.closing) {
+        popoverClassName += ' lui-fade';
+      }
+
+      if (inline) {
+        return React__default.createElement(
+          'div',
+          { ref: function ref(el) {
+              _this3.element = el;
+            } },
+          React__default.createElement(
+            PopoverContent,
+            _extends({ className: popoverClassName, inline: true }, extraProps),
+            children
+          )
+        );
+      }
+
+      return reactDom.createPortal(React__default.createElement(
+        'div',
+        { ref: function ref(el) {
+            _this3.element = el;
+          } },
+        React__default.createElement(
+          PopoverContent,
+          _extends({ className: popoverClassName }, extraProps),
+          children
+        )
+      ), this.containerElement);
+    }
+  }]);
+  return Popover;
+}(React.Component);
+
 var PopoverBody = function PopoverBody(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      nopad = _ref.nopad,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'nopad']);
+
+  var finalClassName = luiClassName('popover__body', {
+    className: className,
+    states: { nopad: nopad }
+  });
+  return React__default.createElement(
+    'div',
+    _extends({ className: finalClassName }, extraProps),
+    children
+  );
+};
+
+var PopoverButton = function PopoverButton(_ref) {
   var className = _ref.className,
       children = _ref.children,
       extraProps = objectWithoutProperties(_ref, ['className', 'children']);
 
-  var finalClassName = luiClassName('popover__body', { className: className });
+  var finalClassName = ('lui-popover__button ' + className).trim();
   return React__default.createElement(
-    'div',
+    Button$1,
     _extends({ className: finalClassName }, extraProps),
     children
   );
@@ -1023,9 +1266,13 @@ var PopoverBody = function PopoverBody(_ref) {
 var PopoverFooter = function PopoverFooter(_ref) {
   var className = _ref.className,
       children = _ref.children,
-      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+      nopad = _ref.nopad,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'nopad']);
 
-  var finalClassName = luiClassName('popover__footer', { className: className });
+  var finalClassName = luiClassName('popover__footer', {
+    className: className,
+    states: { nopad: nopad }
+  });
   return React__default.createElement(
     'div',
     _extends({ className: finalClassName }, extraProps),
@@ -1036,9 +1283,13 @@ var PopoverFooter = function PopoverFooter(_ref) {
 var PopoverHeader = function PopoverHeader(_ref) {
   var className = _ref.className,
       children = _ref.children,
-      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+      nopad = _ref.nopad,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'nopad']);
 
-  var finalClassName = luiClassName('popover__header', { className: className });
+  var finalClassName = luiClassName('popover__header', {
+    className: className,
+    states: { nopad: nopad }
+  });
   return React__default.createElement(
     'div',
     _extends({ className: finalClassName }, extraProps),
@@ -1054,187 +1305,6 @@ var PopoverTitle = function PopoverTitle(_ref) {
   var finalClassName = luiClassName('popover__title', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: finalClassName }, extraProps),
-    children
-  );
-};
-
-var FADE_DURATION$1 = 100;
-var POPOVER_STATE = {
-  opening: 0,
-  open: 1,
-  closing: 2,
-  closed: 3
-};
-
-var currentId$1 = 0;
-
-var Popover$1 = function (_Component) {
-  inherits(Popover, _Component);
-
-  function Popover(props) {
-    classCallCheck(this, Popover);
-
-    var _this = possibleConstructorReturn(this, (Popover.__proto__ || Object.getPrototypeOf(Popover)).call(this, props));
-
-    _this.portalId = 'rlui-popover-' + currentId$1;
-    _this.state = {
-      popoverState: props.show ? POPOVER_STATE.opening : POPOVER_STATE.closed
-    };
-    currentId$1 += 1;
-
-    _this.outsideListener = _this.outsideListener.bind(_this);
-    _this.transitionToOpen = _this.transitionToOpen.bind(_this);
-    _this.transitionToClosed = _this.transitionToClosed.bind(_this);
-    return _this;
-  }
-
-  createClass(Popover, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.portalElement = document.createElement('div');
-      this.portalElement.id = this.portalId;
-      document.body.appendChild(this.portalElement);
-
-      if (this.state.popoverState === POPOVER_STATE.opening) {
-        this.transitionToOpen();
-      }
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (!this.props.show && nextProps.show) {
-        this.setState({
-          popoverState: POPOVER_STATE.opening
-        });
-      } else if (this.props.show && !nextProps.show) {
-        this.setState({
-          popoverState: POPOVER_STATE.closing
-        });
-      }
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      if (this.state.popoverState === POPOVER_STATE.opening) {
-        this.transitionToOpen();
-      } else if (this.state.popoverState === POPOVER_STATE.closing) {
-        this.transitionToClosed();
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      document.body.removeChild(this.portalElement);
-    }
-  }, {
-    key: 'outsideListener',
-    value: function outsideListener(e) {
-      if (!this.element.contains(e.target)) {
-        this.props.onOutside();
-      }
-    }
-  }, {
-    key: 'transitionToOpen',
-    value: function transitionToOpen() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        _this2.setState({ popoverState: POPOVER_STATE.open });
-        if (typeof _this2.props.onOutside === 'function') {
-          document.addEventListener('click', _this2.outsideListener);
-        }
-        if (typeof _this2.props.onOpen === 'function') {
-          _this2.props.onOpen();
-        }
-      });
-    }
-  }, {
-    key: 'transitionToClosed',
-    value: function transitionToClosed() {
-      var _this3 = this;
-
-      if (typeof this.props.onOutside === 'function') {
-        document.removeEventListener('click', this.outsideListener);
-      }
-      setTimeout(function () {
-        _this3.setState({ popoverState: POPOVER_STATE.closed });
-        if (typeof _this3.props.onClose === 'function') {
-          _this3.props.onClose();
-        }
-      }, FADE_DURATION$1);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this4 = this;
-
-      var popoverState = this.state.popoverState;
-
-
-      if (popoverState === POPOVER_STATE.closed) {
-        return null;
-      }
-
-      var _props = this.props,
-          className = _props.className,
-          children = _props.children,
-          inline = _props.inline,
-          variant = _props.variant,
-          extraProps = objectWithoutProperties(_props, ['className', 'children', 'inline', 'variant']);
-
-
-      var popoverClassName = luiClassName('popover', {
-        className: className,
-        modifiers: { variant: variant }
-      });
-      if (popoverState === POPOVER_STATE.opening || popoverState === POPOVER_STATE.closing) {
-        popoverClassName += ' lui-fade';
-      }
-
-      if (inline) {
-        return React__default.createElement(
-          'div',
-          { ref: function ref(el) {
-              _this4.element = el;
-            } },
-          React__default.createElement(
-            PopoverContent,
-            _extends({ className: popoverClassName, inline: true }, extraProps),
-            children
-          )
-        );
-      }
-
-      return reactDom.createPortal(React__default.createElement(
-        'div',
-        { ref: function ref(el) {
-            _this4.element = el;
-          } },
-        React__default.createElement(
-          PopoverContent,
-          _extends({ className: popoverClassName }, extraProps),
-          children
-        )
-      ), this.portalElement);
-    }
-  }]);
-  return Popover;
-}(React.Component);
-
-Popover$1.Header = PopoverHeader;
-Popover$1.Title = PopoverTitle;
-Popover$1.Body = PopoverBody;
-Popover$1.Footer = PopoverFooter;
-
-var PopoverButton = function PopoverButton(_ref) {
-  var className = _ref.className,
-      children = _ref.children,
-      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
-
-  var finalClassName = luiClassName('lui-popover__button', { className: className });
-  return React__default.createElement(
-    Button$1,
     _extends({ className: finalClassName }, extraProps),
     children
   );
@@ -1328,8 +1398,6 @@ var Select$1 = function (_Component) {
   }]);
   return Select;
 }(React.Component);
-
-// TODO handle outside updates of value
 
 var Search$1 = function (_Component) {
   inherits(Search, _Component);
@@ -1574,6 +1642,199 @@ var Textarea$1 = function (_Component) {
   return Textarea;
 }(React.Component);
 
+var FADE_DURATION$2 = 200;
+var currentId$2 = 0;
+
+var getOrCreateContainer = function getOrCreateContainer(parentElement) {
+  var element = document.getElementById('lui-toast-container');
+  if (!element) {
+    element = document.createElement('div');
+    element.classList.add('lui-toast-container');
+    element.id = 'lui-toast-container';
+    parentElement.appendChild(element);
+  }
+  return element;
+};
+
+var Toast$1 = function (_Component) {
+  inherits(Toast, _Component);
+
+  function Toast(props) {
+    classCallCheck(this, Toast);
+
+    var _this = possibleConstructorReturn(this, (Toast.__proto__ || Object.getPrototypeOf(Toast)).call(this, props));
+
+    currentId$2 += 1;
+    _this.portalId = 'rlui-toast-' + currentId$2;
+    _this.state = {
+      toastState: TOOLTIP_STATE.closed
+    };
+
+    _this.openToast = _this.openToast.bind(_this);
+    _this.closeToast = _this.closeToast.bind(_this);
+
+    if (typeof document !== 'undefined') {
+      _this.parentElement = props.parentElement || document.body;
+    }
+    return _this;
+  }
+
+  createClass(Toast, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.show) {
+        this.openToast();
+      }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (!this.props.show && nextProps.show) {
+        this.openToast();
+      } else if (this.props.show && !nextProps.show) {
+        this.closeToast();
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var _this2 = this;
+
+      if (this.state.toastState === TOOLTIP_STATE.opening) {
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              toastState: TOOLTIP_STATE.open
+            };
+          });
+          if (typeof _this2.props.onOutside === 'function') {
+            document.addEventListener('click', _this2.outsideListener);
+          }
+          if (typeof _this2.props.onOpen === 'function') {
+            _this2.props.onOpen();
+          }
+        });
+      } else if (this.state.toastState === TOOLTIP_STATE.closing) {
+        if (typeof this.props.onOutside === 'function') {
+          document.removeEventListener('click', this.outsideListener);
+        }
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              toastState: TOOLTIP_STATE.closed
+            };
+          });
+          if (typeof _this2.props.onClose === 'function') {
+            _this2.props.onClose();
+          }
+        }, FADE_DURATION$2);
+      }
+    }
+  }, {
+    key: 'openToast',
+    value: function openToast() {
+      this.setState(function () {
+        return {
+          toastState: TOOLTIP_STATE.opening
+        };
+      });
+    }
+  }, {
+    key: 'closeToast',
+    value: function closeToast() {
+      this.setState(function () {
+        return {
+          toastState: TOOLTIP_STATE.closing
+        };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var toastState = this.state.toastState;
+
+
+      if (toastState === TOOLTIP_STATE.closed) {
+        return null;
+      }
+
+      var _props = this.props,
+          className = _props.className,
+          children = _props.children,
+          dock = _props.dock,
+          alignTo = _props.alignTo,
+          inline = _props.inline,
+          variant = _props.variant,
+          show = _props.show,
+          onOpen = _props.onOpen,
+          onClose = _props.onClose,
+          parentElement = _props.parentElement,
+          extraProps = objectWithoutProperties(_props, ['className', 'children', 'dock', 'alignTo', 'inline', 'variant', 'show', 'onOpen', 'onClose', 'parentElement']);
+
+
+      var toastClassName = luiClassName('toast', {
+        className: className,
+        modifiers: { variant: variant }
+      });
+
+      var style = {
+        bottom: '-50px'
+      };
+      if (toastState === TOOLTIP_STATE.opening || toastState === TOOLTIP_STATE.closing) {
+        toastClassName += ' lui-fade';
+      } else {
+        style.bottom = '10px';
+      }
+
+      var containerElement = getOrCreateContainer(this.parentElement);
+      return reactDom.createPortal(React__default.createElement(
+        'div',
+        _extends({
+          ref: function ref(el) {
+            _this3.toast = el;
+          },
+          className: toastClassName,
+          style: style
+        }, extraProps),
+        children
+      ), containerElement);
+    }
+  }]);
+  return Toast;
+}(React.Component);
+
+var ToastAction = function ToastAction(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-toast__aside ' + className).trim();
+  return React__default.createElement(
+    'div',
+    _extends({ className: finalClassName }, extraProps),
+    children
+  );
+};
+
+var ToastText = function ToastText(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-toast__text ' + className).trim();
+  return React__default.createElement(
+    'div',
+    _extends({ className: finalClassName }, extraProps),
+    children
+  );
+};
+
+Toast$1.Action = ToastAction;
+Toast$1.Text = ToastText;
+
 var DEFAULT_DOCK$1 = 'top';
 var OFFSET$1 = 10;
 
@@ -1665,15 +1926,8 @@ var TooltipContent = function (_Component) {
   return TooltipContent;
 }(React.Component);
 
-var FADE_DURATION$2 = 50;
-var TOOLTIP_STATE = {
-  opening: 0,
-  open: 1,
-  closing: 2,
-  closed: 3
-};
-
-var currentId$2 = 0;
+var FADE_DURATION$3 = 50;
+var currentId$3 = 0;
 
 var Tooltip$1 = function (_Component) {
   inherits(Tooltip, _Component);
@@ -1686,75 +1940,99 @@ var Tooltip$1 = function (_Component) {
     _this.state = {
       tooltipState: props.show ? TOOLTIP_STATE.opening : TOOLTIP_STATE.closed
     };
-    _this.portalId = 'rlui-tooltip-' + currentId$2;
-    currentId$2 += 1;
+    _this.portalId = 'rlui-tooltip-' + currentId$3;
+    currentId$3 += 1;
 
-    _this.transitionToOpen = _this.transitionToOpen.bind(_this);
-    _this.transitionToClosed = _this.transitionToClosed.bind(_this);
+    _this.openTooltip = _this.openTooltip.bind(_this);
+    _this.closeTooltip = _this.closeTooltip.bind(_this);
+
+    if (!props.inline && typeof document !== 'undefined') {
+      _this.parentElement = props.parentElement || document.body;
+
+      _this.containerElement = document.createElement('div');
+      _this.containerElement.id = _this.portalId;
+    }
     return _this;
   }
 
   createClass(Tooltip, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.portalElement = document.createElement('div');
-      this.portalElement.id = this.portalId;
-      document.body.appendChild(this.portalElement);
+      if (!this.props.inline) {
+        this.parentElement.appendChild(this.containerElement);
+      }
 
       if (this.state.tooltipState === TOOLTIP_STATE.opening) {
-        this.transitionToOpen();
+        this.openTooltip();
       }
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (!this.props.show && nextProps.show) {
-        this.setState({
-          tooltipState: TOOLTIP_STATE.opening
-        });
+        this.openTooltip();
       } else if (this.props.show && !nextProps.show) {
-        this.setState({
-          tooltipState: TOOLTIP_STATE.closing
-        });
+        this.closeTooltip();
       }
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      if (this.state.tooltipState === TOOLTIP_STATE.opening) {
-        this.transitionToOpen();
-      } else if (this.state.tooltipState === TOOLTIP_STATE.closing) {
-        this.transitionToClosed();
+      var _this2 = this;
+
+      var tooltipState = this.state.tooltipState;
+      var _props = this.props,
+          inline = _props.inline,
+          onOpen = _props.onOpen,
+          onClose = _props.onClose;
+
+
+      if (tooltipState === TOOLTIP_STATE.opening) {
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              tooltipState: TOOLTIP_STATE.open
+            };
+          });
+          if (typeof onOpen === 'function') {
+            onOpen();
+          }
+        });
+      } else if (tooltipState === TOOLTIP_STATE.closing) {
+        setTimeout(function () {
+          _this2.setState(function () {
+            return {
+              tooltipState: TOOLTIP_STATE.closed
+            };
+          });
+
+          if (typeof onClose === 'function') {
+            onClose();
+          }
+
+          if (!inline) {
+            _this2.parentElement.removeChild(_this2.containerElement);
+          }
+        }, FADE_DURATION$3);
       }
     }
   }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      document.body.removeChild(this.portalElement);
-    }
-  }, {
-    key: 'transitionToOpen',
-    value: function transitionToOpen() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        _this2.setState({ tooltipState: TOOLTIP_STATE.open });
-        if (typeof _this2.props.onOpen === 'function') {
-          _this2.props.onOpen();
-        }
+    key: 'openTooltip',
+    value: function openTooltip() {
+      this.setState(function () {
+        return {
+          tooltipState: TOOLTIP_STATE.opening
+        };
       });
     }
   }, {
-    key: 'transitionToClosed',
-    value: function transitionToClosed() {
-      var _this3 = this;
-
-      setTimeout(function () {
-        _this3.setState({ tooltipState: TOOLTIP_STATE.closed });
-        if (typeof _this3.props.onClose === 'function') {
-          _this3.props.onClose();
-        }
-      }, FADE_DURATION$2);
+    key: 'closeTooltip',
+    value: function closeTooltip() {
+      this.setState(function () {
+        return {
+          tooltipState: TOOLTIP_STATE.closing
+        };
+      });
     }
   }, {
     key: 'render',
@@ -1766,12 +2044,12 @@ var Tooltip$1 = function (_Component) {
         return null;
       }
 
-      var _props = this.props,
-          className = _props.className,
-          children = _props.children,
-          inline = _props.inline,
-          variant = _props.variant,
-          extraProps = objectWithoutProperties(_props, ['className', 'children', 'inline', 'variant']);
+      var _props2 = this.props,
+          className = _props2.className,
+          children = _props2.children,
+          inline = _props2.inline,
+          variant = _props2.variant,
+          extraProps = objectWithoutProperties(_props2, ['className', 'children', 'inline', 'variant']);
 
 
       var tooltipClassName = luiClassName('tooltip', {
@@ -1794,7 +2072,7 @@ var Tooltip$1 = function (_Component) {
         TooltipContent,
         _extends({ className: tooltipClassName }, extraProps),
         children
-      ), this.portalElement);
+      ), this.containerElement);
     }
   }]);
   return Tooltip;
@@ -1817,6 +2095,7 @@ exports.Switch = Switch$1;
 exports.Tab = Tab$1;
 exports.Tabset = Tabset$1;
 exports.Textarea = Textarea$1;
+exports.Toast = Toast$1;
 exports.Tooltip = Tooltip$1;
 
 Object.defineProperty(exports, '__esModule', { value: true });
