@@ -27,13 +27,15 @@ class Tooltip extends Component {
     this.closeTooltip = this.closeTooltip.bind(this);
 
     if (!props.inline && typeof document !== 'undefined') {
+      this.parentElement = props.parentElement || document.body;
+
       this.containerElement = document.createElement('div');
       this.containerElement.id = this.portalId;
     }
   }
   componentDidMount() {
     if (!this.props.inline) {
-      document.body.appendChild(this.containerElement);
+      this.parentElement.appendChild(this.containerElement);
     }
 
     if (this.state.tooltipState === TOOLTIP_STATE.opening) {
@@ -74,7 +76,7 @@ class Tooltip extends Component {
         }
 
         if (!inline) {
-          document.body.removeChild(this.containerElement);
+          this.parentElement.removeChild(this.containerElement);
         }
       }, FADE_DURATION);
     }

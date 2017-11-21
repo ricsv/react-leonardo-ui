@@ -30,6 +30,8 @@ class Popover extends Component {
     this.closePopover = this.closePopover.bind(this);
 
     if (!props.inline && typeof document !== 'undefined') {
+      this.parentElement = props.parentElement || document.body;
+
       this.containerElement = document.createElement('div');
       this.containerElement.id = this.props.portalId;
     }
@@ -85,7 +87,7 @@ class Popover extends Component {
           onClose();
         }
         if (!inline) {
-          document.body.removeChild(this.containerElement);
+          this.parentElement.removeChild(this.containerElement);
         }
       }, FADE_DURATION);
     }
@@ -102,7 +104,7 @@ class Popover extends Component {
   }
   openPopover() {
     if (!this.props.inline) {
-      document.body.appendChild(this.containerElement);
+      this.parentElement.appendChild(this.containerElement);
     }
 
     this.setState(() => ({

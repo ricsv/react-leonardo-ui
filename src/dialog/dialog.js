@@ -28,6 +28,8 @@ class Dialog extends Component {
     this.closeDialog = this.closeDialog.bind(this);
 
     if (typeof document !== 'undefined') {
+      this.parentElement = props.parentElement || document.body;
+
       this.containerElement = document.createElement('div');
       this.containerElement.id = this.portalId;
     }
@@ -74,7 +76,7 @@ class Dialog extends Component {
         if (typeof onClose === 'function') {
           onClose();
         }
-        document.body.removeChild(this.containerElement);
+        this.parentElement.removeChild(this.containerElement);
       }, FADE_DURATION);
     }
   }
@@ -84,7 +86,7 @@ class Dialog extends Component {
     }
   }
   openDialog() {
-    document.body.appendChild(this.containerElement);
+    this.parentElement.appendChild(this.containerElement);
 
     this.setState(() => ({
       dialogState: DIALOG_STATE.opening,
@@ -104,6 +106,7 @@ class Dialog extends Component {
       onEscape,
       onOpen,
       onClose,
+      parentElement,
       ...extraProps
     } = this.props;
 

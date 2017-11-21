@@ -13,13 +13,13 @@ const TOAST_STATE = {
 
 let currentId = 0;
 
-const getOrCreateContainer = () => {
+const getOrCreateContainer = (parentElement) => {
   let element = document.getElementById('lui-toast-container');
   if (!element) {
     element = document.createElement('div');
     element.classList.add('lui-toast-container');
     element.id = 'lui-toast-container';
-    document.body.appendChild(element);
+    parentElement.appendChild(element);
   }
   return element;
 };
@@ -36,6 +36,11 @@ class Toast extends Component {
 
     this.openToast = this.openToast.bind(this);
     this.closeToast = this.closeToast.bind(this);
+
+
+    if (typeof document !== 'undefined') {
+      this.parentElement = props.parentElement || document.body;
+    }
   }
   componentDidMount() {
     if (this.props.show) {
@@ -96,7 +101,11 @@ class Toast extends Component {
       alignTo,
       inline,
       variant,
-      show, // Don't pass
+      // Avoid passing
+      show,
+      onOpen,
+      onClose,
+      parentElement,
       ...extraProps
     } = this.props;
 
@@ -114,7 +123,7 @@ class Toast extends Component {
       style.bottom = '10px';
     }
 
-    const containerElement = getOrCreateContainer();
+    const containerElement = getOrCreateContainer(this.parentElement);
     return (
       createPortal(
         <div
