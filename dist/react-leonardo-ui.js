@@ -1,97 +1,46 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
-	(factory((global['React Leonardo UI'] = global['React Leonardo UI'] || {}),global.React,global.ReactDOM));
+	(factory((global['React Leonardo UI'] = {}),global.React,global.ReactDOM));
 }(this, (function (exports,React,reactDom) { 'use strict';
 
 var React__default = 'default' in React ? React['default'] : React;
 
-function luiClassName(name, opts) {
-  var _opts$props = opts.props,
-      props = _opts$props === undefined ? {} : _opts$props,
+function luiClassName(name) {
+  var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var className = opts.className,
       _opts$modifiers = opts.modifiers,
-      modifiers = _opts$modifiers === undefined ? [] : _opts$modifiers,
+      modifiers = _opts$modifiers === undefined ? {} : _opts$modifiers,
       _opts$states = opts.states,
-      states = _opts$states === undefined ? [] : _opts$states;
+      states = _opts$states === undefined ? {} : _opts$states;
 
 
   var baseClass = 'lui-' + name;
-  var className = baseClass;
+  var resClassName = baseClass;
 
-  var isModifier = function isModifier(key) {
-    return modifiers.some(function (modifier) {
-      return modifier === key;
-    });
-  };
-  var isState = function isState(key) {
-    return states.some(function (state) {
-      return state === key;
-    });
-  };
-
-  var keys = Object.keys(props);
-  keys.forEach(function (key) {
-    if (isModifier(key)) {
-      // Modifiers can be booleans or key-value pair of strings
-      if (typeof props[key] === 'boolean') {
-        if (props[key]) {
-          className += ' ' + baseClass + '--' + key;
-        }
-      } else if (props[key]) {
-        className += ' ' + baseClass + '--' + props[key];
+  Object.keys(modifiers).forEach(function (key) {
+    // Modifiers can be booleans or key-value pair of strings
+    if (typeof modifiers[key] === 'boolean') {
+      if (modifiers[key]) {
+        resClassName += ' ' + baseClass + '--' + key;
       }
+    } else if (modifiers[key]) {
+      resClassName += ' ' + baseClass + '--' + modifiers[key];
     }
   });
-  keys.forEach(function (key) {
-    if (isState(key) && props[key]) {
-      // States are always booleans
-      className += ' lui-' + key;
+
+  Object.keys(states).forEach(function (key) {
+    // States are always booleans
+    if (states[key]) {
+      resClassName += ' lui-' + key;
     }
   });
-  if (props.className) {
-    className += ' ' + props.className;
+
+  if (className) {
+    resClassName += ' ' + className;
   }
 
-  return className;
-}
-
-function filterProps() {
-  for (var _len = arguments.length, filter = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    filter[_key - 1] = arguments[_key];
-  }
-
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  var defaultFilter = ['children', 'ref', 'key', 'className'];
-
-  var shouldFilter = function shouldFilter(prop) {
-    var res = false;
-
-    var shouldFilterKey = function shouldFilterKey(key) {
-      if (Array.isArray(key)) {
-        return key.some(shouldFilterKey);
-      } else if (key instanceof RegExp) {
-        return key.test(prop);
-      }
-      return key === prop;
-    };
-
-    var filterKeys = filter.concat(defaultFilter);
-    for (var i = 0; i < filterKeys.length; i++) {
-      res = res || shouldFilterKey(filterKeys[i]);
-    }
-
-    return res;
-  };
-
-  var newProps = {};
-  Object.keys(props).forEach(function (key) {
-    if (!shouldFilter(key)) {
-      newProps[key] = props[key];
-    }
-  });
-
-  return newProps;
+  return resClassName;
 }
 
 var classCallCheck = function (instance, Constructor) {
@@ -164,7 +113,17 @@ var inherits = function (subClass, superClass) {
 
 
 
+var objectWithoutProperties = function (obj, keys) {
+  var target = {};
 
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
 
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
@@ -173,9 +132,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-var modifiers = ['variant', 'size', 'block', 'rounded'];
-var states = ['active', 'disabled'];
 
 var Button$1 = function (_Component) {
   inherits(Button, _Component);
@@ -196,50 +152,69 @@ var Button$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
-      var props = this.props;
+      var _props = this.props,
+          children = _props.children,
+          className = _props.className,
+          variant = _props.variant,
+          size = _props.size,
+          block = _props.block,
+          rounded = _props.rounded,
+          active = _props.active,
+          extraProps = objectWithoutProperties(_props, ['children', 'className', 'variant', 'size', 'block', 'rounded', 'active']);
 
-      var className = luiClassName('button', {
-        props: props,
-        modifiers: modifiers,
-        states: states
+
+      var finalClassName = luiClassName('button', {
+        className: className,
+        modifiers: {
+          variant: variant,
+          size: size,
+          block: block,
+          rounded: rounded
+        },
+        states: { active: active }
       });
+
       return React__default.createElement(
         'button',
         _extends({
           ref: function ref(element) {
             _this2.element = element;
           },
-          className: className
-        }, filterProps(props, modifiers, states)),
-        props.children
+          className: finalClassName
+        }, extraProps),
+        children
       );
     }
   }]);
   return Button;
 }(React.Component);
 
-var modifiers$1 = ['size', 'name'];
+var Icon = function Icon(_ref) {
+  var className = _ref.className,
+      name = _ref.name,
+      size = _ref.size,
+      extraProps = objectWithoutProperties(_ref, ['className', 'name', 'size']);
 
-var Icon = function Icon(props) {
-  var className = luiClassName('icon', {
-    props: props,
-    modifiers: modifiers$1
+  var finalClassName = luiClassName('icon', {
+    className: className,
+    modifiers: { name: name, size: size }
   });
-  return React__default.createElement('span', _extends({ className: className, 'aria-hidden': 'true' }, filterProps(props, modifiers$1)));
+  return React__default.createElement('span', _extends({ className: finalClassName, 'aria-hidden': 'true' }, extraProps));
 };
 
 var ButtonIcon = function ButtonIcon(props) {
   return React__default.createElement(Icon, _extends({ className: 'lui-button__icon' }, props));
 };
 
-var ButtonText = function ButtonText(props) {
+var ButtonText = function ButtonText(_ref) {
+  var children = _ref.children;
   return React__default.createElement(
     "span",
     { className: "lui-button__text" },
-    props.children
+    children
   );
 };
 
@@ -251,43 +226,56 @@ Button$1.Icon = ButtonIcon;
 Button$1.Text = ButtonText;
 Button$1.Caret = ButtonDropdown;
 
-var ButtonGroup$1 = function ButtonGroup(props) {
-  var className = luiClassName('buttongroup', {
-    props: props
+var ButtonGroup$1 = function ButtonGroup(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('buttongroup', {
+    className: className,
+    props: extraProps
   });
   return React__default.createElement(
     'div',
-    _extends({}, filterProps(props), { className: className }),
-    props.children
+    _extends({}, extraProps, { className: finalClassName }),
+    children
   );
 };
 
-var ButtonGroupButton = function ButtonGroupButton(props) {
-  var className = 'lui-buttongroup__button  ' + (props.className || '');
+var ButtonGroupButton = function ButtonGroupButton(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-buttongroup__button  ' + className).trim();
   return React__default.createElement(
     Button$1,
-    _extends({}, filterProps(props), { className: className }),
-    props.children
+    _extends({}, extraProps, { className: finalClassName }),
+    children
   );
 };
 
 ButtonGroup$1.Button = ButtonGroupButton;
 
-var states$1 = ['active'];
-var modifiers$2 = ['variant'];
+var Checkbox$1 = function Checkbox(_ref) {
+  var children = _ref.children,
+      className = _ref.className,
+      title = _ref.title,
+      htmlFor = _ref.htmlFor,
+      active = _ref.active,
+      variant = _ref.variant,
+      extraProps = objectWithoutProperties(_ref, ['children', 'className', 'title', 'htmlFor', 'active', 'variant']);
 
-var Checkbox$1 = function Checkbox(props) {
-  var attributes = filterProps(props, states$1, modifiers$2, 'title', 'type');
-
-  var className = luiClassName('checkbox', {
-    props: props,
-    states: states$1,
-    modifiers: modifiers$2
+  var finalClassName = luiClassName('checkbox', {
+    className: className,
+    states: { active: active },
+    modifiers: { variant: variant }
   });
   return React__default.createElement(
     'label',
-    { htmlFor: props.htmlFor, title: props.title, className: className },
-    React__default.createElement('input', _extends({ className: 'lui-checkbox__input', type: 'checkbox' }, attributes)),
+    { htmlFor: htmlFor, title: title, className: finalClassName },
+    React__default.createElement('input', _extends({ className: 'lui-checkbox__input', type: 'checkbox' }, extraProps)),
     React__default.createElement(
       'div',
       { className: 'lui-checkbox__check-wrap' },
@@ -295,58 +283,11 @@ var Checkbox$1 = function Checkbox(props) {
       React__default.createElement(
         'span',
         { className: 'lui-checkbox__check-text' },
-        props.children
+        children
       )
     )
   );
 };
-
-var Portal = function (_Component) {
-  inherits(Portal, _Component);
-
-  function Portal(props) {
-    classCallCheck(this, Portal);
-
-    var _this = possibleConstructorReturn(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).call(this, props));
-
-    _this.portalElement = null;
-    return _this;
-  }
-
-  createClass(Portal, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var p = this.props.portalId && document.getElementById(this.props.portalId);
-      if (!p) {
-        p = document.createElement('div');
-        p.id = this.props.portalId;
-        document.body.appendChild(p);
-      }
-      this.portalElement = p;
-      this.componentDidUpdate();
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      reactDom.render(React__default.createElement(
-        'div',
-        null,
-        this.props.children
-      ), this.portalElement);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      document.body.removeChild(this.portalElement);
-    }
-  }, {
-    key: 'render',
-    value: function render$$1() {
-      return null;
-    }
-  }]);
-  return Portal;
-}(React.Component);
 
 var FADE_DURATION = 200;
 
@@ -356,8 +297,6 @@ var DIALOG_STATE = {
   closing: 2,
   closed: 3
 };
-
-var modifiers$3 = ['variant'];
 
 var currentId = 0;
 
@@ -373,7 +312,7 @@ var Dialog$1 = function (_Component) {
     _this.state = {
       dialogState: props.show ? DIALOG_STATE.opening : DIALOG_STATE.closed
     };
-    currentId++;
+    currentId += 1;
 
     _this.keyUpListener = _this.keyUpListener.bind(_this);
     _this.transitionToOpen = _this.transitionToOpen.bind(_this);
@@ -384,6 +323,10 @@ var Dialog$1 = function (_Component) {
   createClass(Dialog, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.portalElement = document.createElement('div');
+      this.portalElement.id = this.portalId;
+      document.body.appendChild(this.portalElement);
+
       if (this.state.dialogState === DIALOG_STATE.opening) {
         this.transitionToOpen();
       }
@@ -409,6 +352,11 @@ var Dialog$1 = function (_Component) {
       } else if (this.state.dialogState === DIALOG_STATE.closing) {
         this.transitionToClosed();
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      document.body.removeChild(this.portalElement);
     }
   }, {
     key: 'keyUpListener',
@@ -449,73 +397,97 @@ var Dialog$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
+      var _props = this.props,
+          className = _props.className,
+          children = _props.children,
+          variant = _props.variant,
+          show = _props.show,
+          onEscape = _props.onEscape,
+          onOpen = _props.onOpen,
+          onClose = _props.onClose,
+          extraProps = objectWithoutProperties(_props, ['className', 'children', 'variant', 'show', 'onEscape', 'onOpen', 'onClose']);
       var dialogState = this.state.dialogState;
 
-      var className = luiClassName('dialog', {
-        props: this.props,
-        modifiers: modifiers$3
+
+      var dialogClassName = luiClassName('dialog', {
+        className: className,
+        modifiers: { variant: variant }
       });
       var backgroundClassName = 'lui-modal-background';
       if (dialogState === DIALOG_STATE.opening || dialogState === DIALOG_STATE.closing) {
-        className += ' lui-fade';
+        dialogClassName += ' lui-fade';
         backgroundClassName += ' lui-fade';
       }
 
-      var passProps = filterProps(this.props, modifiers$3, 'onEscape', 'show', 'onOpen', 'onClose');
+      if (dialogState === DIALOG_STATE.closed) {
+        return null;
+      }
 
-      return dialogState !== DIALOG_STATE.closed ? React__default.createElement(
-        Portal,
-        { portalId: this.portalId },
+      return reactDom.createPortal(React__default.createElement(
+        'div',
+        { className: 'lui-dialog-container' },
+        React__default.createElement('div', { className: backgroundClassName }),
         React__default.createElement(
           'div',
-          { className: 'lui-dialog-container' },
-          React__default.createElement('div', { className: backgroundClassName }),
-          React__default.createElement(
-            'div',
-            _extends({ className: className, tabIndex: '-1' }, passProps),
-            this.props.children
-          )
+          _extends({ className: dialogClassName, tabIndex: '-1' }, extraProps),
+          this.props.children
         )
-      ) : null;
+      ), this.portalElement);
     }
   }]);
   return Dialog;
 }(React.Component);
 
-var DialogBody = function DialogBody(props) {
-  var className = luiClassName('dialog__body', { props: props });
+var DialogBody = function DialogBody(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('dialog__body', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var DialogFooter = function DialogFooter(props) {
-  var className = luiClassName('dialog__footer', { props: props });
+var DialogFooter = function DialogFooter(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('dialog__footer', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var DialogHeader = function DialogHeader(props) {
-  var className = luiClassName('dialog__header', { props: props });
+var DialogHeader = function DialogHeader(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('dialog__header', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var DialogTitle = function DialogTitle(props) {
-  var className = luiClassName('dialog__title', { props: props });
+var DialogTitle = function DialogTitle(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('dialog__title', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
@@ -524,20 +496,31 @@ Dialog$1.Title = DialogTitle;
 Dialog$1.Body = DialogBody;
 Dialog$1.Footer = DialogFooter;
 
-var states$2 = ['active', 'disabled'];
-var modifiers$4 = ['variant', 'block', 'rounded', 'size'];
+var FadeButton$1 = function FadeButton(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      variant = _ref.variant,
+      size = _ref.size,
+      block = _ref.block,
+      rounded = _ref.rounded,
+      active = _ref.active,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'variant', 'size', 'block', 'rounded', 'active']);
 
-var FadeButton$1 = function FadeButton(props) {
-  var className = luiClassName('fade-button', {
-    props: props,
-    states: states$2,
-    modifiers: modifiers$4
+  var finalClassName = luiClassName('fade-button', {
+    className: className,
+    modifiers: {
+      variant: variant,
+      size: size,
+      block: block,
+      rounded: rounded
+    },
+    states: { active: active }
   });
 
   return React__default.createElement(
     'button',
-    _extends({ className: className }, filterProps(props, modifiers$4, states$2)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
@@ -561,10 +544,6 @@ FadeButton$1.Icon = FadeButtonIcon;
 FadeButton$1.Text = FadeButtonText;
 FadeButton$1.Caret = FadeButtonCaret;
 
-var modifiers$5 = ['variant', 'size'];
-
-var states$3 = ['invalid'];
-
 var Input$1 = function (_Component) {
   inherits(Input, _Component);
 
@@ -584,112 +563,152 @@ var Input$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
-      var props = this.props;
+      var _props = this.props,
+          className = _props.className,
+          variant = _props.variant,
+          size = _props.size,
+          invalid = _props.invalid,
+          extraProps = objectWithoutProperties(_props, ['className', 'variant', 'size', 'invalid']);
 
-      var className = luiClassName('input', {
-        props: props,
-        states: states$3,
-        modifiers: modifiers$5
+      var finalClassName = luiClassName('input', {
+        className: className,
+        modifiers: { variant: variant, size: size },
+        states: { invalid: invalid }
       });
-      var attributes = filterProps(props, modifiers$5, states$3);
       return React__default.createElement('input', _extends({
         ref: function ref(element) {
           _this2.element = element;
         },
-        className: className }, attributes));
+        className: finalClassName
+      }, extraProps));
     }
   }]);
   return Input;
 }(React.Component);
 
-var modifiers$6 = ['variant'];
+var InputGroup$1 = function InputGroup(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      variant = _ref.variant,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'variant']);
 
-var InputGroup$1 = function InputGroup(props) {
-  var className = luiClassName('input-group', {
-    props: props,
-    modifiers: modifiers$6
+  var finalClassName = luiClassName('input-group', {
+    className: className,
+    modifiers: { variant: variant }
   });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props, modifiers$6)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var InputGroupButton = function InputGroupButton(props) {
-  var className = 'lui-input-group__item  lui-input-group__button  ' + (props.className || '');
+var InputGroupButton = function InputGroupButton(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-input-group__item  lui-input-group__button  ' + className).trim();
   return React__default.createElement(
     Button$1,
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var InputGroupInput = function InputGroupInput(props) {
-  var className = 'lui-input-group__item  lui-input-group__input  ' + (props.className || '');
-  return React__default.createElement(Input$1, _extends({ className: className }, filterProps(props)));
+var InputGroupInput = function InputGroupInput(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      extraProps = objectWithoutProperties(_ref, ['className']);
+
+  var finalClassName = ('lui-input-group__item  lui-input-group__input  ' + className).trim();
+  return React__default.createElement(Input$1, _extends({ className: finalClassName }, extraProps));
 };
 
 InputGroup$1.Button = InputGroupButton;
 InputGroup$1.Input = InputGroupInput;
 
-var modifiers$7 = ['variant'];
+var List$1 = function List(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      variant = _ref.variant,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'variant']);
 
-var List$1 = function List(props) {
-  var className = luiClassName('list', {
-    props: props,
-    modifiers: modifiers$7
+  var finalClassName = luiClassName('list', {
+    className: className,
+    modifiers: { variant: variant }
   });
   return React__default.createElement(
     'ul',
-    _extends({ className: className }, filterProps(props, modifiers$7)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var ListItem = function ListItem(props) {
-  var className = luiClassName('list__item', { props: props });
+var ListItem = function ListItem(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-list__item  ' + className).trim();
   return React__default.createElement(
     'li',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var ListAside = function ListAside(props) {
-  var className = luiClassName('list__header', { props: props });
+var ListHeader = function ListHeader(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-list__header  ' + className).trim();
   return React__default.createElement(
     'li',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var ListText = function ListText(props) {
-  var className = luiClassName('list__text', { props: props });
+var ListText = function ListText(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-list__text  ' + className).trim();
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var ListAside$1 = function ListAside(props) {
-  var className = luiClassName('list__aside', { props: props });
+var ListAside = function ListAside(_ref) {
+  var _ref$className = _ref.className,
+      className = _ref$className === undefined ? '' : _ref$className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = ('lui-list__aside  ' + className).trim();
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
 List$1.Item = ListItem;
-List$1.Header = ListAside;
+List$1.Header = ListHeader;
 List$1.Text = ListText;
-List$1.Aside = ListAside$1;
+List$1.Aside = ListAside;
 
 var oppositeDockMap = {
   top: 'bottom',
@@ -738,14 +757,14 @@ function getDockCenterPoint(rect, dock) {
   var top = void 0;
   var left = void 0;
   if (dock === 'top') {
-    top = rect.top;
+    top = rect.top; // eslint-disable-line prefer-destructuring
     left = rect.left + rect.width / 2;
   } else if (dock === 'right') {
     top = rect.top + rect.height / 2;
     left = rect.right;
   } else if (dock === 'left') {
     top = rect.top + rect.height / 2;
-    left = rect.left;
+    left = rect.left; // eslint-disable-line prefer-destructuring
   } else {
     top = rect.bottom;
     left = rect.left + rect.width / 2;
@@ -845,8 +864,10 @@ function positionToRect(element, rect) {
   var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
   var elemRect = element.getBoundingClientRect();
-  var pageYOffset = window.pageYOffset;
-  var pageXOffset = window.pageXOffset;
+  var _window = window,
+      pageXOffset = _window.pageXOffset,
+      pageYOffset = _window.pageYOffset;
+
   var windowRect = createRect(0, 0, document.body.clientWidth, document.body.clientHeight);
 
   var getOffset = function getOffset(fromElement) {
@@ -866,7 +887,7 @@ function positionToRect(element, rect) {
 
   var docks = getDocks(dock);
   var firstResult = null;
-  for (var i = 0; i < docks.length; i++) {
+  for (var i = 0; i < docks.length; i += 1) {
     var result = tryDock(elemRect, rect, windowRect, docks[i], options);
     result.position.top += pageYOffset;
     result.toPosition.top += pageYOffset;
@@ -940,7 +961,7 @@ var PopoverContent = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
       var res = this.state.positionResult;
@@ -986,52 +1007,65 @@ var PopoverContent = function (_Component) {
   return PopoverContent;
 }(React.Component);
 
-var PopoverBody = function PopoverBody(props) {
-  var className = 'lui-popover__body ' + (props.className ? props.className : '');
+var PopoverBody = function PopoverBody(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('popover__body', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var PopoverFooter = function PopoverFooter(props) {
-  var className = luiClassName('popover__footer', { props: props });
+var PopoverFooter = function PopoverFooter(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('popover__footer', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var PopoverHeader = function PopoverHeader(props) {
-  var className = luiClassName('popover__header', { props: props });
+var PopoverHeader = function PopoverHeader(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('popover__header', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
-var PopoverTitle = function PopoverTitle(props) {
-  var className = luiClassName('popover__title', { props: props });
+var PopoverTitle = function PopoverTitle(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('popover__title', { className: className });
   return React__default.createElement(
     'div',
-    _extends({ className: className }, filterProps(props)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
 var FADE_DURATION$1 = 100;
-
 var POPOVER_STATE = {
   opening: 0,
   open: 1,
   closing: 2,
   closed: 3
 };
-
-var modifiers$8 = ['variant'];
 
 var currentId$1 = 0;
 
@@ -1047,7 +1081,7 @@ var Popover$1 = function (_Component) {
     _this.state = {
       popoverState: props.show ? POPOVER_STATE.opening : POPOVER_STATE.closed
     };
-    currentId$1++;
+    currentId$1 += 1;
 
     _this.outsideListener = _this.outsideListener.bind(_this);
     _this.transitionToOpen = _this.transitionToOpen.bind(_this);
@@ -1058,6 +1092,10 @@ var Popover$1 = function (_Component) {
   createClass(Popover, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.portalElement = document.createElement('div');
+      this.portalElement.id = this.portalId;
+      document.body.appendChild(this.portalElement);
+
       if (this.state.popoverState === POPOVER_STATE.opening) {
         this.transitionToOpen();
       }
@@ -1083,6 +1121,11 @@ var Popover$1 = function (_Component) {
       } else if (this.state.popoverState === POPOVER_STATE.closing) {
         this.transitionToClosed();
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      document.body.removeChild(this.portalElement);
     }
   }, {
     key: 'outsideListener',
@@ -1123,23 +1166,33 @@ var Popover$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this4 = this;
 
       var popoverState = this.state.popoverState;
 
-      var props = this.props;
-      var className = luiClassName('popover', {
-        props: props,
-        modifiers: modifiers$8
-      });
-      if (popoverState === POPOVER_STATE.opening || popoverState === POPOVER_STATE.closing) {
-        className += ' lui-fade';
-      }
 
       if (popoverState === POPOVER_STATE.closed) {
         return null;
-      } else if (this.props.inline) {
+      }
+
+      var _props = this.props,
+          className = _props.className,
+          children = _props.children,
+          inline = _props.inline,
+          variant = _props.variant,
+          extraProps = objectWithoutProperties(_props, ['className', 'children', 'inline', 'variant']);
+
+
+      var popoverClassName = luiClassName('popover', {
+        className: className,
+        modifiers: { variant: variant }
+      });
+      if (popoverState === POPOVER_STATE.opening || popoverState === POPOVER_STATE.closing) {
+        popoverClassName += ' lui-fade';
+      }
+
+      if (inline) {
         return React__default.createElement(
           'div',
           { ref: function ref(el) {
@@ -1147,26 +1200,23 @@ var Popover$1 = function (_Component) {
             } },
           React__default.createElement(
             PopoverContent,
-            _extends({ className: className, inline: true }, filterProps(props)),
-            props.children
+            _extends({ className: popoverClassName, inline: true }, extraProps),
+            children
           )
         );
       }
-      return React__default.createElement(
-        Portal,
-        { portalId: this.portalId },
+
+      return reactDom.createPortal(React__default.createElement(
+        'div',
+        { ref: function ref(el) {
+            _this4.element = el;
+          } },
         React__default.createElement(
-          'div',
-          { ref: function ref(el) {
-              _this4.element = el;
-            } },
-          React__default.createElement(
-            PopoverContent,
-            _extends({ className: className }, filterProps(props)),
-            props.children
-          )
+          PopoverContent,
+          _extends({ className: popoverClassName }, extraProps),
+          children
         )
-      );
+      ), this.portalElement);
     }
   }]);
   return Popover;
@@ -1177,12 +1227,16 @@ Popover$1.Title = PopoverTitle;
 Popover$1.Body = PopoverBody;
 Popover$1.Footer = PopoverFooter;
 
-var PopoverButton = function PopoverButton(props) {
-  var className = 'lui-popover__button  ' + (props.className || '');
+var PopoverButton = function PopoverButton(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+
+  var finalClassName = luiClassName('lui-popover__button', { className: className });
   return React__default.createElement(
     Button$1,
-    _extends({}, filterProps(props), { className: className }),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
@@ -1192,20 +1246,25 @@ Popover$1.Body = PopoverBody;
 Popover$1.Button = PopoverButton;
 Popover$1.Footer = PopoverFooter;
 
-var modifiers$9 = ['variant'];
-var states$4 = ['active'];
+var RadioButton$1 = function RadioButton(_ref) {
+  var children = _ref.children,
+      className = _ref.className,
+      title = _ref.title,
+      htmlFor = _ref.htmlFor,
+      active = _ref.active,
+      variant = _ref.variant,
+      extraProps = objectWithoutProperties(_ref, ['children', 'className', 'title', 'htmlFor', 'active', 'variant']);
 
-var RadioButton$1 = function RadioButton(props) {
-  var className = luiClassName('radiobutton', {
-    props: props,
-    modifiers: modifiers$9,
-    states: states$4
+  var finalClassName = luiClassName('radiobutton', {
+    className: className,
+    states: { active: active },
+    modifiers: { variant: variant }
   });
 
   return React__default.createElement(
     'label',
-    { htmlFor: props.htmlFor, className: className },
-    React__default.createElement('input', _extends({ className: 'lui-radiobutton__input', type: 'radio' }, filterProps(props, modifiers$9, states$4, 'type'))),
+    { htmlFor: htmlFor, className: finalClassName },
+    React__default.createElement('input', _extends({ className: 'lui-radiobutton__input' }, extraProps, { type: 'radio' })),
     React__default.createElement(
       'div',
       { className: 'lui-radiobutton__radio-wrap' },
@@ -1213,14 +1272,11 @@ var RadioButton$1 = function RadioButton(props) {
       React__default.createElement(
         'span',
         { className: 'lui-radiobutton__radio-text' },
-        props.children
+        children
       )
     )
   );
 };
-
-var modifiers$10 = ['variant'];
-var states$5 = ['active'];
 
 var Select$1 = function (_Component) {
   inherits(Select, _Component);
@@ -1241,32 +1297,37 @@ var Select$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
-      var props = this.props;
+      var _props = this.props,
+          children = _props.children,
+          className = _props.className,
+          active = _props.active,
+          variant = _props.variant,
+          extraProps = objectWithoutProperties(_props, ['children', 'className', 'active', 'variant']);
 
-      var className = luiClassName('select', {
-        props: props,
-        states: states$5,
-        modifiers: modifiers$10
+
+      var finalClassName = luiClassName('select', {
+        className: className,
+        modifiers: { variant: variant },
+        states: { active: active }
       });
+
       return React__default.createElement(
         'select',
         _extends({
           ref: function ref(element) {
             _this2.element = element;
           },
-          className: className
-        }, filterProps(props, states$5, modifiers$10)),
-        props.children
+          className: finalClassName
+        }, extraProps),
+        children
       );
     }
   }]);
   return Select;
 }(React.Component);
-
-var modifiers$11 = ['variant'];
 
 // TODO handle outside updates of value
 
@@ -1298,28 +1359,36 @@ var Search$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
-      var props = this.props;
+      var _props = this.props,
+          className = _props.className,
+          children = _props.children,
+          variant = _props.variant,
+          value = _props.value,
+          onClear = _props.onClear,
+          extraProps = objectWithoutProperties(_props, ['className', 'children', 'variant', 'value', 'onClear']);
 
-      var className = luiClassName('search', {
-        props: props,
-        modifiers: modifiers$11
+
+      var finalClassName = luiClassName('search', {
+        className: className,
+        modifiers: { variant: variant }
       });
 
       return React__default.createElement(
         'div',
-        { className: className },
+        { className: finalClassName },
         React__default.createElement('span', { className: 'lui-icon  lui-icon--search  lui-search__search-icon' }),
         React__default.createElement('input', _extends({
           ref: function ref(elem) {
             _this2.element = elem;
           },
-          type: 'text',
           className: 'lui-search__input'
-        }, filterProps(props, modifiers$11, 'type', 'onClear'))),
-        this.props.value ? React__default.createElement(
+        }, extraProps, {
+          type: 'text'
+        })),
+        value ? React__default.createElement(
           'button',
           {
             className: 'lui-search__clear-button',
@@ -1334,9 +1403,6 @@ var Search$1 = function (_Component) {
   }]);
   return Search;
 }(React.Component);
-
-var modifiers$12 = ['variant'];
-var states$6 = ['active'];
 
 var Switch$1 = function (_Component) {
   inherits(Switch, _Component);
@@ -1357,31 +1423,39 @@ var Switch$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
-      var props = this.props;
+      var _props = this.props,
+          children = _props.children,
+          className = _props.className,
+          title = _props.title,
+          htmlFor = _props.htmlFor,
+          active = _props.active,
+          variant = _props.variant,
+          extraProps = objectWithoutProperties(_props, ['children', 'className', 'title', 'htmlFor', 'active', 'variant']);
 
-      var className = luiClassName('switch', {
-        props: props,
-        states: states$6,
-        modifiers: modifiers$12
+
+      var finalClassName = luiClassName('switch', {
+        className: className,
+        modifiers: { variant: variant },
+        states: { active: active }
       });
 
-      var attributes = filterProps(props, modifiers$12, states$6, 'title', 'type');
       return React__default.createElement(
         'div',
-        { className: className, title: props.title },
+        { className: finalClassName, title: title },
         React__default.createElement(
           'label',
-          { htmlFor: props.htmlFor, className: 'lui-switch__label' },
+          { htmlFor: htmlFor, className: 'lui-switch__label' },
           React__default.createElement('input', _extends({
             ref: function ref(element) {
               _this2.element = element;
             },
-            className: 'lui-switch__checkbox',
+            className: 'lui-switch__checkbox'
+          }, extraProps, {
             type: 'checkbox'
-          }, attributes)),
+          })),
           React__default.createElement(
             'span',
             { className: 'lui-switch__wrap' },
@@ -1395,20 +1469,24 @@ var Switch$1 = function (_Component) {
   return Switch;
 }(React.Component);
 
-var modifiers$13 = ['variant'];
-var states$7 = ['active', 'disabled'];
+var Tab$1 = function Tab(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      variant = _ref.variant,
+      active = _ref.active,
+      disabled = _ref.disabled,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'variant', 'active', 'disabled']);
 
-var Tab$1 = function Tab(props) {
-  var className = luiClassName('tab', {
-    props: props,
-    states: states$7,
-    modifiers: modifiers$13
+  var finalClassName = luiClassName('tab', {
+    className: className,
+    modifiers: { variant: variant },
+    states: { active: active, disabled: disabled }
   });
-  var attributes = filterProps(props, modifiers$13, states$7);
+
   return React__default.createElement(
     'li',
-    _extends({ className: className }, attributes),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
 
@@ -1431,23 +1509,23 @@ var TabText = function TabText(props) {
 Tab$1.Text = TabText;
 Tab$1.Aside = TabAside;
 
-var modifiers$14 = ['variant', 'fill'];
+var Tabset$1 = function Tabset(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      variant = _ref.variant,
+      fill = _ref.fill,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'variant', 'fill']);
 
-var Tabset$1 = function Tabset(props) {
-  var className = luiClassName('tabset', {
-    props: props,
-    modifiers: modifiers$14
+  var finalClassName = luiClassName('tabset', {
+    className: className,
+    modifiers: { variant: variant, fill: fill }
   });
   return React__default.createElement(
     'ul',
-    _extends({ className: className }, filterProps(props, modifiers$14)),
-    props.children
+    _extends({ className: finalClassName }, extraProps),
+    children
   );
 };
-
-var modifiers$15 = ['variant'];
-
-var states$8 = ['invalid'];
 
 var Textarea$1 = function (_Component) {
   inherits(Textarea, _Component);
@@ -1468,22 +1546,29 @@ var Textarea$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
-      var props = this.props;
+      var _props = this.props,
+          className = _props.className,
+          children = _props.children,
+          variant = _props.variant,
+          invalid = _props.invalid,
+          extraProps = objectWithoutProperties(_props, ['className', 'children', 'variant', 'invalid']);
 
-      var className = luiClassName('textarea', {
-        props: props,
-        states: states$8,
-        modifiers: modifiers$15
+
+      var finalClassName = luiClassName('textarea', {
+        className: className,
+        modifiers: { variant: variant },
+        states: { invalid: invalid }
       });
+
       return React__default.createElement('textarea', _extends({
         ref: function ref(element) {
           _this2.element = element;
         },
-        className: className
-      }, filterProps(props, modifiers$15, states$8)));
+        className: finalClassName
+      }, extraProps));
     }
   }]);
   return Textarea;
@@ -1536,7 +1621,7 @@ var TooltipContent = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
+    value: function render() {
       var _this2 = this;
 
       var res = this.state.positionResult;
@@ -1580,16 +1665,15 @@ var TooltipContent = function (_Component) {
   return TooltipContent;
 }(React.Component);
 
-var currentId$2 = 0;
-
 var FADE_DURATION$2 = 50;
-
 var TOOLTIP_STATE = {
   opening: 0,
   open: 1,
   closing: 2,
   closed: 3
 };
+
+var currentId$2 = 0;
 
 var Tooltip$1 = function (_Component) {
   inherits(Tooltip, _Component);
@@ -1603,7 +1687,7 @@ var Tooltip$1 = function (_Component) {
       tooltipState: props.show ? TOOLTIP_STATE.opening : TOOLTIP_STATE.closed
     };
     _this.portalId = 'rlui-tooltip-' + currentId$2;
-    currentId$2++;
+    currentId$2 += 1;
 
     _this.transitionToOpen = _this.transitionToOpen.bind(_this);
     _this.transitionToClosed = _this.transitionToClosed.bind(_this);
@@ -1613,6 +1697,10 @@ var Tooltip$1 = function (_Component) {
   createClass(Tooltip, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.portalElement = document.createElement('div');
+      this.portalElement.id = this.portalId;
+      document.body.appendChild(this.portalElement);
+
       if (this.state.tooltipState === TOOLTIP_STATE.opening) {
         this.transitionToOpen();
       }
@@ -1640,6 +1728,11 @@ var Tooltip$1 = function (_Component) {
       }
     }
   }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      document.body.removeChild(this.portalElement);
+    }
+  }, {
     key: 'transitionToOpen',
     value: function transitionToOpen() {
       var _this2 = this;
@@ -1665,32 +1758,43 @@ var Tooltip$1 = function (_Component) {
     }
   }, {
     key: 'render',
-    value: function render$$1() {
-      var props = this.props;
+    value: function render() {
       var tooltipState = this.state.tooltipState;
-      var className = luiClassName('tooltip', { props: props });
-      if (tooltipState === TOOLTIP_STATE.opening || tooltipState === TOOLTIP_STATE.closing) {
-        className += ' lui-fade';
-      }
+
 
       if (tooltipState === TOOLTIP_STATE.closed) {
         return null;
-      } else if (this.props.inline) {
+      }
+
+      var _props = this.props,
+          className = _props.className,
+          children = _props.children,
+          inline = _props.inline,
+          variant = _props.variant,
+          extraProps = objectWithoutProperties(_props, ['className', 'children', 'inline', 'variant']);
+
+
+      var tooltipClassName = luiClassName('tooltip', {
+        className: className,
+        modifiers: { variant: variant }
+      });
+      if (tooltipState === TOOLTIP_STATE.opening || tooltipState === TOOLTIP_STATE.closing) {
+        tooltipClassName += ' lui-fade';
+      }
+
+      if (inline) {
         return React__default.createElement(
           TooltipContent,
-          _extends({ inline: true, className: className }, filterProps(props)),
-          props.children
+          _extends({ inline: true, className: tooltipClassName }, extraProps),
+          children
         );
       }
-      return React__default.createElement(
-        Portal,
-        { portalId: this.portalId },
-        React__default.createElement(
-          TooltipContent,
-          _extends({ className: className }, filterProps(props)),
-          props.children
-        )
-      );
+
+      return reactDom.createPortal(React__default.createElement(
+        TooltipContent,
+        _extends({ className: tooltipClassName }, extraProps),
+        children
+      ), this.portalElement);
     }
   }]);
   return Tooltip;

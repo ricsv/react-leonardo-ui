@@ -6,10 +6,12 @@ import uglify from 'rollup-plugin-uglify';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
 const config = {
-  entry: 'src/react-leonardo-ui.js',
-  dest: 'dist/react-leonardo-ui.js',
-  moduleName: 'React Leonardo UI',
-  format: 'umd',
+  name: 'React Leonardo UI',
+  input: 'src/react-leonardo-ui.js',
+  output: {
+    file: 'dist/react-leonardo-ui.js',
+    format: 'umd',
+  },
   external: [
     'react',
     'react-dom',
@@ -32,7 +34,7 @@ const config = {
 };
 
 if (process.env.BUILD === 'production') {
-  config.dest = 'dist/react-leonardo-ui.min.js';
+  config.output.file = 'dist/react-leonardo-ui.min.js';
   config.plugins.push(uglify());
 } else {
   config.plugins.push(sourcemaps());

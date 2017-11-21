@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dialog body passes props correctly 1`] = `
+<div
+  className="lui-dialog__body my-class"
+  data-x="x"
+  title="Body title"
+>
+  Body title
+</div>
+`;
+
+exports[`Dialog body renders correctly 1`] = `
+<div
+  className="lui-dialog__body"
+>
+  Body content
+</div>
+`;

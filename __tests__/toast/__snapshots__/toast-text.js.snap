@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toast text passes props correctly 1`] = `
+<div
+  className="lui-toast__text my-class"
+  data-x="x"
+  title="Text"
+>
+  Text
+</div>
+`;
+
+exports[`Toast text renders correctly 1`] = `
+<div
+  className="lui-toast__text"
+>
+  Text
+</div>
+`;

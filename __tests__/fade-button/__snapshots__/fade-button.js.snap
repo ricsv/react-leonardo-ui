@@ -28,7 +28,8 @@ exports[`fade-button with modifiers renders correctly 1`] = `
 
 exports[`fade-button with states renders correctly 1`] = `
 <button
-  className="lui-fade-button lui-active lui-disabled"
+  className="lui-fade-button lui-active"
+  disabled={true}
   value="Value"
 />
 `;

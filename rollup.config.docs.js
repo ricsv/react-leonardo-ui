@@ -59,10 +59,12 @@ function ssr() {
 }
 
 const config = {
-  entry: 'docs/src/docs.js',
-  dest: 'docs/dist/docs.js',
-  moduleName: 'docsContainer',
-  format: 'umd',
+  name: 'docsContainer',
+  input: 'docs/src/docs.js',
+  output: {
+    file: 'docs/dist/docs.js',
+    format: 'umd',
+  },
   external: [
     'react',
     'react-dom',

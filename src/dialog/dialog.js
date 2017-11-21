@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 
+import DIALOG_STATE from '../overlay-state';
 import { luiClassName } from '../util';
 
 const FADE_DURATION = 200;
-
-const DIALOG_STATE = {
-  opening: 0,
-  open: 1,
-  closing: 2,
-  closed: 3,
-};
-
 let currentId = 0;
 
 class Dialog extends Component {
@@ -19,70 +12,87 @@ class Dialog extends Component {
     super(props);
     this.portalId = `rlui-dialog-${currentId}`;
     this.state = {
-      dialogState: props.show ? DIALOG_STATE.opening : DIALOG_STATE.closed,
+      dialogState: DIALOG_STATE.closed,
     };
     currentId += 1;
 
     this.keyUpListener = this.keyUpListener.bind(this);
-    this.transitionToOpen = this.transitionToOpen.bind(this);
-    this.transitionToClosed = this.transitionToClosed.bind(this);
+    this.openDialog = this.openDialog.bind(this);
+    this.closeDialog = this.closeDialog.bind(this);
+
+    if (typeof document !== 'undefined') {
+      this.parentElement = props.parentElement || document.body;
+
+      this.containerElement = document.createElement('div');
+      this.containerElement.id = this.portalId;
+    }
   }
   componentDidMount() {
-    this.portalElement = document.createElement('div');
-    this.portalElement.id = this.props.portalId;
-    document.body.appendChild(this.portalElement);
-
-    if (this.state.dialogState === DIALOG_STATE.opening) {
-      this.transitionToOpen();
+    if (this.props.show) {
+      this.openDialog();
     }
   }
   componentWillReceiveProps(nextProps) {
     if (!this.props.show && nextProps.show) {
-      this.setState({
-        dialogState: DIALOG_STATE.opening,
-      });
+      this.openDialog();
     } else if (this.props.show && !nextProps.show) {
-      this.setState({
-        dialogState: DIALOG_STATE.closing,
-      });
+      this.closeDialog();
     }
   }
   componentDidUpdate() {
-    if (this.state.dialogState === DIALOG_STATE.opening) {
-      this.transitionToOpen();
-    } else if (this.state.dialogState === DIALOG_STATE.closing) {
-      this.transitionToClosed();
+    const {
+      dialogState,
+    } = this.state;
+
+    const {
+      onEscape,
+      onOpen,
+      onClose,
+    } = this.props;
+
+    if (dialogState === DIALOG_STATE.opening) {
+      setTimeout(() => {
+        this.setState(() => ({
+          dialogState: DIALOG_STATE.open,
+        }));
+        if (typeof onEscape === 'function') {
+          window.addEventListener('keyup', this.keyUpListener);
+        }
+        if (typeof onOpen === 'function') {
+          onOpen();
+        }
+      });
+    } else if (dialogState === DIALOG_STATE.closing) {
+      if (typeof onEscape === 'function') {
+        window.removeEventListener('keyup', this.keyUpListener);
+      }
+      setTimeout(() => {
+        this.setState(() => ({
+          dialogState: DIALOG_STATE.closed,
+        }));
+        if (typeof onClose === 'function') {
+          onClose();
+        }
+        this.parentElement.removeChild(this.containerElement);
+      }, FADE_DURATION);
     }
-  }
-  componentWillUnmount() {
-    document.body.removeChild(this.portalElement);
   }
   keyUpListener(e) {
     if (e.keyCode === 27) {
       this.props.onEscape();
     }
   }
-  transitionToOpen() {
-    setTimeout(() => {
-      this.setState({ dialogState: DIALOG_STATE.open });
-      if (typeof this.props.onEscape === 'function') {
-        window.addEventListener('keyup', this.keyUpListener);
-      }
-      if (typeof this.props.onOpen === 'function') {
-        this.props.onOpen();
-      }
-    }, 0);
+  openDialog() {
+    this.parentElement.appendChild(this.containerElement);
+
+    this.setState(() => ({
+      dialogState: DIALOG_STATE.opening,
+    }));
   }
-  transitionToClosed() {
-    setTimeout(() => {
-      this.setState({ dialogState: DIALOG_STATE.closed });
-      if (typeof this.props.onEscape === 'function') {
-        window.removeEventListener('keyup', this.keyUpListener);
-      }
-      if (typeof this.props.onClose === 'function') {
-        this.props.onClose();
-      }
-    }, FADE_DURATION);
+  closeDialog() {
+    this.setState(() => ({
+      dialogState: DIALOG_STATE.closing,
+    }));
   }
   render() {
     const {
@@ -93,32 +103,35 @@ class Dialog extends Component {
       onEscape,
       onOpen,
       onClose,
+      parentElement,
       ...extraProps
     } = this.props;
+
     const { dialogState } = this.state;
+
+    if (dialogState === DIALOG_STATE.closed) {
+      return null;
+    }
 
     let dialogClassName = luiClassName('dialog', {
       className,
       modifiers: { variant },
     });
     let backgroundClassName = 'lui-modal-background';
+
     if (dialogState === DIALOG_STATE.opening || dialogState === DIALOG_STATE.closing) {
       dialogClassName += ' lui-fade';
       backgroundClassName += ' lui-fade';
-    }
-
-    if (dialogState === DIALOG_STATE.closed) {
-      return null;
     }
 
     return createPortal(
       <div className="lui-dialog-container">
         <div className={backgroundClassName} />
         <div className={dialogClassName} tabIndex="-1" {...extraProps}>
-          {this.props.children}
+          {children}
         </div>
       </div>,
-      this.portalElement
+      this.containerElement
     );
   }
 }

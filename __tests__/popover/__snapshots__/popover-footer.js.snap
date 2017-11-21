@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popover footer passes props correctly 1`] = `
+<div
+  className="lui-popover__footer my-class"
+  data-x="x"
+  title="Footer title"
+>
+  Footer title
+</div>
+`;
+
+exports[`Popover footer renders correctly 1`] = `
+<div
+  className="lui-popover__footer"
+>
+  Footer content
+</div>
+`;

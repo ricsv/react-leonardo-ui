@@ -9,7 +9,6 @@ const FadeButton = ({
   block,
   rounded,
   active,
-  disabled,
   ...extraProps
 }) => {
   const finalClassName = luiClassName('fade-button', {
@@ -20,7 +19,7 @@ const FadeButton = ({
       block,
       rounded,
     },
-    states: { active, disabled },
+    states: { active },
   });
 
   return (

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popover header passes props correctly 1`] = `
+<div
+  className="lui-popover__header my-class"
+  data-x="x"
+  title="Header title"
+>
+  Header title
+</div>
+`;
+
+exports[`Popover header renders correctly 1`] = `
+<div
+  className="lui-popover__header"
+>
+  Header content
+</div>
+`;
+
+exports[`Popover header with title renders correctly 1`] = `
+<div
+  className="lui-popover__header"
+>
+  <div
+    className="lui-popover__title"
+  >
+    Header title
+  </div>
+</div>
+`;
