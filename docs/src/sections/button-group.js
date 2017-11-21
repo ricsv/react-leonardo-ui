@@ -21,20 +21,24 @@ class ButtonGroupSection extends Component {
     const { props } = this;
 
     const buttons = [{
+      id: 1,
       text: 'First',
     }, {
+      id: 2,
       text: 'Second',
     }, {
+      id: 3,
       text: 'Third',
     }];
 
-    const buttonItems = buttons.map((button, idx) => (
+    const buttonItems = buttons.map(({ id, text }) => (
       <ButtonGroup.Button
+        key={id}
         variant={props.baseVariant}
-        active={this.state.activeButton === idx}
-        onClick={() => this.onClick(idx)}
+        active={this.state.activeButton === id}
+        onClick={() => this.onClick(id)}
       >
-        {button.text}
+        {text}
       </ButtonGroup.Button>
     ));
 

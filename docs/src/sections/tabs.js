@@ -20,12 +20,15 @@ class TabsSection extends Component {
   render() {
     const { props } = this;
     const tabs = [{
+      id: 0,
       tabContent: 'Tab 1',
       content: <div>Content 1</div>,
     }, {
+      id: 1,
       tabContent: 'Tab 2',
       content: <div>Content 2</div>,
     }, {
+      id: 2,
       tabContent: [
         <Tab.Text key="text">Blah 3</Tab.Text>,
         <Tab.Aside key="aside">
@@ -35,13 +38,14 @@ class TabsSection extends Component {
       content: <div>Content 1</div>,
     }];
 
-    const tabItems = tabs.map((tab, idx) => (
+    const tabItems = tabs.map(({ id, tabContent }) => (
       <Tab
-        onClick={() => this.onClick(idx)}
+        key={id}
+        onClick={() => this.onClick(id)}
         variant={props.baseVariant}
-        active={this.state.activeTab === idx}
+        active={this.state.activeTab === id}
       >
-        {tab.tabContent}
+        {tabContent}
       </Tab>
     ));
 
