@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>React Leonardo UI</title>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+  <link rel="stylesheet" href="leonardo-ui.css">
+  <link rel="stylesheet" href="docs.css">
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700);
+    @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro);
+    
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 14px;
+      color: #595959;
+    }
+
+    section {
+      margin: 30px 0 0 0;
+    }
+
+    section:first-child {
+      margin-top: 0;
+    }
+    input,
+    textarea,
+    select,
+    button {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 13px;
+    }
+
+    a:link,
+    a:active,
+    a:hover,
+    a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      border: none;
+    }
+
+    .header-wrapper {
+      border-bottom: 1px solid #CCCCCC;
+      height: 50px;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .header {
+      max-width: 960px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-logo {
+      display: flex;
+    }
+
+    .header-logo img {
+      height: 48px;
+    }
+
+    .header-logo span {
+      align-self: center;
+      padding-left: 5px;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 940px;
+      min-height: 2000px;
+      margin: 0 auto;
+      padding: 20px 20px 50px 20px;
+    }
+
+    .container > div {
+      display: flex;
+    }
+
+    .sidebar {
+      position: sticky;
+      position: -webkit-sticky;
+      top: 10px;
+      flex: 0 0 auto;
+      width: 150px;
+    }
+
+    .sidebar-variant-bg {
+      margin-left: -10px;
+      margin-top: 20px;
+    }
+
+    .sidebar-variant-bg button {
+      padding: 0 8px;
+      font-size: 12px;
+      height: 26px;
+    }
+
+    @media (max-width: 767px) {
+      .sidebar {
+        display: none;
+      }
+    }
+
+    .content {
+      flex: 1 1 auto;
+      max-width: 800px;
+    }
+
+    .footer {
+      padding: 30px 0;
+      min-height: 75px;
+      border-top: 1px solid #CCCCCC;
+      text-align: center;
+    }
+
+    .footer .footer-title {
+      font-size: 18px;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header-wrapper">
+      <div class="header">
+        <a class="header-logo" href="/">
+          <img src="react-logo.svg" alt="React"/>
+          <span>React Leonardo UI</span>
+        </a>
+        <div class="header-links">
+          <a href="https://github.com/ricsv/react-leonardo-ui">Github</a>
+        </div>
+      </div>
+    </div>
+    <div class="container" id="container"><div data-reactroot=""><div class="sidebar"><ul><li><a href="#Installation">Installation</a></li><li><a href="#Get started">Get started</a></li><li><a href="#Button">Button</a></li><li><a href="#ButtonGroup">Button group</a></li><li><a href="#Input">Input</a></li><li><a href="#InputGroup">Input group</a></li><li><a href="#List">List</a></li><li><a href="#Textarea">Textarea</a></li><li><a href="#Select">Select</a></li><li><a href="#Checkbox">Checkbox</a></li><li><a href="#RadioButton">Radiobuttons</a></li><li><a href="#Switch">Switch</a></li><li><a href="#Search">Search</a></li><li><a href="#Tabs">Tabs</a></li><li><a href="#Icons">Icons</a></li><li><a href="#Dialog">Dialog</a></li><li><a href="#Popover">Popover</a></li><li><a href="#Tooltip">Tooltip</a></li><li><a href="#Toast">Toast</a></li></ul><div><div class="lui-buttongroup sidebar-variant-bg"><button class="lui-button lui-active">Default</button><button class="lui-button">Inverse</button></div></div></div><div class="content">React implementation of <a href="https://github.com/qlik-oss/leonardo-ui">Leonardo UI</a>.<section><h2 id="Installation"><a href="#Installation">Installation</a></h2><div><p><b>NPM</b></p><div class="example-code hljs"><pre><code class="bash">npm install --save react-leonardo-ui</code></pre></div></div></section><section><h2 id="Get started"><a href="#Get started">Get started</a></h2><div><p><b>ES2015</b></p><div class="example-code hljs"><pre><code class="javascript">import { Button } from &#x27;react-leonardo-ui&#x27;;</code></pre></div><p><b>CommonJS</b></p><div class="example-code hljs"><pre><code class="javascript">const Button = require(&#x27;react-leonardo-ui&#x27;).Button;</code></pre></div><h3>Props passing</h3><p>Properties that are not recognized by a component are passed to the root element (of most components). This removes extra abstractions and helps keeping components small and manageable.</p><div class="example-code hljs"><pre><code class="jsx">&lt;Button active title=&quot;My title&quot; onClick={clickHandler}&gt;
+  My button
+&lt;/Button&gt;</code></pre></div><p>In the example above, the Button component will handle the active attribute and pass title and onClick to its button element.</p></div></section><section><h2 id="Button"><a href="#Button">Button</a></h2><div class="example  button-example"><div class="example-box"><button class="lui-button">Default</button><button class="lui-button lui-button--toolbar">Gradient</button><button class="lui-button lui-button--info">Info</button><button class="lui-button lui-button--warning">Warning</button><button class="lui-button lui-button--danger">Danger</button><button class="lui-button lui-button--success">Success</button><button class="lui-button"><span class="lui-icon lui-icon--download lui-button__icon" aria-hidden="true"></span><span class="lui-button__text">Download 23</span></button></div><div class="example-code"><pre><code class="jsx">&lt;Button&gt;Default&lt;/Button&gt;
+&lt;Button variant=&quot;gradient&quot;&gt;Gradient&lt;/Button&gt;
+&lt;Button variant=&quot;info&quot;&gt;Info&lt;/Button&gt;
+&lt;Button variant=&quot;warning&quot;&gt;Warning&lt;/Button&gt;
+&lt;Button variant=&quot;danger&quot;&gt;Danger&lt;/Button&gt;
+&lt;Button variant=&quot;success&quot;&gt;Success&lt;/Button&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>rounded</td><td>Boolean</td><td>Extra rounded corners.</td></tr><tr><td>block</td><td>Boolean</td><td>Display as a block element.</td></tr><tr><td>size</td><td>String</td><td>Button size. Any of: null (default) | &quot;large&quot; | &quot;x-large&quot;</td></tr><tr><td>variant</td><td>String</td><td>Variant to use. Any of: null (default) | &quot;inverse&quot; | &quot;success&quot; | &quot;info&quot; | &quot;warning&quot; | &quot;danger&quot;</td></tr><tr><td>active</td><td>Boolean</td><td>Show the button in active state. Suitable for toggle buttons</td></tr><tr><td>disabled</td><td>Boolean</td><td>Show the button in disabled state.</td></tr></tbody></table></div></section><section><h2 id="ButtonGroup"><a href="#ButtonGroup">ButtonGroup</a></h2><div class="example"><div class="example-box"><div class="lui-buttongroup"><button class="lui-button lui-buttongroup__button">First</button><button class="lui-button lui-buttongroup__button">Second</button><button class="lui-button lui-buttongroup__button">Third</button></div></div><div class="example-code"><pre><code class="jsx">&lt;ButtonGroup&gt;
+  &lt;ButtonGroup.Button&gt;First&lt;/ButtonGroup.Button&gt;
+  &lt;ButtonGroup.Button active&gt;Second&lt;/ButtonGroup.Button&gt;
+  &lt;ButtonGroup.Button&gt;Third&lt;/ButtonGroup.Button&gt;
+&lt;/ButtonGroup&gt;</code></pre></div></div></section><section><h2 id="Input"><a href="#Input">Input</a></h2><div class="example"><div class="example-box"><input class="lui-input"/></div><div class="example-code"><pre><code class="jsx">&lt;Input value={value}/&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant of the Input. Any of: null (default) | &quot;inverse&quot;.</td></tr><tr><td>size</td><td>String</td><td>Input size. Any of: null (default) | &quot;large&quot;.</td></tr></tbody></table></div></section><section><h2 id="InputGroup"><a href="#InputGroup">InputGroup</a></h2><div class="example"><div class="example-box"><div class="lui-input-group"><input class="lui-input lui-input-group__item  lui-input-group__input"/><button class="lui-button lui-input-group__item  lui-input-group__button"><span class="lui-icon lui-icon--more lui-button__icon" aria-hidden="true"></span></button></div></div><div class="example-code"><pre><code class="jsx">&lt;InputGroup&gt;
+  &lt;InputGroup.Input /&gt;
+  &lt;InputGroup.Button&gt;&lt;Icon name=&quot;more&quot; /&gt;&lt;/InputGroup.Button&gt;
+&lt;/InputGroup&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant. Any of: null (default) | &quot;inverse&quot;.</td></tr></tbody></table></div></section><section><h2 id="List"><a href="#List">List</a></h2><div class="example"><div class="example-box"><ul class="lui-list"><li class="lui-list__header">Header</li><li class="lui-list__item"><div class="lui-list__text">Item 1</div></li><li class="lui-list__item"><div class="lui-list__text">Item 2</div><div class="lui-list__aside"><span class="lui-icon lui-icon--info" aria-hidden="true"></span></div></li><li class="lui-list__item"><div class="lui-list__aside"><span class="lui-icon lui-icon--info" aria-hidden="true"></span></div><div class="lui-list__text">Item 3</div></li></ul></div><div class="example-code"><pre><code class="jsx">&lt;List&gt;
+  &lt;List.Header&gt;Header&lt;/List.Header&gt;
+  &lt;List.Item&gt;
+    &lt;List.Text&gt;Item 1&lt;/List.Text&gt;
+  &lt;/List.Item&gt;
+  &lt;List.Item&gt;
+    &lt;List.Text&gt;Item 2&lt;/List.Text&gt;
+    &lt;List.Aside&gt;&lt;Icon name=&quot;info&quot; /&gt;&lt;/List.Aside&gt;
+  &lt;/List.Item&gt;
+  &lt;List.Item&gt;
+    &lt;List.Aside&gt;&lt;Icon name=&quot;info&quot; /&gt;&lt;/List.Aside&gt;
+    &lt;List.Text&gt;Item 3&lt;/List.Text&gt;
+  &lt;/List.Item&gt;
+&lt;/List&gt;</code></pre></div></div></section><section><h2 id="Textarea"><a href="#Textarea">Textarea</a></h2><div class="example"><div class="example-box"><textarea class="lui-textarea"></textarea></div><div class="example-code"><pre><code class="jsx">&lt;Textarea/&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant. Any of: null (default) | &quot;inverse&quot;.</td></tr></tbody></table></div></section><section><h2 id="Select"><a href="#Select">Select</a></h2><div class="example"><div class="example-box"><select class="lui-select"><option value="x">Option 1</option><option value="y">Option 2</option></select></div><div class="example-code"><pre><code class="jsx">&lt;Select&gt;
+  &lt;option value=&quot;x&quot;&gt;Option 1&lt;/option&gt;
+  &lt;option value=&quot;y&quot;&gt;Option 2&lt;/option&gt;
+&lt;/Select&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant. Any of: null (default) | &quot;inverse&quot;.</td></tr></tbody></table></div></section><section><h2 id="Checkbox"><a href="#Checkbox">Checkbox</a></h2><div class="example"><div class="example-box"><label class="lui-checkbox"><input type="checkbox" class="lui-checkbox__input"/><div class="lui-checkbox__check-wrap"><span class="lui-checkbox__check"></span><span class="lui-checkbox__check-text">Label</span></div></label></div><div class="example-code"><pre><code class="jsx">&lt;Checkbox&gt;Label&lt;/Checkbox&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant of the Checkbox. Any of: null (default) | &quot;inverse&quot;.</td></tr></tbody></table></div></section><section><h2 id="RadioButton"><a href="#RadioButton">RadioButton</a></h2><div class="example  radiobutton-example"><div class="example-box"><label class="lui-radiobutton"><input type="radio" class="lui-radiobutton__input" name="radio"/><div class="lui-radiobutton__radio-wrap"><span class="lui-radiobutton__radio"></span><span class="lui-radiobutton__radio-text">Radio 1</span></div></label><label class="lui-radiobutton"><input type="radio" class="lui-radiobutton__input" name="radio"/><div class="lui-radiobutton__radio-wrap"><span class="lui-radiobutton__radio"></span><span class="lui-radiobutton__radio-text">Radio 2</span></div></label></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant. Any of: null (default) | &quot;inverse&quot;.</td></tr></tbody></table></div></section><section><h2 id="Switch"><a href="#Switch">Switch</a></h2><div class="example"><div class="example-box"><div class="lui-switch"><label class="lui-switch__label"><input type="checkbox" class="lui-switch__checkbox"/><span class="lui-switch__wrap"><div class="lui-switch__inner"></div><div class="lui-switch__switch"></div></span></label></div></div><div class="example-code"><pre><code class="jsx">&lt;Switch value=&quot;Value&quot; /&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant of the Switch. Any of: null (default) | &quot;inverse&quot;.</td></tr></tbody></table></div></section><section><h2 id="Search"><a href="#Search">Search</a></h2><div class="example"><div class="example-box"><div class="lui-search"><span class="lui-icon  lui-icon--search  lui-search__search-icon"></span><input type="text" class="lui-search__input"/></div></div><div class="example-code"><pre><code class="jsx">
+&lt;Search
+  value={this.state.value}
+  onChange={e =&gt; this.setState({ value: e.target.value })}
+  onClear={() =&gt; this.setState({ value: &#x27;&#x27; })}
+  variant={this.props.baseVariant}
+/&gt;
+</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>variant</td><td>String</td><td>Variant. Any of: null (default) | &quot;inverse&quot;.</td></tr><tr><td>onClear</td><td>Function</td><td>Callback that is invoked when the clear button is clicked.</td></tr></tbody></table></div></section><section><h2 id="Tabs"><a href="#Tabs">Tabs</a></h2><div class="example"><div class="example-box"><ul class="lui-tabset"><li class="lui-tab lui-active">Tab 1</li><li class="lui-tab">Tab 2</li><li class="lui-tab"><div class="lui-tab__text">Blah 3</div><div class="lui-tab__aside"><span class="lui-icon lui-icon--close lui-icon--small" aria-hidden="true"></span></div></li></ul><div><div>Content 1</div></div></div><div class="example-code"><pre><code class="jsx">&lt;Tabs&gt;Tabs&lt;/Tabs&gt;</code></pre></div></div></section><section><h2 id="Icons"><a href="#Icons">Icons</a></h2><div class="example"><div class="example-box"><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--sheet" aria-hidden="true"></span></div><div class="icon-example-text">sheet</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--object" aria-hidden="true"></span></div><div class="icon-example-text">object</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--image" aria-hidden="true"></span></div><div class="icon-example-text">image</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--clear-selections" aria-hidden="true"></span></div><div class="icon-example-text">clear-selections</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--selections-tool" aria-hidden="true"></span></div><div class="icon-example-text">selections-tool</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--bookmark" aria-hidden="true"></span></div><div class="icon-example-text">bookmark</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--back" aria-hidden="true"></span></div><div class="icon-example-text">back</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--forward" aria-hidden="true"></span></div><div class="icon-example-text">forward</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--history" aria-hidden="true"></span></div><div class="icon-example-text">history</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--help" aria-hidden="true"></span></div><div class="icon-example-text">help</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--info" aria-hidden="true"></span></div><div class="icon-example-text">info</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--toggle-left" aria-hidden="true"></span></div><div class="icon-example-text">toggle-left</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--toggle-right" aria-hidden="true"></span></div><div class="icon-example-text">toggle-right</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--selections-reload" aria-hidden="true"></span></div><div class="icon-example-text">selections-reload</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--text" aria-hidden="true"></span></div><div class="icon-example-text">text</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--group" aria-hidden="true"></span></div><div class="icon-example-text">group</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--search" aria-hidden="true"></span></div><div class="icon-example-text">search</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--zoom-in" aria-hidden="true"></span></div><div class="icon-example-text">zoom-in</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--zoom-out" aria-hidden="true"></span></div><div class="icon-example-text">zoom-out</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--selections-back" aria-hidden="true"></span></div><div class="icon-example-text">selections-back</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--selections-forward" aria-hidden="true"></span></div><div class="icon-example-text">selections-forward</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--export" aria-hidden="true"></span></div><div class="icon-example-text">export</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--import" aria-hidden="true"></span></div><div class="icon-example-text">import</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--lock" aria-hidden="true"></span></div><div class="icon-example-text">lock</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--unlock" aria-hidden="true"></span></div><div class="icon-example-text">unlock</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--database" aria-hidden="true"></span></div><div class="icon-example-text">database</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--calendar" aria-hidden="true"></span></div><div class="icon-example-text">calendar</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--field" aria-hidden="true"></span></div><div class="icon-example-text">field</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--expression" aria-hidden="true"></span></div><div class="icon-example-text">expression</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--library" aria-hidden="true"></span></div><div class="icon-example-text">library</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--debug" aria-hidden="true"></span></div><div class="icon-example-text">debug</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--script-ok" aria-hidden="true"></span></div><div class="icon-example-text">script-ok</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--grid" aria-hidden="true"></span></div><div class="icon-example-text">grid</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--star" aria-hidden="true"></span></div><div class="icon-example-text">star</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--print" aria-hidden="true"></span></div><div class="icon-example-text">print</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--remove" aria-hidden="true"></span></div><div class="icon-example-text">remove</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--handle" aria-hidden="true"></span></div><div class="icon-example-text">handle</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--handle-horizontal" aria-hidden="true"></span></div><div class="icon-example-text">handle-horizontal</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--menu" aria-hidden="true"></span></div><div class="icon-example-text">menu</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--list" aria-hidden="true"></span></div><div class="icon-example-text">list</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--unordered-list" aria-hidden="true"></span></div><div class="icon-example-text">unordered-list</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--bar-chart" aria-hidden="true"></span></div><div class="icon-example-text">bar-chart</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--bar-chart-horizontal" aria-hidden="true"></span></div><div class="icon-example-text">bar-chart-horizontal</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--clock" aria-hidden="true"></span></div><div class="icon-example-text">clock</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--line-chart" aria-hidden="true"></span></div><div class="icon-example-text">line-chart</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--pie-chart" aria-hidden="true"></span></div><div class="icon-example-text">pie-chart</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--gauge-chart" aria-hidden="true"></span></div><div class="icon-example-text">gauge-chart</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--kpi" aria-hidden="true"></span></div><div class="icon-example-text">kpi</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--scatter-chart" aria-hidden="true"></span></div><div class="icon-example-text">scatter-chart</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--map" aria-hidden="true"></span></div><div class="icon-example-text">map</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--puzzle" aria-hidden="true"></span></div><div class="icon-example-text">puzzle</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--table" aria-hidden="true"></span></div><div class="icon-example-text">table</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--pivot-table" aria-hidden="true"></span></div><div class="icon-example-text">pivot-table</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--filterpane" aria-hidden="true"></span></div><div class="icon-example-text">filterpane</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--treemap" aria-hidden="true"></span></div><div class="icon-example-text">treemap</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--combo-chart" aria-hidden="true"></span></div><div class="icon-example-text">combo-chart</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--plus" aria-hidden="true"></span></div><div class="icon-example-text">plus</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--minus" aria-hidden="true"></span></div><div class="icon-example-text">minus</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--triangle-top" aria-hidden="true"></span></div><div class="icon-example-text">triangle-top</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--triangle-bottom" aria-hidden="true"></span></div><div class="icon-example-text">triangle-bottom</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--triangle-left" aria-hidden="true"></span></div><div class="icon-example-text">triangle-left</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--triangle-right" aria-hidden="true"></span></div><div class="icon-example-text">triangle-right</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--run-script" aria-hidden="true"></span></div><div class="icon-example-text">run-script</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--tick" aria-hidden="true"></span></div><div class="icon-example-text">tick</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--cogwheel" aria-hidden="true"></span></div><div class="icon-example-text">cogwheel</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--settings" aria-hidden="true"></span></div><div class="icon-example-text">settings</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--data-model" aria-hidden="true"></span></div><div class="icon-example-text">data-model</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--script" aria-hidden="true"></span></div><div class="icon-example-text">script</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--sense" aria-hidden="true"></span></div><div class="icon-example-text">sense</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--cut" aria-hidden="true"></span></div><div class="icon-example-text">cut</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--copy" aria-hidden="true"></span></div><div class="icon-example-text">copy</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--paste" aria-hidden="true"></span></div><div class="icon-example-text">paste</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--align-left" aria-hidden="true"></span></div><div class="icon-example-text">align-left</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--align-center" aria-hidden="true"></span></div><div class="icon-example-text">align-center</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--align-right" aria-hidden="true"></span></div><div class="icon-example-text">align-right</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--bold" aria-hidden="true"></span></div><div class="icon-example-text">bold</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--italic" aria-hidden="true"></span></div><div class="icon-example-text">italic</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--underline" aria-hidden="true"></span></div><div class="icon-example-text">underline</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--select-alternative" aria-hidden="true"></span></div><div class="icon-example-text">select-alternative</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--select-possible" aria-hidden="true"></span></div><div class="icon-example-text">select-possible</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--select-excluded" aria-hidden="true"></span></div><div class="icon-example-text">select-excluded</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--select-all" aria-hidden="true"></span></div><div class="icon-example-text">select-all</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--camera" aria-hidden="true"></span></div><div class="icon-example-text">camera</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--slide-show" aria-hidden="true"></span></div><div class="icon-example-text">slide-show</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--palette" aria-hidden="true"></span></div><div class="icon-example-text">palette</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--shapes" aria-hidden="true"></span></div><div class="icon-example-text">shapes</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--effects" aria-hidden="true"></span></div><div class="icon-example-text">effects</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--file" aria-hidden="true"></span></div><div class="icon-example-text">file</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--expand" aria-hidden="true"></span></div><div class="icon-example-text">expand</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--collapse" aria-hidden="true"></span></div><div class="icon-example-text">collapse</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--bin" aria-hidden="true"></span></div><div class="icon-example-text">bin</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--link" aria-hidden="true"></span></div><div class="icon-example-text">link</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--pivot" aria-hidden="true"></span></div><div class="icon-example-text">pivot</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--reload" aria-hidden="true"></span></div><div class="icon-example-text">reload</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--add" aria-hidden="true"></span></div><div class="icon-example-text">add</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--edit" aria-hidden="true"></span></div><div class="icon-example-text">edit</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--lasso" aria-hidden="true"></span></div><div class="icon-example-text">lasso</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--key" aria-hidden="true"></span></div><div class="icon-example-text">key</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--box" aria-hidden="true"></span></div><div class="icon-example-text">box</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--home" aria-hidden="true"></span></div><div class="icon-example-text">home</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--person" aria-hidden="true"></span></div><div class="icon-example-text">person</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--stream" aria-hidden="true"></span></div><div class="icon-example-text">stream</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--cloud" aria-hidden="true"></span></div><div class="icon-example-text">cloud</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--more" aria-hidden="true"></span></div><div class="icon-example-text">more</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--folder" aria-hidden="true"></span></div><div class="icon-example-text">folder</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--auto-layout" aria-hidden="true"></span></div><div class="icon-example-text">auto-layout</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--toggle-bottom" aria-hidden="true"></span></div><div class="icon-example-text">toggle-bottom</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--drop" aria-hidden="true"></span></div><div class="icon-example-text">drop</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--play" aria-hidden="true"></span></div><div class="icon-example-text">play</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--tag" aria-hidden="true"></span></div><div class="icon-example-text">tag</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--close" aria-hidden="true"></span></div><div class="icon-example-text">close</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--direct-discovery" aria-hidden="true"></span></div><div class="icon-example-text">direct-discovery</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--warning" aria-hidden="true"></span></div><div class="icon-example-text">warning</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--warning-triangle" aria-hidden="true"></span></div><div class="icon-example-text">warning-triangle</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--share" aria-hidden="true"></span></div><div class="icon-example-text">share</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--top" aria-hidden="true"></span></div><div class="icon-example-text">top</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--low-resolution" aria-hidden="true"></span></div><div class="icon-example-text">low-resolution</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--high-resolution" aria-hidden="true"></span></div><div class="icon-example-text">high-resolution</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--view" aria-hidden="true"></span></div><div class="icon-example-text">view</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--control" aria-hidden="true"></span></div><div class="icon-example-text">control</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--code" aria-hidden="true"></span></div><div class="icon-example-text">code</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--upload" aria-hidden="true"></span></div><div class="icon-example-text">upload</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--repair" aria-hidden="true"></span></div><div class="icon-example-text">repair</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--split" aria-hidden="true"></span></div><div class="icon-example-text">split</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--up-down" aria-hidden="true"></span></div><div class="icon-example-text">up-down</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--disconnect" aria-hidden="true"></span></div><div class="icon-example-text">disconnect</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--photo-library" aria-hidden="true"></span></div><div class="icon-example-text">photo-library</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--application" aria-hidden="true"></span></div><div class="icon-example-text">application</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--new-tab" aria-hidden="true"></span></div><div class="icon-example-text">new-tab</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--ascending" aria-hidden="true"></span></div><div class="icon-example-text">ascending</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--descending" aria-hidden="true"></span></div><div class="icon-example-text">descending</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--arrow-up" aria-hidden="true"></span></div><div class="icon-example-text">arrow-up</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--arrow-down" aria-hidden="true"></span></div><div class="icon-example-text">arrow-down</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--arrow-right" aria-hidden="true"></span></div><div class="icon-example-text">arrow-right</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--arrow-left" aria-hidden="true"></span></div><div class="icon-example-text">arrow-left</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--sync" aria-hidden="true"></span></div><div class="icon-example-text">sync</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--draggable" aria-hidden="true"></span></div><div class="icon-example-text">draggable</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--book" aria-hidden="true"></span></div><div class="icon-example-text">book</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--measure" aria-hidden="true"></span></div><div class="icon-example-text">measure</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--download" aria-hidden="true"></span></div><div class="icon-example-text">download</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--more-rounded" aria-hidden="true"></span></div><div class="icon-example-text">more-rounded</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--align-object-left" aria-hidden="true"></span></div><div class="icon-example-text">align-object-left</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--align-object-center" aria-hidden="true"></span></div><div class="icon-example-text">align-object-center</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--align-object-right" aria-hidden="true"></span></div><div class="icon-example-text">align-object-right</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--submit" aria-hidden="true"></span></div><div class="icon-example-text">submit</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--operators" aria-hidden="true"></span></div><div class="icon-example-text">operators</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--general-data-class" aria-hidden="true"></span></div><div class="icon-example-text">general-data-class</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--building" aria-hidden="true"></span></div><div class="icon-example-text">building</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--bell" aria-hidden="true"></span></div><div class="icon-example-text">bell</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--unlink" aria-hidden="true"></span></div><div class="icon-example-text">unlink</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--lightbulb" aria-hidden="true"></span></div><div class="icon-example-text">lightbulb</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--associate" aria-hidden="true"></span></div><div class="icon-example-text">associate</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--break-association" aria-hidden="true"></span></div><div class="icon-example-text">break-association</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--log-in" aria-hidden="true"></span></div><div class="icon-example-text">log-in</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--log-out" aria-hidden="true"></span></div><div class="icon-example-text">log-out</div></div><div class="icon-example"><div class="icon-example-box"><span class="lui-icon lui-icon--previous" aria-hidden="true"></span></div><div class="icon-example-text">previous</div></div></div><div class="example-code"><pre><code class="jsx">&lt;Icon name=&quot;more&quot; /&gt;
+&lt;Icon name=&quot;more&quot; size=&quot;small&quot; /&gt;
+&lt;Icon name=&quot;more&quot; size=&quot;large&quot; /&gt;
+</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>name</td><td>String</td><td>Name of the icon to show.</td></tr><tr><td>size</td><td>String</td><td>Icon size. Any of: null (default) | &quot;small&quot; | &quot;large&quot;.</td></tr></tbody></table></div></section><section><h2 id="Dialog"><a href="#Dialog">Dialog</a></h2><div class="example"><div class="example-box"><button class="lui-button">Open dialog</button></div><div class="example-code"><pre><code class="jsx">&lt;Dialog show={this.state.show} onEscape={() =&gt; this.setState({ show: false})}&gt;
+  &lt;Dialog.Header&gt;
+    &lt;Dialog.Title&gt;Header&lt;/Dialog.Title&gt;
+  &lt;/Dialog.Header&gt;
+  &lt;Dialog.Body&gt;Body&lt;/Dialog.Body&gt;
+  &lt;Dialog.Footer&gt;
+    &lt;Dialog.Button autoFocus onClick={() =&gt; this.setState({ show: false})}&gt;
+      OK
+    &lt;/Dialog.Button&gt;
+  &lt;/Dialog.Footer&gt;
+&lt;/Dialog&gt;</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>show</td><td>Boolean</td><td>Flag used to open / close the dialog.</td></tr><tr><td>variant</td><td>String</td><td>Variant. Any of: null (default) | &quot;inverse&quot;.</td></tr><tr><td>onEscape</td><td>Function</td><td>Function triggered when the escape key is pressed.</td></tr><tr><td>onOpen</td><td>Function</td><td>Function triggered when the dialog has opened.</td></tr><tr><td>onClose</td><td>Function</td><td>Function triggered when the dialog has closed.</td></tr></tbody></table></div></section><section><h2 id="Popover"><a href="#Popover">Popover</a></h2><p>The popover is controlled by the <i>show</i> property.</p><div class="example"><div class="example-box"><div style="display:inline-block"><button class="lui-button">Open popover</button></div></div><div class="example-code"><pre><code class="jsx">&lt;Popover
+  alignTo={this.alignToElement}
+  show={this.state.show}
+  onOutside={() =&gt; this.setState({ show: false})}
+&gt;
+  &lt;Popover.Header&gt;
+    &lt;Popover.Title&gt;Header&lt;/Popover.Title&gt;
+  &lt;/Popover.Header&gt;
+  &lt;Popover.Body&gt;Body&lt;/Popover.Body&gt;
+  &lt;Popover.Footer&gt;
+    &lt;Popover.Button onClick={() =&gt; this.setState({ show: false})}&gt;
+      Close
+    &lt;/Popover.Button&gt;
+  &lt;/Popover.Footer&gt;
+&lt;/Popover&gt;
+</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>show</td><td>Boolean</td><td>Flag used to open / close the popover.</td></tr><tr><td>dock</td><td>String</td><td>Dock side. Any of: &quot;top&quot; | &quot;right&quot; | &quot;bottom&quot; | &quot;left&quot;.</td></tr><tr><td>alignTo</td><td>HTMLElement</td><td>The element to align to.</td></tr><tr><td>inline</td><td>Boolean</td><td>Experimental. Append the popover inline in the DOM instead of to the body.</td></tr><tr><td>variant</td><td>String</td><td>Variant of the Popover. Any of: null (default) | &quot;inverse&quot;.</td></tr><tr><td>onOutside</td><td>Function</td><td>Function triggered on clicks outside the popover element.</td></tr><tr><td>onOpen</td><td>Function</td><td>Function triggered when the popover has opened.</td></tr><tr><td>onClose</td><td>Function</td><td>Function triggered when the popover has closed.</td></tr></tbody></table></div></section><section><h2 id="Tooltip"><a href="#Tooltip">Tooltip</a></h2><div class="example"><div class="example-box"><div style="display:inline-block"><button class="lui-button">Hover to show tooltip</button></div><p>Keep clicking to see the dock change</p></div><div class="example-code"><pre><code class="jsx">&lt;Tooltip
+  alignTo={this.alignToElement}
+  show={this.state.show}
+  dock={this.state.dock}
+&gt;
+  I&#x27;m placed to the: &lt;b&gt;${this.state.dock}&lt;/b&gt;
+&lt;/Tooltip&gt;
+</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>show</td><td>Boolean</td><td>Flag used to open / close the popover.</td></tr><tr><td>dock</td><td>String</td><td>Dock side. Any of: &quot;top&quot; | &quot;right&quot; | &quot;bottom&quot; | &quot;left&quot;.</td></tr><tr><td>alignTo</td><td>HTMLElement</td><td>The element to align to.</td></tr><tr><td>inline</td><td>Boolean</td><td>Experimental. Append the tooltip inline in the DOM instead of to the body.</td></tr></tbody></table></div></section><section><h2 id="Toast"><a href="#Toast">Toast</a></h2><p>The toast is controlled by the <i>show</i> property.</p><div class="example"><div class="example-box"><div style="display:inline-block"><button class="lui-button">Open toast</button><button class="lui-button">Open second toast</button></div></div><div class="example-code"><pre><code class="jsx">&lt;Toast
+  show={this.state.show}
+&gt;
+  &lt;Toast.Text&gt;
+  Bacon ipsum dolor amet picanha pastrami boudin chicken doner.
+  &lt;/Toast.Text&gt;
+  &lt;Toast.Action onClick={close}&gt;
+    Close
+  &lt;/Toast.Action&gt;
+&lt;/Toast&gt;
+</code></pre></div></div><div class="props"><h3>Props</h3><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>show</td><td>Boolean</td><td>Flag used to open / close the toast.</td></tr><tr><td>onOpen</td><td>Function</td><td>Function triggered when the toast has opened.</td></tr><tr><td>onClose</td><td>Function</td><td>Function triggered when the toast has closed.</td></tr></tbody></table></div></section></div></div>
+    </div>
+    <div class="footer">
+      <div class="wrap">
+        <p>React Leonardo UI © 2017 Rickard Svensson</p>
+        <p>Licensed under MIT</p>
+      </div>
+    </div>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+  <script src="//unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="//unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="docs.js"></script>
+  <script>
+    ReactDOM.hydrate(
+      React.createElement(window.docsContainer),
+      document.getElementById('container')
+    );
+  </script>
+</body>
+</html>
