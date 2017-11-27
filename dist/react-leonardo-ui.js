@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
-	(factory((global['React Leonardo UI'] = {}),global.React,global.ReactDOM));
+	(factory((global.reactLUI = {}),global.React,global.ReactDOM));
 }(this, (function (exports,React,reactDom) { 'use strict';
 
 var React__default = 'default' in React ? React['default'] : React;
