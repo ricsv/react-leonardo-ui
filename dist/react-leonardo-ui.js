@@ -210,16 +210,17 @@ var ButtonIcon = function ButtonIcon(props) {
 };
 
 var ButtonText = function ButtonText(_ref) {
-  var children = _ref.children;
+  var children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ["children"]);
   return React__default.createElement(
     "span",
-    { className: "lui-button__text" },
+    _extends({ className: "lui-button__text" }, extraProps),
     children
   );
 };
 
-var ButtonDropdown = function ButtonDropdown() {
-  return React__default.createElement("span", { className: "lui-button__caret  lui-caret" });
+var ButtonDropdown = function ButtonDropdown(props) {
+  return React__default.createElement("span", _extends({ className: "lui-button__caret  lui-caret" }, props));
 };
 
 Button$1.Icon = ButtonIcon;
@@ -556,19 +557,21 @@ var FadeButton$1 = function FadeButton(_ref) {
 };
 
 var FadeButtonIcon = function FadeButtonIcon(props) {
-  return React__default.createElement(Icon, _extends({ className: 'lui-button__icon' }, props));
+  return React__default.createElement(Icon, _extends({ className: 'lui-fade-button__icon' }, props));
 };
 
-var FadeButtonText = function FadeButtonText(props) {
+var FadeButtonText = function FadeButtonText(_ref) {
+  var children = _ref.children,
+      extraProps = objectWithoutProperties(_ref, ["children"]);
   return React__default.createElement(
     "span",
-    { className: "lui-button__text" },
-    props.children
+    _extends({ className: "lui-fade-button__text" }, extraProps),
+    children
   );
 };
 
-var FadeButtonCaret = function FadeButtonCaret() {
-  return React__default.createElement("span", { className: "lui-button__caret  lui-caret" });
+var FadeButtonCaret = function FadeButtonCaret(props) {
+  return React__default.createElement("span", _extends({ className: "lui-fade-button__caret  lui-caret" }, props));
 };
 
 FadeButton$1.Icon = FadeButtonIcon;
