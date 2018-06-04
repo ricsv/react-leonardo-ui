@@ -56,8 +56,9 @@ class Popover extends Component {
       onOutside,
     } = this.props;
 
-    if (popoverState === POPOVER_STATE.opening) {
-      setTimeout(() => {
+    if (popoverState === POPOVER_STATE.opening && !this.openingTimeout) {
+      this.openingTimeout = setTimeout(() => {
+        this.openingTimeout = null;
         this.setState(() => ({
           popoverState: POPOVER_STATE.open,
         }));
@@ -71,14 +72,15 @@ class Popover extends Component {
           onOpen();
         }
       });
-    } else if (popoverState === POPOVER_STATE.closing) {
+    } else if (popoverState === POPOVER_STATE.closing && !this.closingTimeout) {
       if (typeof onEscape === 'function') {
         window.removeEventListener('keyup', this.keyUpListener);
       }
       if (typeof onOutside === 'function') {
         document.removeEventListener('click', this.outsideListener);
       }
-      setTimeout(() => {
+      this.closingTimeout = setTimeout(() => {
+        this.closingTimeout = null;
         this.setState(() => ({
           popoverState: POPOVER_STATE.closed,
         }));
@@ -89,6 +91,25 @@ class Popover extends Component {
           this.parentElement.removeChild(this.containerElement);
         }
       }, FADE_DURATION);
+    }
+  }
+  componentWillUnmount() {
+    const {
+      popoverState,
+    } = this.state;
+
+    const {
+      inline,
+    } = this.props;
+
+    clearTimeout(this.openingTimeout);
+    this.openingTimeout = null;
+    clearTimeout(this.closingTimeout);
+    this.closingTimeout = null;
+    if (popoverState === POPOVER_STATE.closing) {
+      if (!inline) {
+        this.parentElement.removeChild(this.containerElement);
+      }
     }
   }
   keyUpListener(e) {
