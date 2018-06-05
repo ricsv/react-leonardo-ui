@@ -100,6 +100,7 @@ class Popover extends Component {
 
     const {
       inline,
+      onClose,
     } = this.props;
 
     clearTimeout(this.openingTimeout);
@@ -107,6 +108,9 @@ class Popover extends Component {
     clearTimeout(this.closingTimeout);
     this.closingTimeout = null;
     if (popoverState === POPOVER_STATE.closing) {
+      if (typeof onClose === 'function') {
+        onClose();
+      }
       if (!inline) {
         this.parentElement.removeChild(this.containerElement);
       }
