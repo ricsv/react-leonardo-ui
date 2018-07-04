@@ -62,5 +62,15 @@ exports[`List with items renders correctly 1`] = `
   >
     Item 1
   </li>
+  <li
+    className="lui-list__item lui-active"
+  >
+    Item 1
+  </li>
+  <li
+    className="lui-list__item lui-disabled"
+  >
+    Item 1
+  </li>
 </ul>
 `;

@@ -15,6 +15,8 @@ test('List with items renders correctly', () => {
     <List>
       <List.Header>Header</List.Header>
       <List.Item>Item 1</List.Item>
+      <List.Item active>Item 1</List.Item>
+      <List.Item disabled>Item 1</List.Item>
     </List>
   ).toJSON();
   expect(tree).toMatchSnapshot();
