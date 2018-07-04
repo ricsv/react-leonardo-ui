@@ -687,9 +687,14 @@ var ListItem = function ListItem(_ref) {
   var _ref$className = _ref.className,
       className = _ref$className === undefined ? '' : _ref$className,
       children = _ref.children,
-      extraProps = objectWithoutProperties(_ref, ['className', 'children']);
+      active = _ref.active,
+      disabled = _ref.disabled,
+      extraProps = objectWithoutProperties(_ref, ['className', 'children', 'active', 'disabled']);
 
-  var finalClassName = ('lui-list__item  ' + className).trim();
+  var finalClassName = luiClassName('list__item', {
+    className: className,
+    states: { active: active, disabled: disabled }
+  });
   return React__default.createElement(
     'li',
     _extends({ className: finalClassName }, extraProps),
