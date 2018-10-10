@@ -5,16 +5,32 @@ import { oppositeDock, positionToElement } from '../positioner';
 const DEFAULT_DOCK = 'bottom';
 const OFFSET = 10;
 
+let counter = 0;
+
+function nextId() {
+  counter += 1;
+  return `rlui-popover-${counter}`;
+}
+
 class PopoverContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       positionResult: null,
+      id: nextId(),
     };
     this.reposition = this.reposition.bind(this);
   }
   componentDidMount() {
-    this.reposition(this.props.dock, this.props.alignTo);
+    const {
+      alignTo,
+      dock,
+    } = this.props;
+    alignTo.setAttribute('aria-describedby', this.state.id);
+    this.reposition(dock, alignTo);
+  }
+  componentWillUnmount() {
+    this.props.alignTo.removeAttribute('aria-describedby', this.state.id);
   }
   reposition(dock, alignTo) {
     const positionResult = positionToElement(
