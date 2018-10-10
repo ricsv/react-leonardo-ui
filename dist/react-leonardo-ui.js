@@ -963,6 +963,13 @@ function positionToElement(element, alignToElement) {
 var DEFAULT_DOCK = 'bottom';
 var OFFSET = 10;
 
+var counter = 0;
+
+function nextId() {
+  counter += 1;
+  return 'rlui-popover-' + counter;
+}
+
 var PopoverContent = function (_Component) {
   inherits(PopoverContent, _Component);
 
@@ -972,7 +979,8 @@ var PopoverContent = function (_Component) {
     var _this = possibleConstructorReturn(this, (PopoverContent.__proto__ || Object.getPrototypeOf(PopoverContent)).call(this, props));
 
     _this.state = {
-      positionResult: null
+      positionResult: null,
+      id: nextId()
     };
     _this.reposition = _this.reposition.bind(_this);
     return _this;
@@ -981,7 +989,17 @@ var PopoverContent = function (_Component) {
   createClass(PopoverContent, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.reposition(this.props.dock, this.props.alignTo);
+      var _props = this.props,
+          alignTo = _props.alignTo,
+          dock = _props.dock;
+
+      alignTo.setAttribute('aria-describedby', this.state.id);
+      this.reposition(dock, alignTo);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.props.alignTo.removeAttribute('aria-describedby', this.state.id);
     }
   }, {
     key: 'reposition',
@@ -1846,6 +1864,13 @@ Toast$1.Text = ToastText;
 var DEFAULT_DOCK$1 = 'top';
 var OFFSET$1 = 10;
 
+var counter$1 = 0;
+
+function nextId$1() {
+  counter$1 += 1;
+  return 'rlui-tooltip-' + counter$1;
+}
+
 var TooltipContent = function (_Component) {
   inherits(TooltipContent, _Component);
 
@@ -1855,7 +1880,8 @@ var TooltipContent = function (_Component) {
     var _this = possibleConstructorReturn(this, (TooltipContent.__proto__ || Object.getPrototypeOf(TooltipContent)).call(this, props));
 
     _this.state = {
-      positionResult: null
+      positionResult: null,
+      id: nextId$1()
     };
     _this.reposition = _this.reposition.bind(_this);
     return _this;
@@ -1864,7 +1890,12 @@ var TooltipContent = function (_Component) {
   createClass(TooltipContent, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.reposition(this.props.dock, this.props.alignTo);
+      var _props = this.props,
+          alignTo = _props.alignTo,
+          dock = _props.dock;
+
+      alignTo.setAttribute('aria-describedby', this.state.id);
+      this.reposition(dock, alignTo);
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -1872,6 +1903,11 @@ var TooltipContent = function (_Component) {
       if (nextProps.dock !== this.props.dock || nextProps.alignTo !== this.props.alignTo) {
         this.reposition(nextProps.dock, nextProps.alignTo);
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.props.alignTo.removeAttribute('aria-describedby', this.state.id);
     }
   }, {
     key: 'reposition',
