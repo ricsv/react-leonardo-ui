@@ -1126,8 +1126,9 @@ var Popover$1 = function (_Component) {
           onOutside = _props.onOutside;
 
 
-      if (popoverState === TOOLTIP_STATE.opening) {
-        setTimeout(function () {
+      if (popoverState === TOOLTIP_STATE.opening && !this.openingTimeout) {
+        this.openingTimeout = setTimeout(function () {
+          _this2.openingTimeout = null;
           _this2.setState(function () {
             return {
               popoverState: TOOLTIP_STATE.open
@@ -1143,14 +1144,15 @@ var Popover$1 = function (_Component) {
             onOpen();
           }
         });
-      } else if (popoverState === TOOLTIP_STATE.closing) {
+      } else if (popoverState === TOOLTIP_STATE.closing && !this.closingTimeout) {
         if (typeof onEscape === 'function') {
           window.removeEventListener('keyup', this.keyUpListener);
         }
         if (typeof onOutside === 'function') {
           document.removeEventListener('click', this.outsideListener);
         }
-        setTimeout(function () {
+        this.closingTimeout = setTimeout(function () {
+          _this2.closingTimeout = null;
           _this2.setState(function () {
             return {
               popoverState: TOOLTIP_STATE.closed
@@ -1163,6 +1165,28 @@ var Popover$1 = function (_Component) {
             _this2.parentElement.removeChild(_this2.containerElement);
           }
         }, FADE_DURATION$1);
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      var popoverState = this.state.popoverState;
+      var _props2 = this.props,
+          inline = _props2.inline,
+          onClose = _props2.onClose;
+
+
+      clearTimeout(this.openingTimeout);
+      this.openingTimeout = null;
+      clearTimeout(this.closingTimeout);
+      this.closingTimeout = null;
+      if (popoverState === TOOLTIP_STATE.closing) {
+        if (typeof onClose === 'function') {
+          onClose();
+        }
+        if (!inline) {
+          this.parentElement.removeChild(this.containerElement);
+        }
       }
     }
   }, {
@@ -1213,12 +1237,12 @@ var Popover$1 = function (_Component) {
         return null;
       }
 
-      var _props2 = this.props,
-          className = _props2.className,
-          children = _props2.children,
-          inline = _props2.inline,
-          variant = _props2.variant,
-          extraProps = objectWithoutProperties(_props2, ['className', 'children', 'inline', 'variant']);
+      var _props3 = this.props,
+          className = _props3.className,
+          children = _props3.children,
+          inline = _props3.inline,
+          variant = _props3.variant,
+          extraProps = objectWithoutProperties(_props3, ['className', 'children', 'inline', 'variant']);
 
 
       var popoverClassName = luiClassName('popover', {
