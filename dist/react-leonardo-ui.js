@@ -1087,6 +1087,8 @@ var Popover$1 = function (_Component) {
     _this.openPopover = _this.openPopover.bind(_this);
     _this.closePopover = _this.closePopover.bind(_this);
 
+    _this.ref = React.createRef();
+
     if (!props.inline && typeof document !== 'undefined') {
       _this.parentElement = props.parentElement || document.body;
 
@@ -1126,6 +1128,7 @@ var Popover$1 = function (_Component) {
           onOutside = _props.onOutside;
 
 
+      var outsideEvent = 'ontouchend' in window ? 'touchend' : 'click';
       if (popoverState === TOOLTIP_STATE.opening && !this.openingTimeout) {
         this.openingTimeout = setTimeout(function () {
           _this2.openingTimeout = null;
@@ -1138,7 +1141,7 @@ var Popover$1 = function (_Component) {
             window.addEventListener('keyup', _this2.keyUpListener);
           }
           if (typeof onOutside === 'function') {
-            document.addEventListener('click', _this2.outsideListener);
+            document.addEventListener(outsideEvent, _this2.outsideListener);
           }
           if (typeof onOpen === 'function') {
             onOpen();
@@ -1149,7 +1152,7 @@ var Popover$1 = function (_Component) {
           window.removeEventListener('keyup', this.keyUpListener);
         }
         if (typeof onOutside === 'function') {
-          document.removeEventListener('click', this.outsideListener);
+          document.removeEventListener(outsideEvent, this.outsideListener);
         }
         this.closingTimeout = setTimeout(function () {
           _this2.closingTimeout = null;
@@ -1199,8 +1202,9 @@ var Popover$1 = function (_Component) {
   }, {
     key: 'outsideListener',
     value: function outsideListener(e) {
-      if (!this.element.contains(e.target)) {
-        this.props.onOutside();
+      var element = this.ref.current;
+      if (element && !element.contains(e.target)) {
+        this.props.onOutside(e);
       }
     }
   }, {
@@ -1228,8 +1232,6 @@ var Popover$1 = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       var popoverState = this.state.popoverState;
 
 
@@ -1256,9 +1258,7 @@ var Popover$1 = function (_Component) {
       if (inline) {
         return React__default.createElement(
           'div',
-          { ref: function ref(el) {
-              _this3.element = el;
-            } },
+          { ref: this.ref },
           React__default.createElement(
             PopoverContent,
             _extends({ className: popoverClassName, inline: true }, extraProps),
@@ -1269,9 +1269,7 @@ var Popover$1 = function (_Component) {
 
       return reactDom.createPortal(React__default.createElement(
         'div',
-        { ref: function ref(el) {
-            _this3.element = el;
-          } },
+        { ref: this.ref },
         React__default.createElement(
           PopoverContent,
           _extends({ className: popoverClassName }, extraProps),
