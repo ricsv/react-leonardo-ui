@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { createRef, Component } from 'react';
 import { createPortal } from 'react-dom';
 
 import POPOVER_STATE from '../overlay-state';
@@ -23,6 +23,8 @@ class Popover extends Component {
     this.keyUpListener = this.keyUpListener.bind(this);
     this.openPopover = this.openPopover.bind(this);
     this.closePopover = this.closePopover.bind(this);
+
+    this.ref = createRef();
 
     if (!props.inline && typeof document !== 'undefined') {
       this.parentElement = props.parentElement || document.body;
@@ -56,6 +58,7 @@ class Popover extends Component {
       onOutside,
     } = this.props;
 
+    const outsideEvent = 'ontouchend' in window ? 'touchend' : 'click';
     if (popoverState === POPOVER_STATE.opening && !this.openingTimeout) {
       this.openingTimeout = setTimeout(() => {
         this.openingTimeout = null;
@@ -66,7 +69,7 @@ class Popover extends Component {
           window.addEventListener('keyup', this.keyUpListener);
         }
         if (typeof onOutside === 'function') {
-          document.addEventListener('click', this.outsideListener);
+          document.addEventListener(outsideEvent, this.outsideListener);
         }
         if (typeof onOpen === 'function') {
           onOpen();
@@ -77,7 +80,7 @@ class Popover extends Component {
         window.removeEventListener('keyup', this.keyUpListener);
       }
       if (typeof onOutside === 'function') {
-        document.removeEventListener('click', this.outsideListener);
+        document.removeEventListener(outsideEvent, this.outsideListener);
       }
       this.closingTimeout = setTimeout(() => {
         this.closingTimeout = null;
@@ -122,8 +125,9 @@ class Popover extends Component {
     }
   }
   outsideListener(e) {
-    if (!this.element.contains(e.target)) {
-      this.props.onOutside();
+    const element = this.ref.current;
+    if (element && !element.contains(e.target)) {
+      this.props.onOutside(e);
     }
   }
   openPopover() {
@@ -167,7 +171,7 @@ class Popover extends Component {
 
     if (inline) {
       return (
-        <div ref={(el) => { this.element = el; }}>
+        <div ref={this.ref}>
           <PopoverContent className={popoverClassName} inline {...extraProps}>
             {children}
           </PopoverContent>
@@ -177,7 +181,7 @@ class Popover extends Component {
 
     return (
       createPortal(
-        <div ref={(el) => { this.element = el; }}>
+        <div ref={this.ref}>
           <PopoverContent className={popoverClassName} {...extraProps}>
             {children}
           </PopoverContent>
