@@ -56,9 +56,9 @@ class PopoverSection extends Component {
   </Popover.Header>
   <Popover.Body>Body</Popover.Body>
   <Popover.Footer>
-    <Popover.Button onClick={() => this.setState({ show: false})}>
+    <Button onClick={() => this.setState({ show: false})}>
       Close
-    </Popover.Button>
+    </Button>
   </Popover.Footer>
 </Popover>
 `
