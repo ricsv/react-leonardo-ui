@@ -51,9 +51,9 @@ class DialogSection extends Component {
   </Dialog.Header>
   <Dialog.Body>Body</Dialog.Body>
   <Dialog.Footer>
-    <Dialog.Button autoFocus onClick={() => this.setState({ show: false})}>
+    <Button autoFocus onClick={() => this.setState({ show: false})}>
       OK
-    </Dialog.Button>
+    </Button>
   </Dialog.Footer>
 </Dialog>`
           }
