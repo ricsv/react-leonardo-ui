@@ -319,7 +319,7 @@ var Dialog$1 = function (_Component) {
     _this.closeDialog = _this.closeDialog.bind(_this);
 
     if (typeof document !== 'undefined') {
-      _this.parentElement = props.parentElement || document.body;
+      _this.parentElement = props.parentElement || document.getElementById('show-service-overlay') || document.body;
 
       _this.containerElement = document.createElement('div');
       _this.containerElement.id = _this.portalId;
@@ -1090,7 +1090,7 @@ var Popover$1 = function (_Component) {
     _this.ref = React.createRef();
 
     if (!props.inline && typeof document !== 'undefined') {
-      _this.parentElement = props.parentElement || document.body;
+      _this.parentElement = props.parentElement || document.getElementById('show-service-overlay') || document.body;
 
       _this.containerElement = document.createElement('div');
       _this.containerElement.id = _this.props.portalId;
@@ -1722,7 +1722,7 @@ var Toast$1 = function (_Component) {
     _this.closeToast = _this.closeToast.bind(_this);
 
     if (typeof document !== 'undefined') {
-      _this.parentElement = props.parentElement || document.body;
+      _this.parentElement = props.parentElement || document.getElementById('show-service-overlay') || document.body;
     }
     return _this;
   }
@@ -2013,7 +2013,7 @@ var Tooltip$1 = function (_Component) {
     _this.closeTooltip = _this.closeTooltip.bind(_this);
 
     if (!props.inline && typeof document !== 'undefined') {
-      _this.parentElement = props.parentElement || document.body;
+      _this.parentElement = props.parentElement || document.getElementById('show-service-overlay') || document.body;
 
       _this.containerElement = document.createElement('div');
       _this.containerElement.id = _this.portalId;
