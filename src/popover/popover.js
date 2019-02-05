@@ -27,7 +27,7 @@ class Popover extends Component {
     this.ref = createRef();
 
     if (!props.inline && typeof document !== 'undefined') {
-      this.parentElement = props.parentElement || document.body;
+      this.parentElement = props.parentElement || document.getElementById('show-service-overlay') || document.body;
 
       this.containerElement = document.createElement('div');
       this.containerElement.id = this.props.portalId;
