@@ -33,7 +33,7 @@ class Toast extends Component {
 
 
     if (typeof document !== 'undefined') {
-      this.parentElement = props.parentElement || document.body;
+      this.parentElement = props.parentElement || document.getElementById('show-service-overlay') || document.body;
     }
   }
   componentDidMount() {
