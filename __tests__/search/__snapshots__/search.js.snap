@@ -10,6 +10,7 @@ exports[`Empty search renders correctly 1`] = `
   <input
     className="lui-search__input"
     type="text"
+    value=""
   />
 </div>
 `;
@@ -24,6 +25,7 @@ exports[`Normal search renders correctly 1`] = `
   <input
     className="lui-search__input"
     type="text"
+    value="Value"
   />
   <button
     className="lui-search__clear-button"
@@ -48,6 +50,7 @@ exports[`Search passes props correctly 1`] = `
     data-x="x"
     title="Title"
     type="text"
+    value="Value"
   />
   <button
     className="lui-search__clear-button"
@@ -70,6 +73,7 @@ exports[`Search with modifiers renders correctly 1`] = `
   <input
     className="lui-search__input"
     type="text"
+    value="Value"
   />
   <button
     className="lui-search__clear-button"
@@ -94,6 +98,7 @@ exports[`Search with states renders correctly 1`] = `
     disabled={true}
     invalid={true}
     type="text"
+    value="Value"
   />
   <button
     className="lui-search__clear-button"
@@ -116,6 +121,7 @@ exports[`Search without value renders correctly 1`] = `
   <input
     className="lui-search__input"
     type="text"
+    value={undefined}
   />
 </div>
 `;
