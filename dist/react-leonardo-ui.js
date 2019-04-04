@@ -1500,7 +1500,8 @@ var Search$1 = function (_Component) {
           ref: function ref(elem) {
             _this2.element = elem;
           },
-          className: 'lui-search__input'
+          className: 'lui-search__input',
+          value: value
         }, extraProps, {
           type: 'text'
         })),
