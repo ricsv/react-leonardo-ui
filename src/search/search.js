@@ -38,6 +38,7 @@ class Search extends Component {
         <input
           ref={(elem) => { this.element = elem; }}
           className="lui-search__input"
+          value={value}
           {...extraProps}
           type="text"
         />
