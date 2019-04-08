@@ -19,6 +19,7 @@ class TestPopover extends Component {
   render() {
     return (
       <Popover
+        noArrow={this.props.noArrow}
         alignTo={this.props.parentElement}
         show={this.state.show}
         onOpen={this.props.onOpen}
@@ -41,6 +42,7 @@ test('Normal popover opens correctly', () => {
     const onOpen = () => {
       popoverElement = parentElement.querySelector('.lui-popover');
       expect(popoverElement.classList.contains('lui-fade')).toBe(false);
+      expect(popoverElement.querySelector('.lui-popover__arrow')).toBeInstanceOf(HTMLElement);
       resolve();
     };
 
@@ -53,6 +55,23 @@ test('Normal popover opens correctly', () => {
 
     popoverElement = parentElement.querySelector('.lui-popover');
     expect(popoverElement.classList.contains('lui-fade')).toBe(true);
+  });
+});
+
+test('Popover opens without an arrow', () => {
+  const rootElement = document.createElement('div');
+  const parentElement = document.createElement('div');
+
+  return new Promise((resolve) => {
+    render(
+      <TestPopover noArrow onOpen={resolve} parentElement={parentElement}>
+        Popover content
+      </TestPopover>,
+      rootElement
+    );
+
+    const popoverElement = parentElement.querySelector('.lui-popover');
+    expect(popoverElement.querySelector('.lui-popover__arrow')).toBeNull();
   });
 });
 
