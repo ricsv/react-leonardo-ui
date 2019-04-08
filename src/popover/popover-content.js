@@ -4,6 +4,7 @@ import { oppositeDock, positionToElement } from '../positioner';
 
 const DEFAULT_DOCK = 'bottom';
 const OFFSET = 10;
+const NOARROWOFFSET = 2;
 
 let counter = 0;
 
@@ -40,7 +41,7 @@ class PopoverContent extends Component {
       {
         containerElement: this.props.inline ? this.popoverElem : null,
         dock: this.props.dock || DEFAULT_DOCK,
-        offset: OFFSET,
+        offset: this.props.noArrow ? NOARROWOFFSET : OFFSET,
         minWindowOffset: 10,
         minEdgeOffset: 5,
       }
@@ -61,6 +62,11 @@ class PopoverContent extends Component {
     };
 
     let arrowElem;
+
+    if (res) {
+      style.visibility = 'visible';
+    }
+
     if (this.props.noArrow) {
       arrowElem = null;
     } else {
@@ -69,7 +75,6 @@ class PopoverContent extends Component {
         style: {},
       };
       if (res) {
-        style.visibility = 'visible';
         arrow.dock = oppositeDock(res.dock);
         if (arrow.dock === 'top' || arrow.dock === 'bottom') {
           arrow.style.left = `${res.toPosition.left - res.position.left}px`;
