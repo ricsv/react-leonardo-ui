@@ -1029,18 +1029,28 @@ var PopoverContent = function (_Component) {
         top: res ? res.position.top + 'px' : '-99999px',
         left: res ? res.position.left + 'px' : '-99999px'
       };
-      var arrow = {
-        dock: '',
-        style: {}
-      };
-      if (res) {
-        style.visibility = 'visible';
-        arrow.dock = oppositeDock(res.dock);
-        if (arrow.dock === 'top' || arrow.dock === 'bottom') {
-          arrow.style.left = res.toPosition.left - res.position.left + 'px';
-        } else {
-          arrow.style.top = res.toPosition.top - res.position.top + 'px';
+
+      var arrowElem = void 0;
+      if (this.props.noArrow) {
+        arrowElem = null;
+      } else {
+        var arrow = {
+          dock: '',
+          style: {}
+        };
+        if (res) {
+          style.visibility = 'visible';
+          arrow.dock = oppositeDock(res.dock);
+          if (arrow.dock === 'top' || arrow.dock === 'bottom') {
+            arrow.style.left = res.toPosition.left - res.position.left + 'px';
+          } else {
+            arrow.style.top = res.toPosition.top - res.position.top + 'px';
+          }
         }
+        arrowElem = React__default.createElement('div', {
+          className: 'lui-popover__arrow  lui-popover__arrow--' + arrow.dock,
+          style: arrow.style
+        });
       }
       return React__default.createElement(
         'div',
@@ -1054,10 +1064,7 @@ var PopoverContent = function (_Component) {
           id: this.state.id
         },
         this.props.children,
-        React__default.createElement('div', {
-          className: 'lui-popover__arrow  lui-popover__arrow--' + arrow.dock,
-          style: arrow.style
-        })
+        arrowElem
       );
     }
   }]);
