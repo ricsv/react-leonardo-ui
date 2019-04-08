@@ -97,6 +97,10 @@ class PopoverSection extends Component {
             type: 'Boolean',
             description: 'Experimental. Append the popover inline in the DOM instead of to the body.',
           }, {
+            name: 'noArrow',
+            type: 'Boolean',
+            description: 'Hide the popover arrow.',
+          }, {
             name: 'variant',
             type: 'String',
             description: 'Variant of the Popover. Any of: null (default) | "inverse".',

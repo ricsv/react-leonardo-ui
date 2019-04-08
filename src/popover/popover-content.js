@@ -59,18 +59,30 @@ class PopoverContent extends Component {
       top: res ? `${res.position.top}px` : '-99999px',
       left: res ? `${res.position.left}px` : '-99999px',
     };
-    const arrow = {
-      dock: '',
-      style: {},
-    };
-    if (res) {
-      style.visibility = 'visible';
-      arrow.dock = oppositeDock(res.dock);
-      if (arrow.dock === 'top' || arrow.dock === 'bottom') {
-        arrow.style.left = `${res.toPosition.left - res.position.left}px`;
-      } else {
-        arrow.style.top = `${res.toPosition.top - res.position.top}px`;
+
+    let arrowElem;
+    if (this.props.noArrow) {
+      arrowElem = null;
+    } else {
+      const arrow = {
+        dock: '',
+        style: {},
+      };
+      if (res) {
+        style.visibility = 'visible';
+        arrow.dock = oppositeDock(res.dock);
+        if (arrow.dock === 'top' || arrow.dock === 'bottom') {
+          arrow.style.left = `${res.toPosition.left - res.position.left}px`;
+        } else {
+          arrow.style.top = `${res.toPosition.top - res.position.top}px`;
+        }
       }
+      arrowElem = (
+        <div
+          className={`lui-popover__arrow  lui-popover__arrow--${arrow.dock}`}
+          style={arrow.style}
+        />
+      );
     }
     return (
       <div
@@ -81,10 +93,7 @@ class PopoverContent extends Component {
         id={this.state.id}
       >
         {this.props.children}
-        <div
-          className={`lui-popover__arrow  lui-popover__arrow--${arrow.dock}`}
-          style={arrow.style}
-        />
+        {arrowElem}
       </div>
     );
   }
