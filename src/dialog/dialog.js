@@ -51,7 +51,8 @@ class Dialog extends Component {
     } = this.props;
 
     if (dialogState === DIALOG_STATE.opening) {
-      setTimeout(() => {
+      this.openingTimeout = this.openingTimeout || setTimeout(() => {
+        this.openingTimeout = null;
         this.setState(() => ({
           dialogState: DIALOG_STATE.open,
         }));
@@ -66,7 +67,8 @@ class Dialog extends Component {
       if (typeof onEscape === 'function') {
         window.removeEventListener('keyup', this.keyUpListener);
       }
-      setTimeout(() => {
+      this.closingTimeout = this.closingTimeout || setTimeout(() => {
+        this.closingTimeout = null;
         this.setState(() => ({
           dialogState: DIALOG_STATE.closed,
         }));
@@ -76,6 +78,12 @@ class Dialog extends Component {
         this.parentElement.removeChild(this.containerElement);
       }, FADE_DURATION);
     }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.openingTimeout);
+    this.openingTimeout = null;
+    clearTimeout(this.closingTimeout);
+    this.closingTimeout = null;
   }
   keyUpListener(e) {
     if (e.keyCode === 27) {
