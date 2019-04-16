@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { oppositeDock, positionToElement } from '../positioner';
 
 const DEFAULT_DOCK = 'bottom';
-const OFFSET = 10;
-const NOARROWOFFSET = 2;
+const DEFAULT_OFFSET = 10;
 
 let counter = 0;
 
@@ -41,7 +40,7 @@ class PopoverContent extends Component {
       {
         containerElement: this.props.inline ? this.popoverElem : null,
         dock: this.props.dock || DEFAULT_DOCK,
-        offset: this.props.noArrow ? NOARROWOFFSET : OFFSET,
+        offset: typeof this.props.offset === 'undefined' ? DEFAULT_OFFSET : this.props.offset,
         minWindowOffset: 10,
         minEdgeOffset: 5,
       }
