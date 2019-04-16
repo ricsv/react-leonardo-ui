@@ -356,7 +356,8 @@ var Dialog$1 = function (_Component) {
 
 
       if (dialogState === TOOLTIP_STATE.opening) {
-        setTimeout(function () {
+        this.openingTimeout = this.openingTimeout || setTimeout(function () {
+          _this2.openingTimeout = null;
           _this2.setState(function () {
             return {
               dialogState: TOOLTIP_STATE.open
@@ -373,7 +374,8 @@ var Dialog$1 = function (_Component) {
         if (typeof onEscape === 'function') {
           window.removeEventListener('keyup', this.keyUpListener);
         }
-        setTimeout(function () {
+        this.closingTimeout = this.closingTimeout || setTimeout(function () {
+          _this2.closingTimeout = null;
           _this2.setState(function () {
             return {
               dialogState: TOOLTIP_STATE.closed
@@ -385,6 +387,14 @@ var Dialog$1 = function (_Component) {
           _this2.parentElement.removeChild(_this2.containerElement);
         }, FADE_DURATION);
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearTimeout(this.openingTimeout);
+      this.openingTimeout = null;
+      clearTimeout(this.closingTimeout);
+      this.closingTimeout = null;
     }
   }, {
     key: 'keyUpListener',
@@ -961,7 +971,7 @@ function positionToElement(element, alignToElement) {
 }
 
 var DEFAULT_DOCK = 'bottom';
-var OFFSET = 10;
+var DEFAULT_OFFSET = 10;
 
 var counter = 0;
 
@@ -1007,7 +1017,7 @@ var PopoverContent = function (_Component) {
       var positionResult = positionToElement(this.popoverElem, alignTo, dock, {
         containerElement: this.props.inline ? this.popoverElem : null,
         dock: this.props.dock || DEFAULT_DOCK,
-        offset: OFFSET,
+        offset: typeof this.props.offset === 'undefined' ? DEFAULT_OFFSET : this.props.offset,
         minWindowOffset: 10,
         minEdgeOffset: 5
       });
@@ -1031,6 +1041,11 @@ var PopoverContent = function (_Component) {
       };
 
       var arrowElem = void 0;
+
+      if (res) {
+        style.visibility = 'visible';
+      }
+
       if (this.props.noArrow) {
         arrowElem = null;
       } else {
@@ -1039,7 +1054,6 @@ var PopoverContent = function (_Component) {
           style: {}
         };
         if (res) {
-          style.visibility = 'visible';
           arrow.dock = oppositeDock(res.dock);
           if (arrow.dock === 'top' || arrow.dock === 'bottom') {
             arrow.style.left = res.toPosition.left - res.position.left + 'px';
@@ -1892,7 +1906,7 @@ Toast$1.Action = ToastAction;
 Toast$1.Text = ToastText;
 
 var DEFAULT_DOCK$1 = 'top';
-var OFFSET$1 = 10;
+var OFFSET = 10;
 
 var counter$1 = 0;
 
@@ -1945,7 +1959,7 @@ var TooltipContent = function (_Component) {
       var positionResult = positionToElement(this.element, alignTo, dock, {
         containerElement: this.props.inline ? this.element : null,
         dock: dock || DEFAULT_DOCK$1,
-        offset: OFFSET$1,
+        offset: OFFSET,
         minWindowOffset: 10,
         minEdgeOffset: 5
       });
