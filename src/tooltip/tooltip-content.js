@@ -29,10 +29,14 @@ class TooltipContent extends Component {
     alignTo.setAttribute('aria-describedby', this.state.id);
     this.reposition(dock, alignTo);
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.dock !== this.props.dock ||
-      nextProps.alignTo !== this.props.alignTo) {
-      this.reposition(nextProps.dock, nextProps.alignTo);
+  componentDidUpdate(prevProps) {
+    const {
+      alignTo,
+      dock,
+    } = this.props;
+    if (dock !== prevProps.dock ||
+      alignTo !== prevProps.alignTo) {
+      this.reposition(dock, alignTo);
     }
   }
   componentWillUnmount() {

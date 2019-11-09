@@ -36,23 +36,23 @@ class Tooltip extends Component {
       this.openTooltip();
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.show && nextProps.show) {
-      this.openTooltip();
-    } else if (this.props.show && !nextProps.show) {
-      this.closeTooltip();
-    }
-  }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {
       tooltipState,
     } = this.state;
 
     const {
+      show,
       inline,
       onOpen,
       onClose,
     } = this.props;
+
+    if (!prevProps.show && show) {
+      this.openTooltip();
+    } else if (prevProps.show && !show) {
+      this.closeTooltip();
+    }
 
     if (tooltipState === TOOLTIP_STATE.opening) {
       setTimeout(() => {

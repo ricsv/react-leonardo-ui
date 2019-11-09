@@ -38,25 +38,25 @@ class Popover extends Component {
       this.openPopover();
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.show && nextProps.show) {
-      this.openPopover();
-    } else if (this.props.show && !nextProps.show) {
-      this.closePopover();
-    }
-  }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {
       popoverState,
     } = this.state;
 
     const {
+      show,
       inline,
       onEscape,
       onOpen,
       onClose,
       onOutside,
     } = this.props;
+
+    if (!prevProps.show && show) {
+      this.openPopover();
+    } else if (prevProps.show && !show) {
+      this.closePopover();
+    }
 
     const outsideEvent = 'ontouchend' in window ? 'touchend' : 'click';
     if (popoverState === POPOVER_STATE.opening && !this.openingTimeout) {
