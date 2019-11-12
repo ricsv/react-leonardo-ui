@@ -4,4 +4,3 @@ export default {
   closing: 2,
   closed: 3,
 };
-

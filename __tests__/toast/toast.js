@@ -11,11 +11,13 @@ class TestToast extends Component {
       show: true,
     };
   }
+
   componentDidMount() {
     document.addEventListener('close-toast', () => {
       this.setState({ show: false });
     });
   }
+
   render() {
     return (
       <Toast

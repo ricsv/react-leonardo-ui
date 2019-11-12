@@ -7,9 +7,11 @@ class Button extends Component {
     super(props);
     this.focus = this.focus.bind(this);
   }
+
   focus() {
     this.element.focus();
   }
+
   render() {
     const {
       children,
@@ -35,6 +37,7 @@ class Button extends Component {
 
     return (
       <button
+        type="button"
         ref={(element) => { this.element = element; }}
         className={finalClassName}
         {...extraProps}

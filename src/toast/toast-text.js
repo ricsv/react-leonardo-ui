@@ -10,4 +10,3 @@ const ToastText = ({ className = '', children, ...extraProps }) => {
 };
 
 export default ToastText;
-

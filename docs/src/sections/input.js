@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { Input } from '../../../src/react-leonardo-ui';
 
-const InputSection = props => (
+const InputSection = (props) => (
   <Section title="Input">
     <Example code={'<Input value={value}/>'}>
       <Input variant={props.baseVariant} />

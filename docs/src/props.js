@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Props = props => (
+const Props = (props) => (
   <div className="props">
     <h3>{props.title || 'Props'}</h3>
     <table>
@@ -12,7 +12,7 @@ const Props = props => (
         </tr>
       </thead>
       <tbody>
-        {props.props.map(prop => (
+        {props.props.map((prop) => (
           <tr key={prop.name}>
             <td>{prop.name}</td>
             <td>{prop.type}</td>

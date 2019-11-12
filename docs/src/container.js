@@ -92,6 +92,7 @@ export default class Page extends Component {
     };
     this.setVariant = this.setVariant.bind(this);
   }
+
   setVariant(variant) {
     const currentVariant = this.state.variant;
     const headerWrapperElem = document.body.querySelector('.header-wrapper');
@@ -104,12 +105,13 @@ export default class Page extends Component {
     document.body.classList.add(`lui-bg-${variant}`);
     headerWrapperElem.classList.add(`lui-bg-${variant}`);
   }
+
   render() {
     return (
       <div>
         <div className="sidebar">
           <ul>
-            {sections.map(section => (
+            {sections.map((section) => (
               <li key={section.name}>
                 <a href={`#${section.href || section.name}`}>
                   {section.name}
@@ -139,7 +141,10 @@ export default class Page extends Component {
         </div>
 
         <div className="content">
-          React implementation of <a href="https://github.com/qlik-oss/leonardo-ui">Leonardo UI</a>.
+          React implementation of
+          {' '}
+          <a href="https://github.com/qlik-oss/leonardo-ui">Leonardo UI</a>
+.
 
           {sections.map((section) => {
             const Comp = section.component;

@@ -2,24 +2,24 @@
 
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
-import uglify from 'rollup-plugin-uglify';
+import { uglify } from 'rollup-plugin-uglify';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
 const config = {
-  name: 'reactLUI',
   input: 'src/react-leonardo-ui.js',
   output: {
+    name: 'reactLUI',
     file: 'dist/react-leonardo-ui.js',
     format: 'umd',
+    globals: {
+      react: 'React',
+      'react-dom': 'ReactDOM',
+    },
   },
   external: [
     'react',
     'react-dom',
   ],
-  globals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
-  },
   plugins: [
     babel({
       exclude: 'node_modules/**',

@@ -17,4 +17,3 @@ test('Top-level API returns a set of functions', () => {
   expect(typeof reactLui.Tab).toBe('function');
   expect(typeof reactLui.Textarea).toBe('function');
 });
-

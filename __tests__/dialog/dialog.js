@@ -11,11 +11,13 @@ class TestDialog extends Component {
       show: true,
     };
   }
+
   componentDidMount() {
     document.addEventListener('close-dialog', () => {
       this.setState({ show: false });
     });
   }
+
   render() {
     return (
       <Dialog

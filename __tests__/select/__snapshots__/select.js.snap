@@ -11,7 +11,7 @@ exports[`Select passes props correctly 1`] = `
 <select
   className="lui-select my-class"
   data-x="x"
-  onChange={[Function]}
+  onChange={[MockFunction]}
   title="Title"
 />
 `;

@@ -12,11 +12,13 @@ class ButtonGroupSection extends Component {
     };
     this.onClick = this.onClick.bind(this);
   }
+
   onClick(activeButton) {
     this.setState({
       activeButton,
     });
   }
+
   render() {
     const { props } = this;
 

@@ -14,13 +14,16 @@ class SearchSection extends Component {
     this.onChange = this.onChange.bind(this);
     this.onClear = this.onClear.bind(this);
   }
+
   onChange(e) {
     const { value } = e.target;
     this.setState({ value });
   }
+
   onClear() {
     this.setState({ value: '' });
   }
+
   render() {
     return (
       <Section title="Search">

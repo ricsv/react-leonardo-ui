@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { Button } from '../../../src/react-leonardo-ui';
 
-const ButtonSection = props => (
+const ButtonSection = (props) => (
   <Section title="Button">
     <Example
       className="button-example"

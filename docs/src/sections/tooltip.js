@@ -16,18 +16,22 @@ class TooltipSection extends Component {
     this.toggleDock = this.toggleDock.bind(this);
     this.toggleTooltip = this.toggleTooltip.bind(this);
   }
+
   componentDidMount() {
     this.forceUpdate();
   }
+
   toggleDock() {
     const docks = ['left', 'top', 'right', 'bottom'];
     let { dock } = this.state;
     dock = docks[docks.indexOf(dock) + 1] || docks[0];
     this.setState({ dock });
   }
+
   toggleTooltip(show) {
     this.setState({ show });
   }
+
   render() {
     return (
       <Section title="Tooltip">
@@ -65,7 +69,9 @@ class TooltipSection extends Component {
             target={this.buttonElem}
             dock={this.state.dock}
           >
-            Im placed to the: <strong>{this.state.dock}</strong>
+            Im placed to the:
+            {' '}
+            <strong>{this.state.dock}</strong>
           </Tooltip>
         </Example>
         <Props

@@ -29,12 +29,12 @@ export function addOffset(dock, left = 0, top = 0, offset = 0) {
       top: top - offset,
       left,
     };
-  } else if (dock === 'right') {
+  } if (dock === 'right') {
     return {
       top,
       left: left + offset,
     };
-  } else if (dock === 'left') {
+  } if (dock === 'left') {
     return {
       top,
       left: left - offset,
