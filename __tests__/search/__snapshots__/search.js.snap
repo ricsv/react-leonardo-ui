@@ -30,6 +30,7 @@ exports[`Normal search renders correctly 1`] = `
   <button
     className="lui-search__clear-button"
     onClick={[Function]}
+    type="button"
   >
     <span
       className="lui-icon  lui-icon--small  lui-icon--close"
@@ -55,6 +56,7 @@ exports[`Search passes props correctly 1`] = `
   <button
     className="lui-search__clear-button"
     onClick={[Function]}
+    type="button"
   >
     <span
       className="lui-icon  lui-icon--small  lui-icon--close"
@@ -78,6 +80,7 @@ exports[`Search with modifiers renders correctly 1`] = `
   <button
     className="lui-search__clear-button"
     onClick={[Function]}
+    type="button"
   >
     <span
       className="lui-icon  lui-icon--small  lui-icon--close"
@@ -103,6 +106,7 @@ exports[`Search with states renders correctly 1`] = `
   <button
     className="lui-search__clear-button"
     onClick={[Function]}
+    type="button"
   >
     <span
       className="lui-icon  lui-icon--small  lui-icon--close"

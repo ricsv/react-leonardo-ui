@@ -3,6 +3,7 @@
 exports[`Normal fade-button renders correctly 1`] = `
 <button
   className="lui-fade-button"
+  type="button"
 >
   Text
 </button>
@@ -14,6 +15,7 @@ exports[`fade-button passes props correctly 1`] = `
   data-x="x"
   onClick={[MockFunction]}
   title="Title"
+  type="button"
 >
   Text
 </button>
@@ -22,6 +24,7 @@ exports[`fade-button passes props correctly 1`] = `
 exports[`fade-button with modifiers renders correctly 1`] = `
 <button
   className="lui-fade-button lui-fade-button--success lui-fade-button--large lui-fade-button--block lui-fade-button--rounded"
+  type="button"
   value="Value"
 />
 `;
@@ -30,6 +33,7 @@ exports[`fade-button with states renders correctly 1`] = `
 <button
   className="lui-fade-button lui-active"
   disabled={true}
+  type="button"
   value="Value"
 />
 `;
@@ -37,6 +41,7 @@ exports[`fade-button with states renders correctly 1`] = `
 exports[`fade-button with subcomponents renders correctly 1`] = `
 <button
   className="lui-fade-button"
+  type="button"
 >
   <span
     aria-hidden="true"

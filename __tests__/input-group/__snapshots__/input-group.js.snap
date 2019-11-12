@@ -25,6 +25,7 @@ exports[`InputGroup with items renders correctly 1`] = `
   />
   <button
     className="lui-button lui-input-group__item  lui-input-group__button"
+    type="button"
   >
     Text
   </button>

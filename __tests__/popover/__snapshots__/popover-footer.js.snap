@@ -24,11 +24,13 @@ exports[`Popover footer with buttons 1`] = `
 >
   <button
     className="lui-button lui-popover__button undefined"
+    type="button"
   >
     Button 1
   </button>
   <button
     className="lui-button lui-popover__button undefined"
+    type="button"
   >
     Button 2
   </button>
