@@ -10,7 +10,7 @@ exports[`InputGroup passes props correctly 1`] = `
 <div
   className="lui-input-group my-class"
   data-x="x"
-  onClick={[Function]}
+  onClick={[MockFunction]}
   title="title"
 />
 `;

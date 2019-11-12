@@ -4,7 +4,7 @@ exports[`Button passes props correctly 1`] = `
 <button
   className="lui-button my-class"
   data-x="x"
-  onClick={[Function]}
+  onClick={[MockFunction]}
   title="Title"
 >
   Text

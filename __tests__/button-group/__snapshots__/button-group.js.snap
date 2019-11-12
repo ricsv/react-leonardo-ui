@@ -4,7 +4,7 @@ exports[`ButtonGroup passes props correctly 1`] = `
 <div
   className="lui-buttongroup my-class"
   data-x="x"
-  onClick={[Function]}
+  onClick={[MockFunction]}
   title="Title"
 />
 `;

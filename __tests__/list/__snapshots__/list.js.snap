@@ -19,7 +19,7 @@ exports[`List passes props correctly 1`] = `
   <li
     className="lui-list__item"
     data-x="x"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     title="Item title"
   >
     Item

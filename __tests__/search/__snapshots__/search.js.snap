@@ -121,7 +121,6 @@ exports[`Search without value renders correctly 1`] = `
   <input
     className="lui-search__input"
     type="text"
-    value={undefined}
   />
 </div>
 `;

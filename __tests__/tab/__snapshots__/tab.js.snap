@@ -32,7 +32,7 @@ exports[`Tabset passes props correctly 1`] = `
   <li
     className="lui-tab"
     data-x="x"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     title="Item title"
   >
     Item 1

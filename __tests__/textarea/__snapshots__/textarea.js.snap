@@ -11,7 +11,7 @@ exports[`Textarea passes props correctly 1`] = `
 <textarea
   className="lui-textarea my-class"
   data-x="x"
-  onClick={[Function]}
+  onClick={[MockFunction]}
   title="Title"
   value="Value"
 />
