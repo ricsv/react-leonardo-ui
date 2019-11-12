@@ -11,6 +11,7 @@ class GetStartedSection extends Component {
       });
     }
   }
+
   render() {
     return (
       <Section title="Get started">
@@ -61,4 +62,3 @@ class GetStartedSection extends Component {
 }
 
 export default GetStartedSection;
-

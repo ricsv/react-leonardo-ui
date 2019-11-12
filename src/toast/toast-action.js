@@ -10,4 +10,3 @@ const ToastAction = ({ className, children, ...extraProps }) => {
 };
 
 export default ToastAction;
-

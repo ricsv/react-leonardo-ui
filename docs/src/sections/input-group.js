@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { InputGroup, Button } from '../../../src/react-leonardo-ui';
 
-const InputGroupSection = props => (
+const InputGroupSection = (props) => (
   <Section title="InputGroup">
     <Example
       code={

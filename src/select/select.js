@@ -6,9 +6,11 @@ class Select extends Component {
     super(props);
     this.focus = this.focus.bind(this);
   }
+
   focus() {
     this.element.focus();
   }
+
   render() {
     const {
       children,

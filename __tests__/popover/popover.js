@@ -11,11 +11,13 @@ class TestPopover extends Component {
       show: true,
     };
   }
+
   componentDidMount() {
     document.addEventListener('close-popover', () => {
       this.setState({ show: false });
     });
   }
+
   render() {
     return (
       <Popover

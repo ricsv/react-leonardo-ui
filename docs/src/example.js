@@ -6,11 +6,13 @@ class Example extends Component {
       hljs.highlightBlock(this.codeElem); // eslint-disable-line no-undef
     }
   }
+
   componentDidUpdate() {
     if (this.codeElem && window.hljs) {
       hljs.highlightBlock(this.codeElem); // eslint-disable-line no-undef
     }
   }
+
   render() {
     const { props } = this;
 
@@ -40,7 +42,7 @@ class Example extends Component {
           </tr>
         </thead>
         <tbody>
-          {props.settings.map(setting => (
+          {props.settings.map((setting) => (
             <tr>
               <td>{setting.name}</td>
               <td>{setting.type}</td>

@@ -8,15 +8,18 @@ class Search extends Component {
     this.focus = this.focus.bind(this);
     this.onClearClick = this.onClearClick.bind(this);
   }
+
   onClearClick(e) {
     e.preventDefault();
     if (typeof this.props.onClear === 'function') {
       this.props.onClear();
     }
   }
+
   focus() {
     this.element.focus();
   }
+
   render() {
     const {
       className,
@@ -42,15 +45,18 @@ class Search extends Component {
           {...extraProps}
           type="text"
         />
-        {value ?
-          <button
-            className="lui-search__clear-button"
-            onClick={this.onClearClick}
-          >
-            <span
-              className="lui-icon  lui-icon--small  lui-icon--close"
-            />
-          </button> : null}
+        {value
+          ? (
+            <button
+              type="button"
+              className="lui-search__clear-button"
+              onClick={this.onClearClick}
+            >
+              <span
+                className="lui-icon  lui-icon--small  lui-icon--close"
+              />
+            </button>
+          ) : null}
       </div>
     );
   }

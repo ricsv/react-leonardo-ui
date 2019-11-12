@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { Button, Dialog } from '../../../src/react-leonardo-ui';
 
-const TestDialog = props => (
+const TestDialog = (props) => (
   <Dialog show={props.show} onEscape={props.onEscape} variant={props.variant}>
     <Dialog.Header>
       <Dialog.Title>Test</Dialog.Title>

@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { Button, Popover } from '../../../src/react-leonardo-ui';
 
-const MyPopover = props => (
+const MyPopover = (props) => (
   <Popover inline onOutside={props.close} {...props}>
     <Popover.Header>
       <Popover.Title>Header</Popover.Title>
@@ -37,13 +37,20 @@ class PopoverSection extends Component {
     };
     this.togglePopover = this.togglePopover.bind(this);
   }
+
   togglePopover(popoverOpen) {
     this.setState({ popoverOpen });
   }
+
   render() {
     return (
       <Section title="Popover">
-        <p>The popover is controlled by the <i>show</i> property.</p>
+        <p>
+The popover is controlled by the
+          <i>show</i>
+          {' '}
+property.
+        </p>
         <Example
           code={
 `<Popover

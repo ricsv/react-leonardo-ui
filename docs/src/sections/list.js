@@ -4,7 +4,7 @@ import Example from '../example';
 import Section from '../section';
 import { List, Icon } from '../../../src/react-leonardo-ui';
 
-const ListSection = props => (
+const ListSection = (props) => (
   <Section title="List">
     <Example
       code={

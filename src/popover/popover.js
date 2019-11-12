@@ -33,11 +33,13 @@ class Popover extends Component {
       this.containerElement.id = this.props.portalId;
     }
   }
+
   componentDidMount() {
     if (this.props.show) {
       this.openPopover();
     }
   }
+
   componentDidUpdate(prevProps) {
     const {
       popoverState,
@@ -96,6 +98,7 @@ class Popover extends Component {
       }, FADE_DURATION);
     }
   }
+
   componentWillUnmount() {
     const {
       popoverState,
@@ -119,17 +122,20 @@ class Popover extends Component {
       }
     }
   }
+
   keyUpListener(e) {
     if (e.keyCode === 27) {
       this.props.onEscape();
     }
   }
+
   outsideListener(e) {
     const element = this.ref.current;
     if (element && !element.contains(e.target)) {
       this.props.onOutside(e);
     }
   }
+
   openPopover() {
     if (!this.props.inline) {
       this.parentElement.appendChild(this.containerElement);
@@ -139,11 +145,13 @@ class Popover extends Component {
       popoverState: POPOVER_STATE.opening,
     }));
   }
+
   closePopover() {
     this.setState(() => ({
       popoverState: POPOVER_STATE.closing,
     }));
   }
+
   render() {
     const { popoverState } = this.state;
 

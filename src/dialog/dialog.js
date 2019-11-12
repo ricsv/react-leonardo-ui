@@ -27,11 +27,13 @@ class Dialog extends Component {
       this.containerElement.id = this.portalId;
     }
   }
+
   componentDidMount() {
     if (this.props.show) {
       this.openDialog();
     }
   }
+
   componentDidUpdate(prevProps) {
     const {
       dialogState,
@@ -79,17 +81,20 @@ class Dialog extends Component {
       }, FADE_DURATION);
     }
   }
+
   componentWillUnmount() {
     clearTimeout(this.openingTimeout);
     this.openingTimeout = null;
     clearTimeout(this.closingTimeout);
     this.closingTimeout = null;
   }
+
   keyUpListener(e) {
     if (e.keyCode === 27) {
       this.props.onEscape();
     }
   }
+
   openDialog() {
     this.parentElement.appendChild(this.containerElement);
 
@@ -97,11 +102,13 @@ class Dialog extends Component {
       dialogState: DIALOG_STATE.opening,
     }));
   }
+
   closeDialog() {
     this.setState(() => ({
       dialogState: DIALOG_STATE.closing,
     }));
   }
+
   render() {
     const {
       className,

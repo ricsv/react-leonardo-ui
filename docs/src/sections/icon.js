@@ -174,7 +174,7 @@ const IconSection = () => (
 `
       }
     >
-      {ICONS.map(name => (
+      {ICONS.map((name) => (
         <div key={name} className="icon-example">
           <div className="icon-example-box">
             <Icon name={name} />
@@ -183,7 +183,7 @@ const IconSection = () => (
             {name}
           </div>
         </div>
-          ))}
+      ))}
     </Example>
     <Props
       props={[{

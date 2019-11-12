@@ -36,11 +36,13 @@ class Toast extends Component {
       this.parentElement = props.parentElement || document.getElementById('show-service-overlay') || document.body;
     }
   }
+
   componentDidMount() {
     if (this.props.show) {
       this.openToast();
     }
   }
+
   componentDidUpdate(prevProps) {
     const { show } = this.props;
     if (!prevProps.show && show) {
@@ -74,16 +76,19 @@ class Toast extends Component {
       }, FADE_DURATION);
     }
   }
+
   openToast() {
     this.setState(() => ({
       toastState: TOAST_STATE.opening,
     }));
   }
+
   closeToast() {
     this.setState(() => ({
       toastState: TOAST_STATE.closing,
     }));
   }
+
   render() {
     const { toastState } = this.state;
 

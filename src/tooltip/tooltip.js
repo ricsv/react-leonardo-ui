@@ -27,6 +27,7 @@ class Tooltip extends Component {
       this.containerElement.id = this.portalId;
     }
   }
+
   componentDidMount() {
     if (!this.props.inline) {
       this.parentElement.appendChild(this.containerElement);
@@ -36,6 +37,7 @@ class Tooltip extends Component {
       this.openTooltip();
     }
   }
+
   componentDidUpdate(prevProps) {
     const {
       tooltipState,
@@ -79,16 +81,19 @@ class Tooltip extends Component {
       }, FADE_DURATION);
     }
   }
+
   openTooltip() {
     this.setState(() => ({
       tooltipState: TOOLTIP_STATE.opening,
     }));
   }
+
   closeTooltip() {
     this.setState(() => ({
       tooltipState: TOOLTIP_STATE.closing,
     }));
   }
+
   render() {
     const { tooltipState } = this.state;
 

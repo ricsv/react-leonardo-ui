@@ -12,11 +12,13 @@ class TabsSection extends Component {
     };
     this.onClick = this.onClick.bind(this);
   }
+
   onClick(activeTab) {
     this.setState({
       activeTab,
     });
   }
+
   render() {
     const { props } = this;
     const tabs = [{

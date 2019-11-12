@@ -62,4 +62,3 @@ describe('util luiClass function', () => {
     })).toBe('lui-button lui-button--large lui-button--block lui-active lui-hovered');
   });
 });
-

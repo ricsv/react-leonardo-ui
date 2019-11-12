@@ -21,6 +21,7 @@ class PopoverContent extends Component {
     };
     this.reposition = this.reposition.bind(this);
   }
+
   componentDidMount() {
     const {
       alignTo,
@@ -29,9 +30,11 @@ class PopoverContent extends Component {
     alignTo.setAttribute('aria-describedby', this.state.id);
     this.reposition(dock, alignTo);
   }
+
   componentWillUnmount() {
     this.props.alignTo.removeAttribute('aria-describedby', this.state.id);
   }
+
   reposition(dock, alignTo) {
     const positionResult = positionToElement(
       this.popoverElem,
@@ -50,6 +53,7 @@ class PopoverContent extends Component {
       positionResult,
     });
   }
+
   render() {
     const res = this.state.positionResult;
     const style = {

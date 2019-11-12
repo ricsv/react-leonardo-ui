@@ -23,7 +23,7 @@ const FadeButton = ({
   });
 
   return (
-    <button className={finalClassName} {...extraProps}>
+    <button type="button" className={finalClassName} {...extraProps}>
       {children}
     </button>
   );

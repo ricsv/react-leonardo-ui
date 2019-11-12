@@ -11,12 +11,14 @@ class TestPopover extends Component {
       include: true,
     };
   }
+
   componentDidMount() {
     document.addEventListener('close-popover', () => {
       this.setState({ show: false });
       setTimeout(() => this.setState({ include: false }));
     });
   }
+
   render() {
     return this.state.include && (
       <Popover

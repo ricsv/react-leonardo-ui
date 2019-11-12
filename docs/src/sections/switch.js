@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { Switch } from '../../../src/react-leonardo-ui';
 
-const SwitchSection = props => (
+const SwitchSection = (props) => (
   <Section title="Switch">
     <Example code={'<Switch value="Value" />'}>
       <Switch variant={props.baseVariant} />

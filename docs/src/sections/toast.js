@@ -26,6 +26,7 @@ class ToastSection extends Component {
     this.toggleToast = this.toggleToast.bind(this);
     this.toggleToast2 = this.toggleToast2.bind(this);
   }
+
   toggleToast(toastOpen) {
     this.setState({ toastOpen });
     if (toastOpen) {
@@ -34,6 +35,7 @@ class ToastSection extends Component {
       }, 5000);
     }
   }
+
   toggleToast2(toast2Open) {
     this.setState({ toast2Open });
     if (toast2Open) {
@@ -42,10 +44,16 @@ class ToastSection extends Component {
       }, 5000);
     }
   }
+
   render() {
     return (
       <Section title="Toast">
-        <p>The toast is controlled by the <i>show</i> property.</p>
+        <p>
+The toast is controlled by the
+          <i>show</i>
+          {' '}
+property.
+        </p>
         <Example
           code={
 `<Toast

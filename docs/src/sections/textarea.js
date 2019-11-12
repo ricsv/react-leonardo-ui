@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { Textarea } from '../../../src/react-leonardo-ui';
 
-const TextareaSection = props => (
+const TextareaSection = (props) => (
   <Section title="Textarea">
     <Example code={'<Textarea/>'}>
       <Textarea variant={props.baseVariant} />

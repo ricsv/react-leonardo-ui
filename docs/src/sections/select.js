@@ -5,7 +5,7 @@ import Props from '../props';
 import Section from '../section';
 import { Select } from '../../../src/react-leonardo-ui';
 
-const SelectSection = props => (
+const SelectSection = (props) => (
   <Section title="Select">
     <Example
       code={

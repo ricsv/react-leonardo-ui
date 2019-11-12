@@ -11,6 +11,7 @@ class InstallationSection extends Component {
       });
     }
   }
+
   render() {
     return (
       <Section title="Installation">

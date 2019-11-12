@@ -11,11 +11,13 @@ class TestTooltip extends Component {
       show: true,
     };
   }
+
   componentDidMount() {
     document.addEventListener('close-tooltip', () => {
       this.setState({ show: false });
     });
   }
+
   render() {
     return (
       <Tooltip
