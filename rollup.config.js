@@ -6,9 +6,9 @@ import uglify from 'rollup-plugin-uglify';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
 const config = {
-  name: 'reactLUI',
   input: 'src/react-leonardo-ui.js',
   output: {
+    name: 'reactLUI',
     file: 'dist/react-leonardo-ui.js',
     format: 'umd',
   },

@@ -31,7 +31,7 @@ function copyFileSync(src, dest) {
 function copy() {
   return {
     name: 'docs-copy',
-    onwrite() {
+    writeBundle() {
       copyFileSync('docs/src/docs.css', 'docs/dist/docs.css');
       copyFileSync('docs/src/favicon.ico', 'docs/dist/favicon.ico');
       copyFileSync('docs/src/react-logo.svg', 'docs/dist/react-logo.svg');
@@ -46,7 +46,7 @@ function copy() {
 function ssr() {
   return {
     name: 'docs-ssr',
-    onwrite() {
+    writeBundle() {
       const Docs = require('./docs/dist/docs'); // eslint-disable-line
 
       const str = renderToString(React.createElement(Docs));
@@ -59,20 +59,20 @@ function ssr() {
 }
 
 const config = {
-  name: 'docsContainer',
   input: 'docs/src/docs.js',
   output: {
     file: 'docs/dist/docs.js',
     format: 'umd',
+    name: 'docsContainer',
+    globals: {
+      react: 'React',
+      'react-dom': 'ReactDOM',
+    },
   },
   external: [
     'react',
     'react-dom',
   ],
-  globals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
-  },
   plugins: [
     babel({
       exclude: 'node_modules/**',
