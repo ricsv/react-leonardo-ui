@@ -41,14 +41,13 @@ class Toast extends Component {
       this.openToast();
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.show && nextProps.show) {
+  componentDidUpdate(prevProps) {
+    const { show } = this.props;
+    if (!prevProps.show && show) {
       this.openToast();
-    } else if (this.props.show && !nextProps.show) {
+    } else if (prevProps.show && !show) {
       this.closeToast();
     }
-  }
-  componentDidUpdate() {
     if (this.state.toastState === TOAST_STATE.opening) {
       setTimeout(() => {
         this.setState(() => ({

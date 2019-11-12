@@ -32,23 +32,23 @@ class Dialog extends Component {
       this.openDialog();
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.show && nextProps.show) {
-      this.openDialog();
-    } else if (this.props.show && !nextProps.show) {
-      this.closeDialog();
-    }
-  }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {
       dialogState,
     } = this.state;
 
     const {
+      show,
       onEscape,
       onOpen,
       onClose,
     } = this.props;
+
+    if (!prevProps.show && show) {
+      this.openDialog();
+    } else if (prevProps.show && !show) {
+      this.closeDialog();
+    }
 
     if (dialogState === DIALOG_STATE.opening) {
       this.openingTimeout = this.openingTimeout || setTimeout(() => {
