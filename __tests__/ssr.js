@@ -7,7 +7,7 @@ test('SSR: Button renders correctly', () => {
   const markup = renderToStaticMarkup(
     <Button>Text</Button>
   );
-  expect(markup).toEqual('<button class="lui-button">Text</button>');
+  expect(markup).toEqual('<button type="button" class="lui-button">Text</button>');
 });
 
 test('SSR: Input renders correctly', () => {
